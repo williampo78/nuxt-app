@@ -50,7 +50,17 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { getCaptchaApi } from "@/api/login";
+onMounted(() => {
+  getCaptcha();
+});
+
+const getCaptcha = async () => {
+  const data = await getCaptchaApi();
+  console.log(data.url);
+};
+</script>
 
 <style lang="scss" scoped>
 .grid-input {
