@@ -1,0 +1,19 @@
+<svg id="ICON-SHOPPINGCART" xmlns="http://www.w3.org/2000/svg" width="40" height="44" viewBox="0 0 40 44">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_720" data-name="Group 720" transform="translate(197.54 -374.392)">
+    <circle id="Ellipse_340" data-name="Ellipse 340" class="cls-1" cx="1.351" cy="1.351" r="1.351" transform="translate(-186.747 404.378)"/>
+    <path id="Path_1336" data-name="Path 1336" class="cls-1" d="M-177.822,401.543a1.352,1.352,0,0,0-1.35,1.351,1.352,1.352,0,0,0,1.35,1.351,1.352,1.352,0,0,0,1.35-1.351A1.352,1.352,0,0,0-177.822,401.543Z" transform="translate(2.997 2.835)"/>
+    <path id="Path_1337" data-name="Path 1337" class="cls-1" d="M-171.884,391.5a.909.909,0,0,0-.714-.351H-187.3l-.761-3.978a.939.939,0,0,0-.91-.778h-3.639a.948.948,0,0,0-.927.968.949.949,0,0,0,.927.97h2.88l.754,3.946c0,.022.008.044.013.065l1.521,7.949a2.772,2.772,0,0,0,2.676,2.312h8.932a2.778,2.778,0,0,0,2.694-2.32l1.457-7.984A1,1,0,0,0-171.884,391.5Zm-3.079,8.413a.9.9,0,0,1-.91.751h-8.862a.918.918,0,0,1-.892-.753l-1.306-6.824h13.215Z" transform="translate(0)"/>
+  </g>
+  <rect id="Rectangle_10" data-name="Rectangle 10" class="cls-2" width="40" height="44"/>
+</svg>

@@ -1,13 +1,9 @@
 <template>
-    <div>
-        This is the layout of the whole app
-    </div>
+  <Header />
+  <slot />
+  <!-- <div>This is the layout of the whole app</div> -->
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
