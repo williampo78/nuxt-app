@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
   content: [],
@@ -8,10 +8,16 @@ export default {
       screens: {
         xs: '414px',
         ...defaultTheme.screens,
-        md: '992px'
+        md: '992px',
+      },
+      fontFamily: {
+        sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        green: '#00BE96',
+        'sky-200': '#B5F1F4',
+        'sky-900': '#00426A',
+
+        green: '#B5F1F4',
         'light-green': '#F7FFFD',
         'dark-green': '#01a17f',
         'menu-light-green': '#e2fff9',
@@ -63,7 +69,7 @@ export default {
         'gift-pink': '#fdf0f3',
         'postive-blue': '#00a0ff',
         'order-orange': '#ea8605',
-        'checked-orange': '#ff7f00'
+        'checked-orange': '#ff7f00',
       },
       // backgroundImage: {
       //   'arrow-right': 'url(/icons/arrow-right.svg)',
@@ -136,8 +142,7 @@ export default {
       //   'member-center': '0 0 10px -5px rgba(0, 0, 0, 0.2)',
       //   modal: '0px 3px 20px rgba(0, 0, 0, 0.15)'
       // }
-    }
+    },
   },
   plugins: [],
-}
-
+};
