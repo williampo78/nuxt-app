@@ -1,13 +1,16 @@
 <template>
-  <div class="bg-sky-200 flex justify-center p-2 md:p-1 text-sky-900 font-bold">
-    <div class="flex justify-between items-center w-full md:max-w-[1200px]">
-      <div class="flex items-center gap-x-[10px] py-4">
-        <img class="md:hidden" src="@/assets/images/hamburger.svg" alt="" />
+  <div class="bg-sky-200 flex justify-center py-2 px-5 md:p-0 text-sky-900 font-bold relative md:min-h-[120px]">
+    <div class="flex justify-between items-center w-full md:max-w-[1200px] z-[1]">
+      <div class="flex items-center gap-x-[10px] md:py-4">
+        <span class="text-[22px] md:hidden">
+          <font-awesome-icon :icon="['fas', 'bars']" />
+        </span>
         <NuxtLink :to="'/'" class="max-w-[180px]">
-          <picture>
+          <!-- <picture>
             <source media="(min-width:992px )" srcset="@/assets/images/logo@2x.png" sizes="" />
             <img src="@/assets/images/logo.svg" alt="" />
-          </picture>
+          </picture> -->
+          <img class="w-[95px] md:w-[210px]" src="@/assets/images/logo.png" alt="">
         </NuxtLink>
       </div>
       <div>
@@ -23,11 +26,11 @@
           <li>益生菌</li>
         </ul>
       </div>
-      <div class="flex items-center justify-end gap-x-2 ">
-        <div class="flex md:hidden">
-          <img src="@/assets/images/search.svg" alt="" />
-          <img src="@/assets/images/user.svg" alt="" />
-          <img src="@/assets/images/cart.svg" alt="" />
+      <div class="flex items-center justify-end gap-x-2">
+        <div class="flex items-center gap-5 md:hidden text-xl">
+          <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+          <font-awesome-icon :icon="['fa-solid', 'fa-user']" />
+          <font-awesome-icon :icon="['fas', 'cart-shopping']" />
         </div>
         <div class="hidden md:flex items-center flex-shrink-0">
           <span class="mr-2">
@@ -35,12 +38,17 @@
           </span>
           <NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
             會員登入</NuxtLink>
-          <a class="mr-2" href="">註冊</a>
-          <img src="@/assets/images/cart-desktop.svg" alt="" />
-          <a href="">購物車</a>
+          <NuxtLink class="mr-2" to="/">註冊</NuxtLink>
+          <NuxtLink to="/">
+            <span>
+              <font-awesome-icon :icon="['fas', 'cart-shopping']" />
+            </span>
+            購物車
+          </NuxtLink>
         </div>
       </div>
     </div>
+    <img class="hidden md:block fixed right-0 z-0" src="@/assets/images/homepage-right-top.png" alt="">
   </div>
 </template>
 
