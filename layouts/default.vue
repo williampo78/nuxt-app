@@ -1,7 +1,10 @@
 <template>
-  <Header />
-  <slot />
-  <!-- <div>This is the layout of the whole app</div> -->
+  <div class="min-h-[100vh] flex flex-col justify-between">
+    <Header />
+    <slot />
+    <Footer />
+    <!-- <div>This is the layout of the whole app</div> -->
+  </div>
 </template>
 
 <script setup></script>

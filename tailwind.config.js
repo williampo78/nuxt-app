@@ -14,8 +14,8 @@ export default {
         sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        'sky-200': '#B5F1F4',
-        'sky-900': '#00426A',
+        'blue-fifth': '#B5F1F4',
+        'blue-primary': '#00426A',
 
         green: '#B5F1F4',
         'light-green': '#F7FFFD',

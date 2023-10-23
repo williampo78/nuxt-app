@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-sky-200 flex justify-center py-2 px-5 md:p-0 text-sky-900 font-bold relative md:min-h-[120px]">
+  <div class="bg-blue-fifth flex justify-center py-2 px-5 md:p-0 text-blue-primary font-bold relative md:min-h-[120px]">
     <div class="flex justify-between items-center w-full md:max-w-[1200px] z-[1]">
       <div class="flex items-center gap-x-[10px] md:py-4">
         <span class="text-[22px] md:hidden">
@@ -15,7 +15,7 @@
       </div>
       <div>
         <div
-          class="hidden w-[500px] h-10 flex-shrink md:flex items-center bg-white p-1 border-2 border-sky-900 rounded-lg">
+          class="hidden w-[500px] h-10 flex-shrink md:flex items-center bg-white p-1 border-2 border-blue-primary rounded-lg">
           <input class="flex-1 border-r border-black outline-none mr-1" type="text" placeholder="輸入想搜尋的商品" />
           <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
           <span class="w-8 mx-2">搜尋</span>
