@@ -9,7 +9,10 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt'],
+  pinia: {
+    storesDirs: ['./store/**'],
+  },
   build: {
     transpile: ['@fortawesome/vue-fontawesome']
   },

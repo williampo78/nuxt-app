@@ -73,8 +73,8 @@
 
 <script setup>
 import { getCaptchaApi } from '@/api/login';
-const url = ref('');
 
+const url = ref('');
 
 onMounted(async () => {
 	await nextTick();
@@ -84,7 +84,6 @@ onMounted(async () => {
 const getCaptcha = async () => {
 	const data = await getCaptchaApi();
 	url.value = data.result.img;
-	console.log(data);
 };
 </script>
 
