@@ -4,7 +4,8 @@
 //  基于useFetch()的网络请求封装
 
 //全局基础URL
-const BASEURL: string = "https://uecbackend.u-ark.com";  //全局后台服务器请求地址
+// const config = useRuntimeConfig()
+// const BASEURL: any = config.public.baseURL;  //全局后台服务器请求地址
 
 //定义ts变量类型接口
 interface HttpParms {
@@ -22,13 +23,16 @@ interface HttpParms {
  */
 export const service = (obj: HttpParms) => {
     const res = new Promise<void>((resolve, reject) => {
+        const config = useRuntimeConfig()
+        const BASEURL: string = config.public.baseURL;
         useFetch(
-            (obj.baseURL ?? BASEURL) + obj.url,
+            BASEURL + obj.url,
             {
                 method: obj.method ?? "GET",
                 query: obj?.query ?? null,
                 body: obj?.body ?? null,
                 onRequest({ request, options }) {
+
                     // 设置请求报头
                     options.headers = options.headers || {}
                     /**如果接口需求携带token请求，则可先自行使用官方的useCookie()方法设置Cookie存储后，再使用useCookie()方法，取出token使用。如下例子：*/
