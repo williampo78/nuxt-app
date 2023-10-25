@@ -22,7 +22,7 @@ interface HttpParms {
  * @returns 响应结果
  */
 export const service = (obj: HttpParms) => {
-    const res = new Promise<void>((resolve, reject) => {
+    const res = new Promise<any>((resolve, reject) => {
         const config = useRuntimeConfig()
         const BASEURL: string = config.public.baseURL;
         useFetch(
