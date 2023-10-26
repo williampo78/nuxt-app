@@ -56,7 +56,7 @@
 
 		<template #button>
 			<span
-				@click="openModal()"
+				@click="openModalHandler()"
 				class="flex items-center justify-center w-full h-full"
 			>
 				會員登入
@@ -84,7 +84,8 @@
 
 <script setup lang="ts">
 import { getCaptchaApi } from '@/api/login';
-const modalStore = useModal();
+
+const { modalConfig, openModal } = useToggleModal();
 definePageMeta({
 	title: <string>'Login',
 	name: <string>'login',
@@ -103,9 +104,14 @@ const getCaptcha = async () => {
 	url.value = data.result.img;
 };
 
-const openModal = () => {
-	modalStore.openModal(true);
-	modalStore.setType('alert')
+const openModalHandler = () => {
+	const config = { ...modalConfig.value };
+	config.type = 'alert';
+	config.status = 'error';
+	config.title = '驗證碼錯誤';
+	config.message = '驗證碼輸入錯誤，請重新輸入！';
+
+	openModal(config);
 };
 </script>
 
