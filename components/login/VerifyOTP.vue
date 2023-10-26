@@ -1,10 +1,10 @@
 <template>
 	<LoginContainer>
-		<template #title>簡訊驗證</template>
+		<template #title>簡訊認證</template>
 		<template #message>
-			<p class="mb-6 md:mb-12 md:text-center">
+			<p class="mb-6 md:mb-12 text-black md:text-center">
 				我們已經驗證碼透過簡訊方式記送到您的手機 0921****78,
-				<br class="hidden md:block"/>
+				<br class="hidden md:block" />
 				請在下方輸入驗證碼。
 			</p>
 		</template>
@@ -22,7 +22,11 @@
 			</div>
 		</template>
 		<template #button>
-			<span>確認</span>
+			<NuxtLink
+				:to="{ name: 'reset-password' }"
+				class="flex w-full h-full justify-center items-center"
+				>確認</NuxtLink
+			>
 		</template>
 		<template #bottom-message>
 			<p class="text-center">

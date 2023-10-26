@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[794px] font-bold md:my-10">
+	 <div class="w-[794px] font-bold md:my-10">
 		<div
 			class="flex border-b-4 border-blue-primary text-center text-white text-lg md:text-2xl"
 		>
@@ -70,7 +70,6 @@
 						<font-awesome-icon :icon="['fas', 'rotate-right']" />
 					</div>
 				</div>
-				<!-- <p class="text-black">{{ url }}</p> -->
 				<button
 					@click="openModal()"
 					class="block bg-blue-primary text-white rounded w-full h-[52px] mt-[30px] mb-[15px] text-lg md:text-2xl"
@@ -100,6 +99,10 @@
 <script setup lang="ts">
 import { getCaptchaApi } from '@/api/login';
 const modalStore = useModal();
+definePageMeta({
+	title: 'Login',
+	name: 'login',
+});
 
 const url = ref<string>('');
 const passwordShown = ref<boolean>(false);

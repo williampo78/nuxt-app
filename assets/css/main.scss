@@ -1,5 +1,5 @@
 .grid-input {
-	@apply flex flex-col  gap-y-1 md:grid  md:grid-cols-[50px,1fr] md:items-center md:gap-x-[15px];
+	@apply flex flex-col  gap-y-1 md:grid  md:grid-cols-[70px,1fr] md:items-center md:gap-x-[15px];
 }
 .input-container {
 	@apply flex items-center bg-white border border-gray-300 rounded-lg  md:flex-1 px-4;

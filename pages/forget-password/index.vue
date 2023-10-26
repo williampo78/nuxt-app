@@ -2,7 +2,7 @@
 	<LoginContainer>
 		<template #title>忘記密碼</template>
 		<template #button>
-			<span @click="nextStep()"> 下一步 </span>
+			<span class="block w-full" @click="nextStep()"> 下一步 </span>
 		</template>
 		<template #input-field>
 			<div class="grid-input mb-3 md:mb-6">
@@ -29,7 +29,7 @@
 <script setup>
 const router = useRouter();
 const nextStep = () => {
-	router.push('/verify-otp');
+	router.push({ name: 'verify-otp' });
 };
 </script>
 
