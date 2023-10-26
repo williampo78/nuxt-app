@@ -1,6 +1,8 @@
 <template>
 	<LoginContainer>
-		<template #title>簡訊認證</template>
+		<template #title>
+			<h2 class="text-center text-2xl text-black mb-6 md:mb-4">簡訊認證</h2>
+		</template>
 		<template #message>
 			<p class="mb-6 md:mb-12 text-black md:text-center">
 				我們已經驗證碼透過簡訊方式記送到您的手機 0921****78,
@@ -22,10 +24,10 @@
 			</div>
 		</template>
 		<template #button>
-			<NuxtLink
-				:to="{ name: 'reset-password' }"
+			<span
+				@click="confirmOTP()"
 				class="flex w-full h-full justify-center items-center"
-				>確認</NuxtLink
+				>確認</span
 			>
 		</template>
 		<template #bottom-message>
@@ -40,6 +42,11 @@
 	</LoginContainer>
 </template>
 
-<script setup></script>
+<script setup>
+const emit = defineEmits(['confirmOTP']);
+const confirmOTP = () => {
+	emit('confirmOTP');
+};
+</script>
 
 <style lang="scss" scoped></style>

@@ -1,5 +1,5 @@
 <template>
-	<ModalsAlert v-if="modalStore.modalShow" />
+	<ModalsSimpleAlert v-if="modalStore.modalShow" />
 	<div class="min-h-[100vh] flex flex-col justify-between">
 		<Header />
 		<div class="px-3 my-4 flex justify-center">

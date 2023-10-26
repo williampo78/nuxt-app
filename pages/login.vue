@@ -54,23 +54,27 @@
 			</div>
 		</template>
 
-		<template #button>會員登入</template>
+		<template #button>
+			<span @click="openModal()" class="flex items-center justify-center w-full h-full">
+				會員登入
+			</span>
+		</template>
 		<template #bottom-message>
 			<div class="flex justify-center">
-					<RouterLink
-						to="/forget-password"
-						class="pr-[10px] mr-[10px] border-r"
-						href=""
-						>忘記密碼</RouterLink
-					>
-					<span>忘記帳號</span>
-				</div>
-				<p class="text-center text-gray-400">
-					還沒加入會員嗎?
-					<span class="text-emerald-400 ml-2">
-						立即註冊<font-awesome-icon :icon="['fas', 'arrow-right']" />
-					</span>
-				</p>
+				<RouterLink
+					to="/forget-password"
+					class="pr-[10px] mr-[10px] border-r"
+					href=""
+					>忘記密碼</RouterLink
+				>
+				<span>忘記帳號</span>
+			</div>
+			<p class="text-center text-gray-400">
+				還沒加入會員嗎?
+				<span class="text-emerald-400 ml-2">
+					立即註冊<font-awesome-icon :icon="['fas', 'arrow-right']" />
+				</span>
+			</p>
 		</template>
 	</LoginContainer>
 </template>

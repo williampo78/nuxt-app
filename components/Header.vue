@@ -52,7 +52,7 @@
 					<NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
 						會員登入</NuxtLink
 					>
-					<NuxtLink class="mr-2" to="/">註冊</NuxtLink>
+					<NuxtLink class="mr-2" to="/register">註冊</NuxtLink>
 					<NuxtLink to="/">
 						<span>
 							<font-awesome-icon :icon="['fas', 'cart-shopping']" />

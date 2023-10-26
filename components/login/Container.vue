@@ -1,14 +1,27 @@
 <template>
 	<div class="w-[794px] font-bold md:mb-10">
-		<div v-if="route.name === 'login' || route.name === 'register'"
-			class="flex border-b-4 border-blue-primary text-center text-white text-lg md:text-2xl md:my-10"
+		<div
+			v-if="route.name === 'login' || route.name === 'register'"
+			class="flex border-b-4 border-blue-primary text-center text-lg md:text-2xl md:my-10"
 		>
-			<span class="flex-1 bg-blue-primary py-2 rounded-t-xl cursor-pointer"
-				>會員登入</span
+			<NuxtLink
+				:to="{ name: 'login' }"
+				class="flex-1 bg-blue-primary py-2 rounded-t-xl cursor-pointer"
+				:class="{
+					'text-gray-100 bg-blue-primary': route.name === 'login',
+					'bg-gray-100 text-blue-primary': route.name === 'register',
+				}"
 			>
-			<span
-				class="flex-1 bg-gray-100 py-2 rounded-t-xl text-gray-400 cursor-pointer"
-				>會員註冊</span
+				會員登入
+			</NuxtLink>
+			<NuxtLink
+				:to="{ name: 'register' }"
+				class="flex-1 py-2 rounded-t-xl cursor-pointer"
+				:class="{
+					'text-gray-100 bg-blue-primary': route.name === 'register',
+					'bg-gray-100 text-blue-primary': route.name === 'login',
+				}"
+				>會員註冊</NuxtLink
 			>
 		</div>
 		<div
@@ -19,9 +32,7 @@
 				class="max-w-[538px] flex flex-col gap-1 pt-6 pb-[25px] text-blue-primary flex-1 md:py-16"
 				action=""
 			>
-				<h2 class="text-center text-2xl text-black mb-6 md:mb-4">
-					<slot name="title"></slot>
-				</h2>
+				<slot name="title"></slot>
 
 				<slot name="message"></slot>
 
@@ -42,4 +53,6 @@
 const route = useRoute();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

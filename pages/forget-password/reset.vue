@@ -1,6 +1,8 @@
 <template>
 	<LoginContainer>
-		<template #title>重設密碼</template>
+		<template #title>
+			<h2 class="text-center text-2xl text-black mb-6 md:mb-4">重設密碼</h2>
+		</template>
 		<template #message>
 			<p class="text-center text-black">
 				請輸入8-12字元的新密碼,密碼不要與帳號相同,您的密碼必須包含至少1個英文字碼和1的數字之半形英數字。
@@ -79,7 +81,6 @@ definePageMeta({
 });
 
 const passwordShown = ref<boolean>(false);
-
 </script>
 
 <style lang="scss" scoped></style>

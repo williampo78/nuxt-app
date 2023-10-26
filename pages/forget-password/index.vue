@@ -1,6 +1,8 @@
 <template>
 	<LoginContainer>
-		<template #title>忘記密碼</template>
+		<template #title>
+			<h2 class="text-center text-2xl text-black mb-6 md:mb-4">忘記密碼</h2>
+		</template>
 		<template #button>
 			<span class="block w-full" @click="nextStep()"> 下一步 </span>
 		</template>

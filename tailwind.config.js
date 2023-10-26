@@ -24,7 +24,7 @@ export default {
 				'green-100': '#DCFCE7',
 				'green-400': '#4ADE80',
 
-				'emerald/400':'#34D399',
+				'emerald-400':'#34D399',
 
 				green: '#B5F1F4',
 				'light-green': '#F7FFFD',
