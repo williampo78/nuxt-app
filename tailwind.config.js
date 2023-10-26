@@ -20,11 +20,14 @@ export default {
 				'gray-100': '#F3F4F6',
 				'gray-300': '#D1D5DB',
 				'gray-400': '#9CA3AF',
+				'gray-500': '#6B7280',
 				'green-50': '#F0FDF4',
 				'green-100': '#DCFCE7',
 				'green-400': '#4ADE80',
-
-				'emerald-400':'#34D399',
+				'emerald-400': '#34D399',
+				'red-50': '#FEF2F2',
+				'red-100': '#FEE2E2',
+				'red-400': '#F87171',
 
 				green: '#B5F1F4',
 				'light-green': '#F7FFFD',

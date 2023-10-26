@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt'],
   pinia: {
-    storesDirs: ['./store/**'],
+    storesDirs: ['./store/**.ts','./store/**.js'],
   },
   build: {
     transpile: ['@fortawesome/vue-fontawesome']

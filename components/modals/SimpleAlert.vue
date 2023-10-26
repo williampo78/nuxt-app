@@ -8,7 +8,7 @@
                     </span>
                 </div>
 			</div>
-            <p class="text-xl font-bold">登入成功</p>
+            <p class="text-xl font-bold">Simple</p>
 		</div>
 	</div>
 </template>

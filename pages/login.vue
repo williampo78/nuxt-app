@@ -55,7 +55,10 @@
 		</template>
 
 		<template #button>
-			<span @click="openModal()" class="flex items-center justify-center w-full h-full">
+			<span
+				@click="openModal()"
+				class="flex items-center justify-center w-full h-full"
+			>
 				會員登入
 			</span>
 		</template>
@@ -83,8 +86,8 @@
 import { getCaptchaApi } from '@/api/login';
 const modalStore = useModal();
 definePageMeta({
-	title: 'Login',
-	name: 'login',
+	title: <string>'Login',
+	name: <string>'login',
 });
 
 const url = ref<string>('');
@@ -102,6 +105,7 @@ const getCaptcha = async () => {
 
 const openModal = () => {
 	modalStore.openModal(true);
+	modalStore.setType('alert')
 };
 </script>
 
