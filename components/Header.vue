@@ -6,8 +6,19 @@
 			class="flex justify-between items-center w-full md:max-w-[1200px] z-[1]"
 		>
 			<div class="flex items-center gap-x-[10px] md:py-4">
-				<span class="text-[22px] md:hidden">
+				<span
+					v-if="!menuStore.menuShow"
+					@click="menuStore.openMenu()"
+					class="text-[22px] w-5 md:hidden"
+				>
 					<font-awesome-icon :icon="['fas', 'bars']" />
+				</span>
+				<span
+					v-else
+					@click="menuStore.closeMenu()"
+					class="text-[22px] w-5 md:hidden"
+				>
+					<font-awesome-icon :icon="['fas', 'xmark']" />
 				</span>
 				<NuxtLink :to="'/'" class="max-w-[180px]">
 					<!-- <picture>
@@ -70,6 +81,8 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+const menuStore = useMenu();
+</script>
 
 <style lang="scss" scoped></style>
