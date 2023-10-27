@@ -11,25 +11,25 @@
 			<div
 				class="flex justify-center items-center w-[62px] h-[62px] my-5 rounded-full"
 				:class="{
-					'bg-green-50': modalStore.status === 'success',
-					'bg-red-50': modalStore.status === 'error',
+					'bg-green-50': modalStore.icon === 'success',
+					'bg-red-50': modalStore.icon === 'error',
 				}"
 			>
 				<div
 					class="flex justify-center items-center w-10 h-10 rounded-full"
 					:class="{
-						'bg-green-100': modalStore.status === 'success',
-						'bg-red-100': modalStore.status === 'error',
+						'bg-green-100': modalStore.icon === 'success',
+						'bg-red-100': modalStore.icon === 'error',
 					}"
 				>
 					<span
-						v-if="modalStore.status === 'success'"
+						v-if="modalStore.icon === 'success'"
 						class="text-green-400 text-2xl"
 					>
 						<font-awesome-icon :icon="['fas', 'circle-check']" />
 					</span>
 					<span
-						v-else-if="modalStore.status === 'error'"
+						v-else-if="modalStore.icon === 'error'"
 						class="text-red-400 text-2xl"
 					>
 						<font-awesome-icon :icon="['fas', 'circle-xmark']" />

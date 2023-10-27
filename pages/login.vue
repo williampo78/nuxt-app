@@ -85,7 +85,7 @@
 <script setup lang="ts">
 import { getCaptchaApi } from '@/api/login';
 
-const { modalConfig, openModal } = useToggleModal();
+const modalStore = useModal();
 definePageMeta({
 	title: <string>'Login',
 	name: <string>'login',
@@ -105,13 +105,11 @@ const getCaptcha = async () => {
 };
 
 const openModalHandler = () => {
-	const config = { ...modalConfig.value };
-	config.type = 'alert';
-	config.status = 'error';
-	config.title = '驗證碼錯誤';
-	config.message = '驗證碼輸入錯誤，請重新輸入！';
-
-	openModal(config);
+	modalStore.openModal({
+		type: 'simple',
+		icon: 'success',
+		message:''
+	});
 };
 </script>
 

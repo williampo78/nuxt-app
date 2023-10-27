@@ -8,11 +8,13 @@
                     </span>
                 </div>
 			</div>
-            <p class="text-xl font-bold">Simple</p>
+            <p class="text-xl font-bold">{{modalStore.title}}</p>
 		</div>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+const modalStore = useModal()
+</script>
 
 <style lang="scss" scoped></style>

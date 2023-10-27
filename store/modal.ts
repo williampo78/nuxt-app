@@ -1,45 +1,56 @@
 import { defineStore } from 'pinia';
 type ModalType = 'simple' | 'alert' | 'modal' | ''
 interface ModalConfig {
-	type: ModalType;
-	status: string;
+	type: 'modal' | '';
+	icon?: string;
+	name: string;
+	title: string;
+	message?: string;
+}
+interface SimpleConfig {
+	type: 'simple';
+	icon: string;
+	title?: string;
+	message: string;
+}
+interface AlertConfig {
+	type: 'alert';
+	icon?: string;
 	title: string;
 	message: string;
 }
+
 export const useModal = defineStore('modal', {
 	state: () => ({
 		modalShow: <boolean>false,
 		type: <ModalType>'',
-		status: 'suceess',
+		icon: <string>'suceess',
 		title: <string>'',
 		message: <string>'',
 		hasHeader: <boolean>true,
 		data: <any>null,
 	}),
 	actions: {
-		openModal(obj: ModalConfig) {
+		openModal(config: ModalConfig | SimpleConfig | AlertConfig) {
+			this.type = config.type || ''
+			this.icon = config.icon || ''
+			this.title = config.title || ''
+			this.message = config.message || ''
 			this.modalShow = true
-		},
-		setType(value: ModalType) {
-			this.type = value
-		},
-		setStatus(value: string) {
-			this.status = value
-		},
-		setTitle(value: string) {
-			this.title = value
-		},
-		setMessage(value: string) {
-			this.message = value
-		},
-		setHeader(value: boolean) {
-			this.hasHeader = value
+			if (config.type === 'simple') {
+				setTimeout(() => {
+					this.closeModal()
+				}, 2000);
+			}
 		},
 
 		closeModal() {
-			this.modalShow = false;
 			this.type = ''
-			this.status = ''
+			this.icon = ''
+			this.message = ''
+			this.title = ''
+			this.modalShow = false;
+			this.hasHeader = true
 		}
 	},
 });
