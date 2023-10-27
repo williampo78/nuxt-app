@@ -108,7 +108,7 @@ const openModalHandler = () => {
 	modalStore.openModal({
 		type: 'simple',
 		icon: 'success',
-		message:''
+		message:'登入成功'
 	});
 };
 </script>
