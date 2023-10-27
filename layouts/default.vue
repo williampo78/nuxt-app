@@ -1,14 +1,14 @@
 <template>
 	<ModalsSimpleAlert v-if="modalStore.type === 'simple'" />
 	<ModalsAlert v-if="modalStore.type === 'alert'" />
-	<div class="min-h-[100vh] flex flex-col justify-between">
+	<div class="min-h-[calc(100vh-219px)] md:min-h-[calc(100vh-257px)]">
 		<Header />
-		<div class="px-3 my-4 flex justify-center">
+		<main class="px-3 my-4 flex justify-center">
 			<slot />
-		</div>
-		<Footer />
+		</main>
 		<!-- <div>This is the layout of the whole app</div> -->
 	</div>
+	<Footer />
 </template>
 
 <script setup>
