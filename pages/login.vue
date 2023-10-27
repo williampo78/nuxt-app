@@ -48,7 +48,7 @@
 			</div>
 			<div class="grid-input">
 				<div class="flex items-center gap-3 col-start-2">
-					<img class="w-[160px] h-10" :src="url" alt="" />
+					<img class="w-[160px] h-10" :src="captchaUrl" alt="" />
 					<font-awesome-icon :icon="['fas', 'rotate-right']" />
 				</div>
 			</div>
@@ -91,7 +91,7 @@ definePageMeta({
 	name: <string>'login',
 });
 
-const url = ref<string>('');
+const captchaUrl = ref<string>('');
 const passwordShown = ref<boolean>(false);
 
 onMounted(async () => {
@@ -101,7 +101,7 @@ onMounted(async () => {
 
 const getCaptcha = async () => {
 	const data = await getCaptchaApi();
-	url.value = data.result.img;
+	captchaUrl.value = data.url.img;
 };
 
 const openModalHandler = () => {

@@ -26,7 +26,7 @@ export const service = (obj: HttpParms) => {
         const config = useRuntimeConfig()
         const BASEURL: string = config.public.baseURL;
         useFetch(
-            BASEURL + obj.url,
+            BASEURL + '/api' + obj.url,
             {
                 method: obj.method ?? "GET",
                 query: obj?.query ?? null,
