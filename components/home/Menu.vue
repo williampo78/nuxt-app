@@ -1,7 +1,30 @@
 <template>
-	<div class="max-w-[1200px] mx-auto">
-		<HomeNav class="md:hidden"/>
-		<Transition name="slide-fade">
+	<div class="max-w-[1200px] mx-auto font-bold">
+		<div class="md:grid md:grid-cols-[204px,1fr]">
+			<span class="hidden bg-blue-primary align-middle text-white md:flex items-center px-4 py-2">
+				<span class="text-[20px] mr-2"> <font-awesome-icon :icon="['fas', 'bars']" /> </span>
+				分類總覽
+			</span>
+			<HomeNav />
+
+			<div v-if="route.path === '/'" class="hidden md:block bg-gray-50">
+				<ul class="text-gray-500">
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+					<li class="py-[10px] px-4">成人飲品</li>
+				</ul>
+			</div>
+			<div v-if="route.path === '/'" class="hidden md:block">
+				<img class="h-full" src="@/assets/images/image-38.png" alt="" />
+			</div>
+		</div>
+
+		<transition name="slide-fade">
 			<div
 				v-if="menuStore.menuShow"
 				class="bg-white font-bold absolute z-40 w-full h-[calc(100vh-52px)] flex top-[52px] md:hidden"
@@ -40,11 +63,12 @@
 					</ul>
 				</div>
 			</div>
-		</Transition>
+		</transition>
 	</div>
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
 const menuStore = useMenu();
 const chosenCateId = ref<number | null>(1);
 const chosenSubId = ref<number | null>(1);
@@ -62,19 +86,6 @@ const chosenSubId = ref<number | null>(1);
 .slide-fade-enter-from,
 .slide-fade-leave-to {
 	transform: translateX(-20px);
-	opacity: 0;
-}
-.drop-fade-enter-active {
-	transition: all 0.8s ease;
-}
-
-.drop-fade-leave-active {
-	transition: all 0.5s ease;
-}
-
-.drop-fade-enter-from,
-.drop-fade-leave-to {
-	transform: translateY(-20px);
 	opacity: 0;
 }
 </style>

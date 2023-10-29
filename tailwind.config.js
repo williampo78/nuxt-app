@@ -31,6 +31,8 @@ export default {
 				'red-100': '#FEE2E2',
 				'red-400': '#F87171',
 				'yellow-forth':'#FFF4CB',
+				'orange-primary':'#FF770D',
+
 
 				green: '#B5F1F4',
 				'light-green': '#F7FFFD',

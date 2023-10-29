@@ -18,14 +18,16 @@
 				/>
 			</span>
 		</div>
-		<ul v-if="open" class="bg-yellow-forth p-4 grid grid-cols-3 gap-2 absolute w-full">
-			<li
-				v-for="item in items"
-				class="text-center text-blue-primary bg-white border-2 border-blue-primary rounded-full"
-			>
-				{{ item.name }}</li
-			>
-		</ul>
+		<transition name="drop">
+			<ul v-if="open" class="bg-yellow-forth p-4 grid grid-cols-3 gap-2 absolute w-full">
+				<li
+					v-for="item in items"
+					class="text-center text-blue-primary bg-white border-2 border-blue-primary rounded-full"
+				>
+					{{ item.name }}</li
+				>
+			</ul>
+		</transition>
 	</div>
 </template>
 
@@ -46,4 +48,18 @@ const items = ref<{ name: string }[]>([
 const open = ref<boolean>(false);
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.drop-enter-active {
+	transition: all 0.5s ease;
+}
+
+.drop-leave-active {
+	transition: all 0.5s ease;
+}
+
+.drop-enter-from,
+.drop-leave-to {
+	transform: translateY(-20px);
+	opacity: 0;
+}
+</style>
