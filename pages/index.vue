@@ -14,15 +14,22 @@
 				</span>
 			</div>
 		</div>
-		<div class="bg-[#FFF8E9] mx-[-12px]">
+		<div class="bg-[#FFF8E9] mx-[-12px] py-6">
 			<div class="max-w-[1200px] mx-auto">
-				<h2 class="text-2xl text-orange-primary"
-					><span class="mr-3"><font-awesome-icon :icon="['fas', 'fire']" /></span>今日最熱銷</h2
+				<h2 class="text-2xl text-orange-primary mb-3"
+					><span class="mr-3"
+						><font-awesome-icon :icon="['fas', 'fire']" /></span
+					>今日最熱銷</h2
 				>
 				<div class="flex justify-between gap-x-3 w-full">
-					<span v-for="i in 6" class="max-w-[200px]">
-						<img class="rounded-2xl" src="@/assets/images/product1.png" alt="" />
-					</span>
+					<!-- <span v-for="i in 6" class="max-w-[200px]">
+						<img
+							class="rounded-2xl"
+							src="@/assets/images/product1.png"
+							alt=""
+						/>
+					</span> -->
+					<ProductCard v-for="i in 6" class="max-w-[250px]" />
 				</div>
 			</div>
 		</div>

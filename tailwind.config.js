@@ -27,12 +27,13 @@ export default {
 				'green-100': '#DCFCE7',
 				'green-400': '#4ADE80',
 				'emerald-400': '#34D399',
+				red: '#FA0000',
 				'red-50': '#FEF2F2',
 				'red-100': '#FEE2E2',
 				'red-400': '#F87171',
-				'yellow-forth':'#FFF4CB',
-				'orange-primary':'#FF770D',
-
+				'yellow-forth': '#FFF4CB',
+				'orange-primary': '#FF770D',
+				'pink-secondary': '#F06988',
 
 				green: '#B5F1F4',
 				'light-green': '#F7FFFD',
