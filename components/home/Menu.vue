@@ -1,12 +1,6 @@
 <template>
 	<div class="max-w-[1200px] mx-auto font-bold">
 		<div class="md:grid md:grid-cols-[204px,1fr]">
-			<span class="hidden bg-blue-primary align-middle text-white md:flex items-center px-4 py-2">
-				<span class="text-[20px] mr-2"> <font-awesome-icon :icon="['fas', 'bars']" /> </span>
-				分類總覽
-			</span>
-			<HomeNav />
-
 			<div v-if="route.path === '/'" class="hidden md:block bg-gray-50">
 				<ul class="text-gray-500">
 					<li class="py-[10px] px-4">成人飲品</li>
@@ -39,14 +33,18 @@
 						}"
 						class="w-[120px] h-[120px] flex flex-col justify-center items-center border-b border-gray-200 last:border-none"
 					>
-						<span class="text-[32px]"><font-awesome-icon :icon="['fas', 'whiskey-glass']" /></span>
+						<span class="text-[32px]"
+							><font-awesome-icon :icon="['fas', 'whiskey-glass']"
+						/></span>
 						成人飲品
 					</div>
 				</div>
 				<div class="flex-1 bg-yellow-forth h-full overflow-scroll">
 					<ul v-for="i in 5" @click="chosenSubId = i">
 						<li class="py-3 px-4 flex justify-between">
-							<span :class="{ 'text-emerald-400': chosenSubId === i }"> 成人飲品 </span>
+							<span :class="{ 'text-emerald-400': chosenSubId === i }">
+								成人飲品
+							</span>
 							<span
 								class="transition ease-linear"
 								:class="{ 'rotate-90 text-emerald-400 ': chosenSubId === i }"
@@ -55,7 +53,9 @@
 						</li>
 						<li class="bg-white">
 							<ul v-if="i === chosenSubId">
-								<li class="py-3 px-4 border-b border-gray-200 last:border-none" v-for="j in 3"
+								<li
+									class="py-3 px-4 border-b border-gray-200 last:border-none"
+									v-for="j in 3"
 									>123</li
 								>
 							</ul>

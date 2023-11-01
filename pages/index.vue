@@ -1,5 +1,7 @@
 <template>
-	<div class="w-[100vw] flex-1 hidden md:block">
+	<div class="w-full flex-1">
+		<Nav />
+
 		<div class="max-w-[1200px] mx-auto">
 			<div class="flex justify-between gap-x-3 w-full">
 				<span v-for="i in 6" class="max-w-[200px]">
@@ -14,14 +16,14 @@
 				</span>
 			</div>
 		</div>
-		<div class="bg-[#FFF8E9] mx-[-12px] py-6">
+		<div class="bg-[#FFF8E9] py-6">
 			<div class="max-w-[1200px] mx-auto">
 				<h2 class="text-2xl text-orange-primary mb-3"
 					><span class="mr-3"
 						><font-awesome-icon :icon="['fas', 'fire']" /></span
 					>今日最熱銷</h2
 				>
-				<div class="flex justify-between gap-x-3 w-full">
+				<div class="flex gap-x-3 w-full overflow-auto px-3">
 					<!-- <span v-for="i in 6" class="max-w-[200px]">
 						<img
 							class="rounded-2xl"
@@ -29,7 +31,7 @@
 							alt=""
 						/>
 					</span> -->
-					<ProductCard v-for="i in 6" class="max-w-[250px]" />
+					<ProductCard v-for="i in 6" />
 				</div>
 			</div>
 		</div>
