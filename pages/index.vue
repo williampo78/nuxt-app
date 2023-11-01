@@ -4,38 +4,21 @@
 		<HomeMenu />
 
 		<div class="max-w-[1200px] mx-auto mt-4">
-			<div class="flex justify-between gap-x-3 w-full">
-				<span v-for="i in 6" class="max-w-[200px]">
+			<div class="flex gap-x-3 w-full overflow-auto">
+				<span v-for="i in 6" class="max-w-[120px] flex-shrink-0 md:max-w-full">
 					<img class="rounded-2xl" src="@/assets/images/product1.png" alt="" />
 				</span>
 			</div>
 		</div>
 		<div class="max-w-[1200px] mx-auto my-5">
-			<div class="flex gap-x-3">
-				<span v-for="i in 2">
+			<div class="flex justify-between w-full overflow-auto">
+				<span v-for="i in 2" class="max-w-full flex-shrink-0">
 					<img class="rounded-2xl" src="@/assets/images/image-63.png" alt="" />
 				</span>
 			</div>
 		</div>
-		<div class="bg-[#FFF8E9] py-6">
-			<div class="max-w-[1200px] mx-auto">
-				<h2 class="text-2xl text-orange-primary mb-3"
-					><span class="mr-3"
-						><font-awesome-icon :icon="['fas', 'fire']" /></span
-					>今日最熱銷</h2
-				>
-				<div class="flex gap-x-3 w-full overflow-auto px-3">
-					<!-- <span v-for="i in 6" class="max-w-[200px]">
-						<img
-							class="rounded-2xl"
-							src="@/assets/images/product1.png"
-							alt=""
-						/>
-					</span> -->
-					<ProductCard v-for="i in 6" />
-				</div>
-			</div>
-		</div>
+		<HomeUnboxing />
+		<ProductCardField />
 	</div>
 </template>
 
