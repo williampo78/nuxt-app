@@ -12,7 +12,12 @@
 				/></NuxtLink>
 			</div>
 			<div class="flex gap-3 justify-between w-full overflow-auto">
-				<Swiper :slides-per-view="'auto'" :free-mode="true" :space-between="12">
+				<Swiper
+					:slides-per-view="'auto'"
+					:space-between="12"
+					:modules="[SwiperFreeMode]"
+					:free-mode="true"
+				>
 					<SwiperSlide v-for="i in 6">
 						<ProductCard />
 					</SwiperSlide>
