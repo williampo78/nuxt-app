@@ -2,6 +2,7 @@
 	<ModalsSimpleAlert v-if="modalStore.type === 'simple'" />
 	<ModalsAlert v-if="modalStore.type === 'alert'" />
 	<Header />
+	<Menu />
 	<div class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold">
 		<main
 			class="px-3 flex justify-center"

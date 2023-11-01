@@ -1,5 +1,5 @@
 <template>
-	<div class="max-w-[1200px] mx-auto">
+	<div class="max-w-[1200px] mx-auto sticky top-[52px] md:top-[120px]">
 		<div class="md:grid md:grid-cols-[204px,1fr]">
 			<span
 				class="hidden bg-blue-primary align-middle text-white md:flex items-center px-4 py-2"
@@ -9,7 +9,7 @@
 				</span>
 				分類總覽
 			</span>
-			<div class="relative font-bold">
+			<div class="relative font-bold bg-white">
 				<div class="flex py-[10px] text-blue-primary">
 					<ul v-if="!open" class="flex overflow-auto gap-6 px-3">
 						<li v-for="item in items" class="flex-shrink-0">

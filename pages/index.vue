@@ -1,8 +1,9 @@
 <template>
-	<div class="w-full flex-1">
+	<div class="w-full">
 		<Nav />
+		<HomeMenu />
 
-		<div class="max-w-[1200px] mx-auto">
+		<div class="max-w-[1200px] mx-auto mt-4">
 			<div class="flex justify-between gap-x-3 w-full">
 				<span v-for="i in 6" class="max-w-[200px]">
 					<img class="rounded-2xl" src="@/assets/images/product1.png" alt="" />
