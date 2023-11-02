@@ -7,7 +7,12 @@
 					<span class="text-gray-300 mr-2">
 						<font-awesome-icon :icon="['fas', 'mobile-screen']" />
 					</span>
-					<input type="tel" class="input" placeholder="請輸入手機號碼" />
+					<input
+						v-model="mobile"
+						type="tel"
+						class="input"
+						placeholder="請輸入手機號碼"
+					/>
 				</div>
 			</div>
 			<div class="grid-input">
@@ -83,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCaptchaApi } from '@/api/login';
+import { getCaptchaApi } from '@/api/auth';
 
 const modalStore = useModal();
 definePageMeta({
@@ -93,6 +98,8 @@ definePageMeta({
 
 const captchaUrl = ref<string>('');
 const passwordShown = ref<boolean>(false);
+
+const mobile = ref<string>('');
 
 onMounted(async () => {
 	await nextTick();
