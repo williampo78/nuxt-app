@@ -36,8 +36,8 @@
 					</span>
 				</div>
 			</div>
-			<h4 class="text-2xl font-bold">驗證碼錯誤</h4>
-			<p class="text-gray-500 mt-3 mb-8">驗證碼輸入錯誤，請重新輸入！</p>
+			<h4 class="text-2xl font-bold">{{modalStore.title}}</h4>
+			<p class="text-gray-500 mt-3 mb-8">{{modalStore.message}}</p>
 			<button
 				@click="modalStore.closeModal()"
 				class="py-3 px-12 mb-4 text-lg text-white font-bold bg-blue-primary rounded-lg md:px-16"

@@ -70,7 +70,6 @@ const footerList = ref([]);
 const getFooter = async () => {
 	const data = await getFooterInfoApi();
 	footerList.value = data.result;
-	console.log(data);
 };
 await getFooter();
 </script>

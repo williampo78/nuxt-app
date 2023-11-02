@@ -13,7 +13,7 @@ interface HttpParms {
     url: string,      //请求api接口地址
     method?: any,   //请求方法
     query?: any,       //添加查询搜索参数到URL
-    body?: any         //请求体
+    data?: any         //请求体
 }
 
 /**
@@ -29,7 +29,7 @@ export const service = async (obj: HttpParms) => {
         {
             method: obj.method ?? "GET",
             query: obj?.query ?? null,
-            body: obj?.body ?? null,
+            body: obj?.data ?? null,
             onRequest({ request, options }) {
 
                 // 设置请求报头

@@ -12,6 +12,7 @@
 						type="tel"
 						class="input"
 						placeholder="請輸入手機號碼"
+						@blur="validateMobile()"
 					/>
 				</div>
 			</div>
@@ -19,6 +20,7 @@
 				<label class="text-left md:text-right" for="">密碼</label>
 				<div class="input-container">
 					<input
+						v-model="password"
 						:type="passwordShown ? 'text' : 'password'"
 						class="input"
 						placeholder="請輸入密碼"
@@ -45,6 +47,7 @@
 				<label class="text-left md:text-right" for="">驗證碼</label>
 				<div class="input-container">
 					<input
+						v-model="captchInput"
 						class="input"
 						type="text"
 						placeholder="請輸入驗證碼 (不分大小寫)"
@@ -54,14 +57,16 @@
 			<div class="grid-input">
 				<div class="flex items-center gap-3 col-start-2">
 					<img class="w-[160px] h-10" :src="captchaUrl" alt="" />
-					<font-awesome-icon :icon="['fas', 'rotate-right']" />
+					<span @click="getCaptcha()" class="cursor-pointer">
+						<font-awesome-icon :icon="['fas', 'rotate-right']" />
+					</span>
 				</div>
 			</div>
 		</template>
 
 		<template #button>
 			<span
-				@click="openModalHandler()"
+				@click="loginHandler()"
 				class="flex items-center justify-center w-full h-full"
 			>
 				會員登入
@@ -88,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCaptchaApi } from '@/api/auth';
+import { getCaptchaApi, loginApi } from '@/api/auth';
 
 const modalStore = useModal();
 definePageMeta({
@@ -96,10 +101,12 @@ definePageMeta({
 	name: <string>'login',
 });
 
-const captchaUrl = ref<string>('');
-const passwordShown = ref<boolean>(false);
+const { mobile, validateMobile, password } = useValidate();
 
-const mobile = ref<string>('');
+const captchaUrl = ref<string>('');
+const captchKey = ref<string>('');
+const captchInput = ref<string>('');
+const passwordShown = ref<boolean>(false);
 
 onMounted(async () => {
 	await nextTick();
@@ -108,14 +115,65 @@ onMounted(async () => {
 
 const getCaptcha = async () => {
 	const data = await getCaptchaApi();
+
 	captchaUrl.value = data.url.img;
+	captchKey.value = data.url.key;
 };
 
-const openModalHandler = () => {
+
+const loginHandler = async () => {
+	let message: string = '';
+	const submitData = {
+		mobile: mobile.value,
+		pwd: password.value,
+		key: captchKey.value,
+		captcha: captchInput.value,
+	};
+	if (!mobile.value || !password.value || !captchInput.value) {
+		message = '請輸入所有欄位';
+		modalStore.openModal({
+			type: 'simple',
+			icon: 'error',
+			message,
+		});
+		return;
+	}
+	try {
+		const data = await loginApi(submitData);
+		if (data.status) {
+			modalStore.openModal({
+				type: 'simple',
+				icon: 'success',
+				message: '登入成功',
+			});
+		}
+
+		if (data.error_code === '404') {
+			message = '您尚未加入會員，邀請您加入會員';
+		} else if (data.error_code === '401') {
+			if (data.error_msg === '參數錯誤') {
+				if (data.result?.password?.length) {
+					message = '您所輸入的帳戶或密碼錯誤，請重新輸入';
+				}
+			} else if (data.error_msg === '資料錯誤') {
+				if (data.result?.captcha?.length) {
+					message = '您所輸入的驗證碼錯誤，請重新輸入';
+				}
+			} else {
+				message = '您尚未完成手機驗證，請重新驗證';
+			}
+		} else {
+			message = '您所輸入的帳戶或密碼錯誤，請重新輸入';
+		}
+		getCaptcha();
+	} catch (err) {
+		message = '請稍後再試，謝謝';
+	}
+
 	modalStore.openModal({
 		type: 'simple',
-		icon: 'success',
-		message: '登入成功',
+		icon: 'error',
+		message,
 	});
 };
 </script>
