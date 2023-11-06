@@ -4,7 +4,7 @@
 			<img src="@/assets/images/image-44.png" alt="" />
 		</div>
 		<small class="mt-4 mb-1 text-xs text-pink-secondary">會員再享 95 折 </small>
-		<NuxtLink to="/product/417" class="text-blue-primary mb-6 block">美強生 優兒A+成長奶粉 6罐</NuxtLink>
+		<NuxtLink to="/product/862" class="text-blue-primary mb-6 block">美強生 優兒A+成長奶粉 6罐</NuxtLink>
 		<p class="text-red text-xl"
 			>$1,800<sub class="text-xs text-gray-400 ml-4 line-through font-medium	">$2,000</sub></p
 		>

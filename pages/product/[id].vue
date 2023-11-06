@@ -27,7 +27,7 @@
 							<sub class="text-xs">$</sub>{{ productInfo.selling_price }}
 						</span>
 						<sub class="text-gray-400 text-xs font-medium line-through">
-							{{ productInfo.list_price }}
+							${{ productInfo.list_price }}
 						</sub>
 					</p>
 				</div>
@@ -55,7 +55,7 @@
 							<font-awesome-icon :icon="['fas', 'chevron-right']" />
 						</span>
 					</li>
-					<li class="flex justify-between">
+					<li v-if="campaignInfo.length" class="flex justify-between">
 						<div class="text-gray-500 flex items-center">
 							<span class="w-[22px]">
 								<font-awesome-icon :icon="['fas', 'gift']" />
@@ -83,9 +83,9 @@
 									>
 										{{ delivery }}
 									</span>
-									<sub class="ml-3 text-xs font-normal text-gray-400"
-										>未滿 $900 運費 $80</sub
-									>
+									<sub class="ml-3 text-xs font-normal text-gray-400">{{
+										shippingFee.notice
+									}}</sub>
 								</p>
 							</div>
 						</div>
@@ -96,8 +96,14 @@
 								<font-awesome-icon :icon="['fas', 'money-check-dollar']" />
 							</span>
 							<p class="ml-2 mr-6">付款</p>
-							<div class="flex gap-x-3">
-								<p class="text-blue-primary"> 信用卡/Line Pay </p>
+							<div class="flex">
+								<p
+									v-for="(payment, index) in availablePayments"
+									class="text-blue-primary"
+								>
+									{{ payment.alt
+									}}<span v-if="index < availablePayments.length - 1">/</span>
+								</p>
 							</div>
 						</div>
 					</li>
@@ -138,16 +144,22 @@ const route = useRoute();
 const orderSpec = ref({});
 const productInfo = ref({});
 const productPhotos = ref([]);
+const shippingFee = ref({});
+const campaignInfo = ref([]);
+// const payment = ref([]);
+const { payment, availablePayments } = usePayments();
 
-const getProductSpec = async () => {
+const getProductInfo = async () => {
 	const id = route.params.id;
 	const data = await getProductInfoApi(id);
-	console.log(data);
 	orderSpec.value = data.result.orderSpec;
 	productInfo.value = data.result.productInfo;
 	productPhotos.value = data.result.productPhotos;
+	shippingFee.value = data.result.shippingFee;
+	campaignInfo.value = data.result.campaignInfo;
+	payment.value = data.result.productInfo.payment;
 };
-getProductSpec();
+await getProductInfo();
 </script>
 
 <style scoped></style>
