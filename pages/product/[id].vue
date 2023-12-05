@@ -3,8 +3,8 @@
 		<Nav />
 		<div class="mt-4 gap-x-5 md:flex">
 			<section class="flex justify-center">
-				<img v-if="productPhotos.length" :src="productPhotos[0]" alt="" />
-				<img v-else src="@/assets/images/image-52.png" alt="" />
+				<!-- <img v-lazy="productPhotos[0]" alt="" width="480" height="480"/> -->
+				<!-- <img v-else src="@/assets/images/image-52.png" alt="" /> -->
 			</section>
 			<section class="flex-1">
 				<p class="text-pink-secondary mt-4 mb-3">會員再享95折 </p>

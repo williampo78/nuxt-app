@@ -148,7 +148,7 @@ const loginHandler = async () => {
 			});
 		}
 
-		if (data.error_code === '404') {
+		else if (data.error_code === '404') {
 			message = '您尚未加入會員，邀請您加入會員';
 		} else if (data.error_code === '401') {
 			if (data.error_msg === '參數錯誤') {
@@ -168,13 +168,13 @@ const loginHandler = async () => {
 		getCaptcha();
 	} catch (err) {
 		message = '請稍後再試，謝謝';
+		modalStore.openModal({
+			type: 'simple',
+			icon: 'error',
+			message,
+		});
 	}
 
-	modalStore.openModal({
-		type: 'simple',
-		icon: 'error',
-		message,
-	});
 };
 </script>
 
