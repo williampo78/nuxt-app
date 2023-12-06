@@ -164,7 +164,6 @@ const loginHandler = async () => {
 		}
 		getCaptcha();
 	} catch (err) {
-		console.log(err);
 
 		message = '請稍後再試，謝謝';
 		modalStore.openModal({
