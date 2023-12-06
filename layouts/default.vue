@@ -1,6 +1,6 @@
 <template>
-	<ModalsSimpleAlert v-if="modalStore.type === 'simple'" />
-	<ModalsAlert v-if="modalStore.type === 'alert'" />
+	<ModalToast v-if="modalStore.modalShow && modalStore.type === 'toast'" />
+	<ModalAlert v-if="modalStore.modalShow && modalStore.type === 'alert'" />
 	<Header />
 	<Menu />
 	<div class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold">

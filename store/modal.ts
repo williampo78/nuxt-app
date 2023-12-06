@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-type ModalType = 'simple' | 'alert' | 'modal' | ''
+type ModalType = 'toast' | 'alert' | 'modal' | ''
 interface ModalConfig {
 	type: 'modal' | '';
 	icon?: string;
@@ -7,8 +7,8 @@ interface ModalConfig {
 	title: string;
 	message?: string;
 }
-interface SimpleConfig {
-	type: 'simple';
+interface ToastConfig {
+	type: 'toast';
 	icon: string;
 	title?: string;
 	message: string;
@@ -31,13 +31,13 @@ export const useModal = defineStore('modal', {
 		data: <any>null,
 	}),
 	actions: {
-		openModal(config: ModalConfig | SimpleConfig | AlertConfig) {
+		openModal(config: ModalConfig | ToastConfig | AlertConfig) {
 			this.type = config.type || ''
 			this.icon = config.icon || ''
 			this.title = config.title || ''
 			this.message = config.message || ''
 			this.modalShow = true
-			if (config.type === 'simple') {
+			if (config.type === 'toast') {
 				setTimeout(() => {
 					this.closeModal()
 				}, 2000);

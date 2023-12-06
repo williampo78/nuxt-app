@@ -120,7 +120,6 @@ const getCaptcha = async () => {
 	captchKey.value = data.url.key;
 };
 
-
 const loginHandler = async () => {
 	let message: string = '';
 	const submitData = {
@@ -132,7 +131,7 @@ const loginHandler = async () => {
 	if (!mobile.value || !password.value || !captchInput.value) {
 		message = '請輸入所有欄位';
 		modalStore.openModal({
-			type: 'simple',
+			type: 'toast',
 			icon: 'error',
 			message,
 		});
@@ -142,14 +141,12 @@ const loginHandler = async () => {
 		const data = await loginApi(submitData);
 		if (data.status) {
 			modalStore.openModal({
-				type: 'simple',
+				type: 'toast',
 				icon: 'success',
 				message: '登入成功',
 			});
-		}
-
-		else if (data.error_code === '404') {
-			message = '您尚未加入會員，邀請您加入會員';
+		} else if (data.error_code === '404') {
+			throw new Error();
 		} else if (data.error_code === '401') {
 			if (data.error_msg === '參數錯誤') {
 				if (data.result?.password?.length) {
@@ -167,14 +164,15 @@ const loginHandler = async () => {
 		}
 		getCaptcha();
 	} catch (err) {
+		console.log(err);
+
 		message = '請稍後再試，謝謝';
 		modalStore.openModal({
-			type: 'simple',
+			type: 'toast',
 			icon: 'error',
 			message,
 		});
 	}
-
 };
 </script>
 
