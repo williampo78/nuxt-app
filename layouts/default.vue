@@ -26,6 +26,9 @@
 <script setup>
 const modalStore = useModal();
 const route = useRoute();
+const { getProductCategories } = useCategories();
+
+await getProductCategories();
 
 const scrollToTop = () => {
 	window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

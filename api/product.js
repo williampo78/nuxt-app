@@ -1,5 +1,13 @@
 import { service } from '~/composables/api.ts';
 
+//取得產品分類
+export const getProductCategoryApi = () => {
+	return service({
+		method: 'GET',
+		url: '/v1/product/category',
+	});
+};
+
 //取得產品規格
 export const getProductSpecApi = (id) => {
 	return service({

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 export const useMenu = defineStore('menu', {
     state: () => ({
         menuShow: <boolean>false,
+        categories: <any>{}
 
     }),
     actions: {
@@ -17,6 +18,9 @@ export const useMenu = defineStore('menu', {
             const body = document.querySelector('body')
             body!.style.height = 'auto'
             body!.style.overflow = ''
+        },
+        setCategory(payload: object) {
+            this.categories = payload
         }
 
     },
