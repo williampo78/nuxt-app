@@ -3,7 +3,7 @@
 		<Nav />
 		<div class="mt-4 gap-x-5 md:flex">
 			<section class="flex justify-center">
-				<!-- <img v-lazy="productPhotos[0]" alt="" width="480" height="480"/> -->
+				<img :src="productPhotos[0]" alt="" width="480" height="480"/>
 				<!-- <img v-else src="@/assets/images/image-52.png" alt="" /> -->
 			</section>
 			<section class="flex-1">

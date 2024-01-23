@@ -10,9 +10,9 @@ export default defineNuxtConfig({
     '@/assets/css/main.scss',
   ],
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt', 'nuxt-swiper'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt', 'nuxt-swiper', '@nuxt/image'],
   pinia: {
-    storesDirs: ['./store/**.ts','./store/**.js'],
+    storesDirs: ['./store/**.ts', './store/**.js'],
   },
   build: {
     transpile: ['@fortawesome/vue-fontawesome']
