@@ -2,11 +2,12 @@
 	<ModalToast v-if="modalStore.modalShow && modalStore.type === 'toast'" />
 	<ModalAlert v-if="modalStore.modalShow && modalStore.type === 'alert'" />
 	<Header />
+	<Nav />
 	<Menu />
-	<div class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold">
+	<div class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold text-blue-primary px-4 ">
 		<main
-			class="px-3 flex justify-center"
-			:class="{ 'px-0': route.path === '/' }"
+			class="max-w-[1200px] mx-auto"
+			:class="{ 'px-0 flex justify-center max-w-none': route.path === '/' }"
 		>
 			<slot />
 		</main>

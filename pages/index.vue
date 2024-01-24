@@ -1,6 +1,5 @@
 <template>
 	<div class="w-full">
-		<Nav />
 		<HomeMenu />
 
 		<div class="max-w-[1200px] mx-auto mt-4">
