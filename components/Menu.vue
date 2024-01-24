@@ -7,25 +7,26 @@
 			>
 				<div class="overflow-scroll">
 					<div
-						@click="chosenCateId = i"
-						v-for="i in 10"
+						@click="chosenCateId = index"
+						v-for="(category, index) in categories"
 						:class="{
-							'bg-yellow-forth': i === chosenCateId,
-							'text-emerald-400': i === chosenCateId,
+							'bg-yellow-forth': index === chosenCateId,
+							'text-emerald-400': index === chosenCateId,
 						}"
 						class="w-[120px] h-[120px] flex flex-col justify-center items-center border-b border-gray-200 last:border-none"
 					>
-						<span class="text-[32px]"
+						<!-- <span class="text-[32px]"
 							><font-awesome-icon :icon="['fas', 'whiskey-glass']"
-						/></span>
-						成人飲品
+						/></span> -->
+						<img :src="category.icon" alt="" class="w-12 mb-1" />
+						{{ category.name }}
 					</div>
 				</div>
 				<div class="flex-1 bg-yellow-forth h-full overflow-scroll">
-					<ul v-for="i in 5" @click="chosenSubId = i">
+					<ul v-for="(sub, i) in subCategories" @click="chosenSubId = i">
 						<li class="py-3 px-4 flex justify-between">
 							<span :class="{ 'text-emerald-400': chosenSubId === i }">
-								成人飲品
+								{{ sub.name }}
 							</span>
 							<span
 								class="transition ease-linear"
@@ -37,9 +38,11 @@
 							<ul v-if="i === chosenSubId">
 								<li
 									class="py-3 px-4 border-b border-gray-200 last:border-none"
-									v-for="j in 3"
-									>123</li
+									v-for="further in sub.cateInfo"
+									@click="gotoCate(further)"
 								>
+									{{ further.name }}
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -50,10 +53,38 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
+import { FurtherCategory } from '@/types/category';
+const router = useRouter();
 const menuStore = useMenu();
 const chosenCateId = ref<number | null>(1);
 const chosenSubId = ref<number | null>(1);
+
+const categories = computed(() => {
+	return menuStore.categories;
+});
+
+const subCategories = computed(() => {
+	if (chosenCateId.value) {
+		return categories.value[chosenCateId.value].cateInfo;
+	}
+	return {};
+});
+
+const gotoCate = (further: FurtherCategory) => {
+	if (further.type === 'P') {
+		router.push({
+			path: '/find/category',
+			query: { category: further.id },
+		});
+	} else if (further.type === 'M') {
+		router.push({
+			path: `/campaign/${further.campaignUrlCode}`,
+			query: { eventId: further.campaignID },
+		});
+	}
+
+	menuStore.closeMenu()
+};
 </script>
 
 <style scoped>
