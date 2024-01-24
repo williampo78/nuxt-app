@@ -95,10 +95,20 @@
 <script setup lang="ts">
 import { getCaptchaApi, loginApi } from '@/api/auth';
 
-const modalStore = useModal();
 definePageMeta({
 	title: <string>'Login',
 	name: <string>'login',
+});
+
+const modalStore = useModal();
+const userStore = useUser();
+const router = useRouter();
+
+const tokenCookie = useCookie('token', {
+	expires: new Date(new Date().getTime() + 60 * 60 * 1000),
+	sameSite: 'lax',
+	secure: true,
+	path: '/',
 });
 
 const { mobile, validateMobile, password } = useValidate();
@@ -140,11 +150,20 @@ const loginHandler = async () => {
 	try {
 		const data = await loginApi(submitData);
 		if (data.status) {
+			const token = data.result._token;
+			tokenCookie.value = token;
+			userStore.setToken(token);
 			modalStore.openModal({
 				type: 'toast',
 				icon: 'success',
 				message: '登入成功',
 			});
+
+			setTimeout(() => {
+				//拿完token取使用者資料
+				getUserInfo();
+			}, 300);
+			router.push('/');
 		} else if (data.error_code === '404') {
 			throw new Error();
 		} else if (data.error_code === '401') {
@@ -164,7 +183,6 @@ const loginHandler = async () => {
 		}
 		getCaptcha();
 	} catch (err) {
-
 		message = '請稍後再試，謝謝';
 		modalStore.openModal({
 			type: 'toast',
@@ -172,6 +190,10 @@ const loginHandler = async () => {
 			message,
 		});
 	}
+};
+
+const getUserInfo = async () => {
+	userStore.setUserInfo();
 };
 </script>
 

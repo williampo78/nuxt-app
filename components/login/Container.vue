@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[794px] font-bold md:mb-10">
+	<div class="md:max-w-[750px] mx-auto md:mb-10">
 		<div
 			v-if="route.name === 'login' || route.name === 'register'"
 			class="flex border-b-4 border-blue-primary text-center text-lg md:text-2xl md:my-10"

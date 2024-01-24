@@ -4,7 +4,9 @@
 	<Header />
 	<Nav />
 	<Menu />
-	<div class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold text-blue-primary px-4 ">
+	<div
+		class="min-h-[calc(100vh-287px)] md:min-h-[calc(100vh-257px)] font-bold text-blue-primary px-4"
+	>
 		<main
 			class="max-w-[1200px] mx-auto"
 			:class="{ 'px-0 flex justify-center max-w-none': route.path === '/' }"
@@ -26,10 +28,17 @@
 
 <script setup>
 const modalStore = useModal();
+const userStore = useUser();
 const route = useRoute();
+const tokenCookie = useCookie('token')
 const { getProductCategories } = useCategories();
 
 await getProductCategories();
+
+userStore.setToken(tokenCookie.value); //把cookie token寫進store
+if(tokenCookie.value){
+	userStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
+}
 
 const scrollToTop = () => {
 	window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

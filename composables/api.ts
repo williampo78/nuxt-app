@@ -35,9 +35,9 @@ export const service = async (obj: HttpParms) => {
                 // 设置请求报头
                 options.headers = options.headers || {}
                 /**如果接口需求携带token请求，则可先自行使用官方的useCookie()方法设置Cookie存储后，再使用useCookie()方法，取出token使用。如下例子：*/
-                //const token = useCookie('token')
+                const token = useCookie('token')
                 //@ts-ignore
-                //options.headers.Authorization = token.value||null
+                options.headers.Authorization =`Bearer ${token.value}`||null
             },
             onRequestError({ request, options, error }) {
                 // 处理请求错误

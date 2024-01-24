@@ -61,10 +61,15 @@
 						<span class="mr-2">
 							<font-awesome-icon :icon="['fa-solid', 'fa-user']" />
 						</span>
-						<NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
-							會員登入</NuxtLink
-						>
-						<NuxtLink class="mr-2" to="/register">註冊</NuxtLink>
+						<template v-if="userStore.token && userStore.userInfo.name">
+							<p class="mr-4"> {{ userStore.userInfo.name }}, 您好 </p>
+						</template>
+						<template v-else>
+							<NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
+								會員登入</NuxtLink
+							>
+							<NuxtLink class="mr-4" to="/register">註冊</NuxtLink>
+						</template>
 						<NuxtLink to="/">
 							<span>
 								<font-awesome-icon :icon="['fas', 'cart-shopping']" />
@@ -85,6 +90,7 @@
 
 <script setup lang="ts">
 const menuStore = useMenu();
+const userStore = useUser();
 </script>
 
 <style lang="scss" scoped></style>

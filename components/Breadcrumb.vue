@@ -16,6 +16,8 @@
 import { getBreadcrumbApi } from '@/api/find';
 const route = useRoute();
 const crumbs = ref<Crumb>();
+const cookie = useCookie('name')
+
 
 interface Crumb {
 	[key: string]: {
