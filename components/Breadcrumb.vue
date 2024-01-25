@@ -16,7 +16,6 @@
 import { getBreadcrumbApi } from '@/api/find';
 const route = useRoute();
 const crumbs = ref<Crumb>();
-const cookie = useCookie('name')
 
 
 interface Crumb {
@@ -29,12 +28,17 @@ interface Crumb {
 
 const getBreadcrumbs = async () => {
 	const data = await getBreadcrumbApi({ category_id: route.query.category });
-	console.log(data.result);
 	crumbs.value = data.result;
-	console.log(crumbs.value);
 };
 
-getBreadcrumbs();
+await getBreadcrumbs();
+
+watch(
+  () => route.query.category,
+  () => {
+	getBreadcrumbs()
+  },
+);
 </script>
 
 <style scoped></style>

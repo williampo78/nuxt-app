@@ -39,7 +39,7 @@
 								<li
 									class="py-3 px-4 border-b border-gray-200 last:border-none"
 									v-for="further in sub.cateInfo"
-									@click="gotoCate(further)"
+									@click="gotoCate(further), closeMenu()"
 								>
 									{{ further.name }}
 								</li>
@@ -53,15 +53,17 @@
 </template>
 
 <script setup lang="ts">
-import { FurtherCategory } from '@/types/category';
-const router = useRouter();
+const {
+	categories,
+	// subCategories,
+	chosenCategoryId,
+	selectCategory,
+	gotoCate,
+} = useCategories();
+
 const menuStore = useMenu();
 const chosenCateId = ref<number | null>(1);
 const chosenSubId = ref<number | null>(1);
-
-const categories = computed(() => {
-	return menuStore.categories;
-});
 
 const subCategories = computed(() => {
 	if (chosenCateId.value) {
@@ -70,20 +72,8 @@ const subCategories = computed(() => {
 	return {};
 });
 
-const gotoCate = (further: FurtherCategory) => {
-	if (further.type === 'P') {
-		router.push({
-			path: '/find/category',
-			query: { category: further.id },
-		});
-	} else if (further.type === 'M') {
-		router.push({
-			path: `/campaign/${further.campaignUrlCode}`,
-			query: { eventId: further.campaignID },
-		});
-	}
-
-	menuStore.closeMenu()
+const closeMenu = () => {
+	menuStore.closeMenu();
 };
 </script>
 

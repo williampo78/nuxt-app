@@ -7,7 +7,7 @@
 			<div class="bg-gray-50">
 				<ul class="text-gray-500">
 					<li
-						v-for="category in catgories"
+						v-for="category in categories"
 						class="py-2.5 px-4 flex justify-between items-center cursor-pointer"
 						:class="{
 							'bg-yellow-forth text-emerald-400':
@@ -59,35 +59,13 @@
 <script setup lang="ts">
 const menuStore = useMenu();
 const router = useRouter();
-const { subCategories, chosenCategoryId } = useCategories();
-
-const catgories = computed(() => {
-	return menuStore.categories;
-});
-
-const selectCategory = (category: any) => {
-	subCategories.value = category.cateInfo;
-	chosenCategoryId.value = category.id;
-};
-
-const gotoCate = (item: {
-	type: string;
-	id: number;
-	campaignUrlCode: string;
-	campaignID: number;
-}) => {
-	if (item.type === 'P') {
-		router.push({
-			path: '/find/category',
-			query: { category: item.id },
-		});
-	} else if (item.type === 'M') {
-		router.push({
-			path: `/campaign/${item.campaignUrlCode}`,
-			query: { eventId: item.campaignID },
-		});
-	}
-};
+const {
+	categories,
+	subCategories,
+	chosenCategoryId,
+	selectCategory,
+	gotoCate,
+} = useCategories();
 </script>
 
 <style scoped></style>
