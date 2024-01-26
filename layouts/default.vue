@@ -28,16 +28,16 @@
 
 <script setup>
 const modalStore = useModal();
-const userStore = useUser();
+const memberStore = useMember();
 const route = useRoute();
 const tokenCookie = useCookie('token')
 const { getProductCategories } = useCategories();
 
 await getProductCategories();
 
-userStore.setToken(tokenCookie.value); //把cookie token寫進store
+memberStore.setToken(tokenCookie.value); //把cookie token寫進store
 if(tokenCookie.value){
-	userStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
+	memberStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
 }
 
 const scrollToTop = () => {

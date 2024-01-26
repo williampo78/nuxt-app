@@ -61,8 +61,30 @@
 						<span class="mr-2">
 							<font-awesome-icon :icon="['fa-solid', 'fa-user']" />
 						</span>
-						<template v-if="userStore.token && userStore.userInfo.name">
-							<p class="mr-4"> {{ userStore.userInfo.name }}, 您好 </p>
+						<template v-if="memberStore.token && memberStore.memberInfo.name">
+							<div class="mr-4 cursor-pointer relative group">
+								<NuxtLink to="/member/center"> {{ memberStore.memberInfo.name }}, 您好 </NuxtLink>
+								<div
+									class="group-hover:block hidden absolute text-sm font-medium text-gray-500 w-28"
+								>
+									<ul
+										class="bg-white border-2 border-emerald-400 relative before:absolute before:left-[5.5px] before:bottom-full before:border-4 before:border-transparent before:z-50 before:border-b-white"
+									>
+										<li
+											v-for="option in memberCenterOptions"
+											:key="option.name"
+											class="border-b border-gray-100 last:border-0"
+										>
+											<NuxtLink
+												:to="option.path"
+												class="hover:bg-gray-100 block p-1.5"
+											>
+												{{ option.name }}
+											</NuxtLink>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</template>
 						<template v-else>
 							<NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
@@ -90,7 +112,17 @@
 
 <script setup lang="ts">
 const menuStore = useMenu();
-const userStore = useUser();
+const memberStore = useMember();
+
+const memberCenterOptions = ref<{ name: string; path: string }[]>([
+	{ name: '訂單查詢', path: '' },
+	{ name: '我的點數', path: '' },
+	{ name: '我的收藏', path: '' },
+	{ name: '我的資料', path: '' },
+	{ name: '常用收件人', path: '' },
+	{ name: '我的通知', path: '' },
+	{ name: '登出', path: '/' },
+]);
 </script>
 
 <style lang="scss" scoped></style>

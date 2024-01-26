@@ -86,7 +86,7 @@ import { Input } from 'postcss'; import { LoginContainer } from
 			</div>
 			<div class="grid-input mb-3">
 				<span> </span>
-				<small class="text-hightlight-red font-medium text-sm"
+				<small class="text-red font-medium text-sm"
 					>*請輸入8-12位半形英數字</small
 				>
 			</div>
@@ -146,6 +146,6 @@ const changeInputType = () => {
 
 <style scoped>
 .required-hint {
-	@apply absolute top-[-25px] right-0 text-hightlight-red text-xs font-normal;
+	@apply absolute top-[-25px] right-0 text-red text-xs font-normal;
 }
 </style>

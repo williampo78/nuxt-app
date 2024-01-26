@@ -39,7 +39,7 @@
 			</div>
 			<div class="grid-input mb-3">
 				<span> </span>
-				<small class="text-hightlight-red font-medium text-sm"
+				<small class="text-red font-medium text-sm"
 					>*請輸入8-12位半形英數字</small
 				>
 			</div>
@@ -101,7 +101,7 @@ definePageMeta({
 });
 
 const modalStore = useModal();
-const userStore = useUser();
+const memberStore = useMember();
 const router = useRouter();
 
 const tokenCookie = useCookie('token', {
@@ -152,7 +152,7 @@ const loginHandler = async () => {
 		if (data.status) {
 			const token = data.result._token;
 			tokenCookie.value = token;
-			userStore.setToken(token);
+			memberStore.setToken(token);
 			modalStore.openModal({
 				type: 'toast',
 				icon: 'success',
@@ -193,7 +193,7 @@ const loginHandler = async () => {
 };
 
 const getUserInfo = async () => {
-	userStore.setUserInfo();
+	memberStore.setUserInfo();
 };
 </script>
 
