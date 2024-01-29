@@ -1,8 +1,11 @@
 <template>
-	<div class="my-5 text-gray-900 md:flex md:gap-x-12">
-		<div class="relative md:hidden">
+	<div
+		class="my-5 text-gray-900 md:flex md:gap-x-12"
+		@click="showPagesMenu = false"
+	>
+		<div class="relative mb-5 md:hidden">
 			<button
-				@click="showPagesMenu = !showPagesMenu"
+				@click.stop="showPagesMenu = !showPagesMenu"
 				class="flex justify-between w-full py-2 px-4 border-2 border-gray-300 rounded-md"
 			>
 				<span>
@@ -18,12 +21,15 @@
 				class="absolute w-full mt-2 border border-gray-200 rounded-lg bg-white shadow-md"
 			>
 				<li
+					@click="currentPage = page"
 					v-for="page in pages"
 					:key="page.name"
-					class="py-2 px-4 border-b border-gray-200 last:border-0"
+					class="border-b border-gray-200 last:border-0"
 				>
-					<font-awesome-icon :icon="['fas', page.icon]" class="mr-2" />
-					{{ page.name }}
+					<NuxtLink class="py-2 px-4 block" :to="page.link">
+						<font-awesome-icon :icon="['fas', page.icon]" class="mr-2" />
+						{{ page.name }}
+					</NuxtLink>
 				</li>
 			</ul>
 		</div>
@@ -47,7 +53,7 @@
 
 		<div class="flex-1">
 			<h1
-				class="text-2xl text-center border-b-4 border-blue-primary pb-3 mb-4"
+				class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-4 md:text-2xl"
 				>{{ currentPage.name }}</h1
 			>
 			<NuxtPage />
@@ -56,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { getMemberPointsApi } from '~/api/member';
+import { getMemberPointsApi,getMemberExpiringPointsApi } from '~/api/member';
 
 const memberStore = useMember();
 
@@ -82,11 +88,11 @@ const pages = ref<Page[]>([
 	// 	link: '/member/order-list',
 	// 	icon: 'rectangle-list',
 	// },
-	// {
-	// 	name: '我的點數',
-	// 	link: '/member/points-history',
-	// 	icon: 'coins',
-	// },
+	{
+		name: '我的點數',
+		link: '/member/points',
+		icon: 'coins',
+	},
 	// {
 	// 	name: '我的收藏',
 	// 	link: '/member/collection',
@@ -125,7 +131,13 @@ const getMemberPoints = async () => {
 	const data = await getMemberPointsApi();
 	memberStore.setPointInfo(data.result);
 };
-await getMemberPoints();
+const getMemberExpiringPoints = async () => {
+	const data = await getMemberExpiringPointsApi();
+	memberStore.setExpiringPointInfo(data.result);
+};
+// await getMemberPoints();
+// await getMemberExpiringPoints()
+await Promise.all([getMemberPoints(),getMemberExpiringPoints()])
 </script>
 
 <style scoped></style>

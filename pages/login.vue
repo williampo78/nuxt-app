@@ -105,7 +105,7 @@ const memberStore = useMember();
 const router = useRouter();
 
 const tokenCookie = useCookie('token', {
-	expires: new Date(new Date().getTime() + 60 * 60 * 1000),
+	expires: new Date(new Date().getTime() + 60 * 60 * 1000 * 3),
 	sameSite: 'lax',
 	secure: true,
 	path: '/',

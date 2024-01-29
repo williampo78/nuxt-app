@@ -13,3 +13,9 @@ export const getMemberPointsApi = () => {
 		method: 'POST',
 	});
 };
+export const getMemberExpiringPointsApi = () => {
+	return service({
+		url: '/membership/expiringPoint',
+		method: 'POST',
+	});
+};

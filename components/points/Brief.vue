@@ -1,5 +1,5 @@
 <template>
-	<div class="border-2 border-blue-forth rounded-xl overflow-hidden shadow-md">
+	<div class="border-2 border-blue-forth rounded-xl overflow-hidden shadow-md mb-8">
 		<div
 			class="text-center bg-emerald-400 text-sm text-white py-2 md:text-base"
 		>

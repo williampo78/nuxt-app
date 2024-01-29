@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@/assets/css/main.scss',
   ],
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt', 'nuxt-swiper', '@nuxt/image'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@pinia/nuxt', 'nuxt-swiper', '@nuxt/image','dayjs-nuxt'],
   pinia: {
     storesDirs: ['./store/**.ts', './store/**.js'],
   },

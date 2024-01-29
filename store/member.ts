@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { getMemberInfoApi } from '~/api/member';
-import {MemberInfo,PointInfo,MemberGroupItem} from '~/types/member'
+import { MemberInfo, PointInfo, MemberGroupItem, PointDetail } from '~/types/member'
+
 
 export const useMember = defineStore('member', {
     state: () => ({
@@ -34,11 +35,19 @@ export const useMember = defineStore('member', {
         pointInfo: <PointInfo>{
             currentPage: 1,
             expiringPoints: <null | number>null,
-            list: <object[]>[],
+            list: <PointDetail[]>[],
             totalPages: <number>1,
             totalPoints: <number>0,
             totalRows: <number>1,
-        }
+        },
+        expiringPointInfo: <PointInfo>{
+            currentPage: 1,
+            expiringPoints: <null | number>null,
+            list: <PointDetail[]>[],
+            totalPages: <number>1,
+            totalPoints: <number>0,
+            totalRows: <number>1,
+        },
     }),
     actions: {
         async setUserInfo() {
@@ -53,6 +62,9 @@ export const useMember = defineStore('member', {
         },
         setPointInfo(payload: PointInfo) {
             this.pointInfo = payload
+        },
+        setExpiringPointInfo(payload: PointInfo) {
+            this.expiringPointInfo = payload
         }
     },
 });
