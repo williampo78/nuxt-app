@@ -21,7 +21,6 @@
 				class="absolute w-full mt-2 border border-gray-200 rounded-lg bg-white shadow-md"
 			>
 				<li
-					@click="currentPage = page"
 					v-for="page in pages"
 					:key="page.name"
 					class="border-b border-gray-200 last:border-0"
@@ -38,7 +37,7 @@
 			<ul
 				class="hidden p-5 bg-member-menu bg-cover rounded-xl shadow-md md:flex flex-col gap-1"
 			>
-				<li v-for="page in pages" :key="page.name" @click="currentPage = page">
+				<li v-for="page in pages" :key="page.name">
 					<nuxt-link
 						:to="page.link"
 						class="block py-2 px-3 w-full"
@@ -62,9 +61,10 @@
 </template>
 
 <script setup lang="ts">
-import { getMemberPointsApi,getMemberExpiringPointsApi } from '~/api/member';
+import { getMemberPointsApi, getMemberExpiringPointsApi } from '~/api/member';
 
 const memberStore = useMember();
+const route = useRoute();
 
 interface Page {
 	name: string;
@@ -72,11 +72,6 @@ interface Page {
 	icon: string;
 	hasMessage?: boolean;
 }
-const currentPage = ref<Page>({
-	name: '會員中心',
-	link: '/member/center',
-	icon: 'house',
-});
 const pages = ref<Page[]>([
 	{
 		name: '會員中心',
@@ -127,6 +122,17 @@ const pages = ref<Page[]>([
 ]);
 const showPagesMenu = ref<boolean>(false);
 
+//computed
+const currentPage = computed((): Page => {
+	return (
+		pages.value.find((page) => {
+			return page.link === route.path;
+		}) || pages.value[0]
+	);
+});
+
+//methods
+
 const getMemberPoints = async () => {
 	const data = await getMemberPointsApi();
 	memberStore.setPointInfo(data.result);
@@ -137,7 +143,7 @@ const getMemberExpiringPoints = async () => {
 };
 // await getMemberPoints();
 // await getMemberExpiringPoints()
-await Promise.all([getMemberPoints(),getMemberExpiringPoints()])
+await Promise.all([getMemberPoints(), getMemberExpiringPoints()]);
 </script>
 
 <style scoped></style>
