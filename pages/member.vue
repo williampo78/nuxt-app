@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="my-5 text-gray-900 md:flex md:gap-x-12"
+		class="my-5  md:flex md:gap-x-12"
 		@click="showPagesMenu = false"
 	>
 		<div class="relative mb-5 md:hidden">
@@ -52,7 +52,7 @@
 
 		<div class="flex-1">
 			<h1
-				class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-4 md:text-2xl"
+				class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-6 md:text-2xl"
 				>{{ currentPage.name }}</h1
 			>
 			<NuxtPage />
@@ -93,11 +93,11 @@ const pages = ref<Page[]>([
 	// 	link: '/member/collection',
 	// 	icon: 'heart',
 	// },
-	// {
-	// 	name: '我的資料',
-	// 	link: '/member/account-info',
-	// 	icon: 'user',
-	// },
+	{
+		name: '我的資料',
+		link: '/member/info',
+		icon: 'user',
+	},
 	// {
 	// 	name: '常用收件人',
 	// 	link: '/member/setting-recipient',

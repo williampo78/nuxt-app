@@ -32,8 +32,10 @@ const memberStore = useMember();
 const route = useRoute();
 const tokenCookie = useCookie('token')
 const { getProductCategories } = useCategories();
+const areaStore = useArea()
 
 await getProductCategories();
+await areaStore.getArea()
 
 memberStore.setToken(tokenCookie.value); //把cookie token寫進store
 if(tokenCookie.value){

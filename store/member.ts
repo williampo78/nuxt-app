@@ -12,7 +12,7 @@ export const useMember = defineStore('member', {
             email: '',
             sex: '',
             sexName: '',
-            birthDay: '',
+            birthday: '',
             zipCode: '',
             cityId: '',
             cityName: '',

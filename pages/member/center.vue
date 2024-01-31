@@ -72,7 +72,7 @@
 						<li
 							v-for="notice in noiceList"
 							:key="notice"
-							class="leading-6 flex"
+							class="leading-6 flex text-gray-900"
 						>
 							<span class="text-emerald-400 mr-2">
 								<font-awesome-icon :icon="['fas', 'circle-xmark']" />

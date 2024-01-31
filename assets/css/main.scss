@@ -7,3 +7,54 @@
 .input {
 	@apply h-10 w-full bg-transparent outline-none placeholder:font-normal placeholder:opacity-50;
 }
+
+input {
+	border: none;
+	outline: none;
+	&:disabled {
+		background: none;
+	}
+	&[type='radio'] {
+		display: none;
+	}
+}
+
+.radio-label {
+	@apply flex items-center gap-2 cursor-pointer;
+}
+
+.radio-button {
+	@apply relative w-4 h-4 rounded-full border-2 border-gray-300;
+}
+
+.radio-button::after {
+	/* 中間點點 */
+	content: '';
+	display: block;
+	height: 80%;
+	width: 80%;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: green;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+.radio-input:checked ~ .radio-label .radio-button::after {
+	/* 選中radio時 才顯示中間點點 */
+	opacity: 1;
+}
+
+.btn {
+	@apply py-3 min-w-[112px] px-4 rounded-lg;
+}
+
+.btn-confirm {
+	@apply bg-blue-primary text-white;
+}
+
+.btn-cancel{
+	@apply bg-white text-black border-2 border-gray-300
+}

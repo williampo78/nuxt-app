@@ -7,6 +7,14 @@ export const getMemberInfoApi = () => {
 	});
 };
 
+export const updateMemberInfoApi = (data) => {
+	return service({
+		url: '/membership',
+		method: 'PUT',
+		data,
+	});
+};
+
 export const getMemberPointsApi = () => {
 	return service({
 		url: '/membership/point',

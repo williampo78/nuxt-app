@@ -118,7 +118,7 @@ const memberCenterOptions = ref<{ name: string; path: string }[]>([
 	{ name: '訂單查詢', path: '' },
 	{ name: '我的點數', path: '/member/points' },
 	{ name: '我的收藏', path: '' },
-	{ name: '我的資料', path: '' },
+	{ name: '我的資料', path: '/member/info' },
 	{ name: '常用收件人', path: '' },
 	{ name: '我的通知', path: '' },
 	{ name: '登出', path: '/' },

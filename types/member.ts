@@ -4,7 +4,7 @@ export interface MemberInfo {
     email: string
     sex: string
     sexName: string
-    birthDay: string
+    birthday: string
     zipCode: string
     cityId: string
     cityName: string
