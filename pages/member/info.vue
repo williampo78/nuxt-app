@@ -38,7 +38,7 @@
 			<InputAddress @setAddressData="setAddressData($event)" />
 		</div>
 		<div class="bg-teal-50 py-6 flex justify-center gap-4 mt-6 md:py-12">
-			<button @click="router.push('/member/center')" class="btn btn-cancel" aria-label="取消">取消</button>
+			<button @click.prevent="router.push('/member/center')" class="btn btn-cancel" aria-label="取消">取消</button>
 			<button
 				@click="updateMemberInfo()"
 				class="btn btn-confirm"
@@ -53,6 +53,7 @@
 			<p class="text-emerald-400">service@gmail.com</p>
 		</div>
 	</form>
+	<ModalCustom />
 </template>
 
 <script setup lang="ts">
