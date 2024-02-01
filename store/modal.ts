@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
-type ModalType = 'toast' | 'alert' | 'modal' | ''
-interface ModalConfig {
-	type: 'modal' | '';
+type ModalType = 'toast' | 'alert' | 'custom' | ''
+interface CustomConfig {
+	type: 'custom' | '';
 	icon?: string;
 	name: string;
 	title: string;
 	message?: string;
+	hasHeader?: boolean
 }
 interface ToastConfig {
 	type: 'toast';
@@ -24,14 +25,15 @@ export const useModal = defineStore('modal', {
 	state: () => ({
 		modalShow: <boolean>false,
 		type: <ModalType>'',
-		icon: <string>'suceess',
+		icon: <string>'success',
 		title: <string>'',
 		message: <string>'',
 		hasHeader: <boolean>true,
+		name: <string>'',
 		data: <any>null,
 	}),
 	actions: {
-		openModal(config: ModalConfig | ToastConfig | AlertConfig) {
+		openModal(config: CustomConfig | ToastConfig | AlertConfig) {
 			this.type = config.type || ''
 			this.icon = config.icon || ''
 			this.title = config.title || ''
@@ -42,8 +44,13 @@ export const useModal = defineStore('modal', {
 					this.closeModal()
 				}, 2000);
 			}
+			if (config.type === 'custom') {
+				this.hasHeader = config.hasHeader || false
+				this.name = config.name
+			}
+			const body = document.querySelector('body')
+			body!.style.overflow = 'hidden'
 		},
-
 		closeModal() {
 			this.type = ''
 			this.icon = ''
@@ -51,6 +58,10 @@ export const useModal = defineStore('modal', {
 			this.title = ''
 			this.modalShow = false;
 			this.hasHeader = true
+			this.name = ''
+
+			const body = document.querySelector('body')
+			body!.style.overflow = 'unset'
 		}
 	},
 });

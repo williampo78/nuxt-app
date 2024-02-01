@@ -8,7 +8,10 @@
 		</label>
 		<div
 			class="relative py-2 px-4 border-2 border-gray-300 text-sm text-gray-900 font-medium rounded-lg flex items-center gap-2 md:text-base"
-			:class="{ ' bg-gray-100': disabled }"
+			:class="{
+				' bg-gray-100': disabled,
+				'!border-red': required && formSubmit && !inputValue,
+			}"
 		>
 			<font-awesome-icon :icon="['fas', icon]" class="text-gray-300" />
 			<input
@@ -40,6 +43,7 @@ const props = withDefaults(
 		required?: boolean;
 		disabled?: boolean;
 		inputValue?: string | null | number;
+		formSubmit?: boolean;
 	}>(),
 	{
 		//default values
