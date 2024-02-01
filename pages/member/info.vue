@@ -13,6 +13,7 @@
 				:icon="'user'"
 				id="name"
 				required
+				:formSubmit="formSubmit"
 				v-model:inputValue="memberData.name"
 			/>
 			<InputField
@@ -20,6 +21,7 @@
 				:icon="'envelope'"
 				id="email"
 				required
+				:formSubmit="formSubmit"
 				v-model:inputValue="memberData.email"
 			/>
 			<InputRadio
@@ -38,7 +40,12 @@
 			<InputAddress @setAddressData="setAddressData($event)" />
 		</div>
 		<div class="bg-teal-50 py-6 flex justify-center gap-4 mt-6 md:py-12">
-			<button @click.prevent="router.push('/member/center')" class="btn btn-cancel" aria-label="取消">取消</button>
+			<button
+				@click.prevent="router.push('/member/center')"
+				class="btn btn-cancel"
+				aria-label="取消"
+				>取消</button
+			>
 			<button
 				@click="updateMemberInfo()"
 				class="btn btn-confirm"
@@ -63,6 +70,7 @@ const memberStore = useMember();
 const modalStore = useModal();
 const router = useRouter();
 
+//data
 const memberData = ref({
 	name: <string>'',
 	email: <string>'',
@@ -83,6 +91,8 @@ const radioOptions = ref([
 	{ name: 'gender', value: 1, id: 'male', label: '生理男' },
 	{ name: 'gender', value: 0, id: 'female', label: '生理女' },
 ]);
+
+const formSubmit = ref<boolean>(false);
 
 onMounted(() => {
 	getMemberData();
@@ -111,6 +121,10 @@ const setAddressData = (data: AddressData): void => {
 };
 
 const updateMemberInfo = async () => {
+	formSubmit.value = true;
+	if (!memberData.value.name || !memberData.value.email) {
+		return;
+	}
 	const data = await updateMemberInfoApi(submitData.value);
 	if (data.error_code) {
 		alert('欄位錯誤');
