@@ -20,9 +20,9 @@
 		<template #bottom-message>
 			<p class="text-center">
 				返回
-				<NuxtLink to="/login" class="text-emerald-400 ml-2">
+				<nuxt-link to="/login" class="text-emerald-400 ml-2">
 					會員登入<font-awesome-icon :icon="['fas', 'arrow-right']" />
-				</NuxtLink>
+				</nuxt-link>
 			</p>
 		</template>
 	</LoginContainer>

@@ -30,17 +30,19 @@
 const modalStore = useModal();
 const memberStore = useMember();
 const route = useRoute();
-const tokenCookie = useCookie('token')
+const tokenCookie = useCookie('token');
 const { getProductCategories } = useCategories();
-const areaStore = useArea()
-
-await getProductCategories();
-await areaStore.getArea()
+const areaStore = useArea();
 
 memberStore.setToken(tokenCookie.value); //把cookie token寫進store
-if(tokenCookie.value){
+if (tokenCookie.value) {
 	memberStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
 }
+
+await Promise.all([
+	getProductCategories(),
+	areaStore.getArea(),
+]);
 
 const scrollToTop = () => {
 	window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

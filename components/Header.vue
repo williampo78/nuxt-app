@@ -21,7 +21,7 @@
 					>
 						<font-awesome-icon :icon="['fas', 'xmark']" />
 					</span>
-					<NuxtLink :to="'/'" class="max-w-[180px]">
+					<nuxt-link :to="'/'" class="max-w-[180px]">
 						<!-- <picture>
             <source media="(min-width:992px )" srcset="@/assets/images/logo@2x.png" sizes="" />
             <img src="@/assets/images/logo.svg" alt="" />
@@ -31,7 +31,7 @@
 							src="@/assets/images/logo.png"
 							alt=""
 						/>
-					</NuxtLink>
+					</nuxt-link>
 				</div>
 				<div>
 					<div
@@ -63,7 +63,7 @@
 						</span>
 						<template v-if="memberStore.token && memberStore.memberInfo.name">
 							<div class="mr-4 cursor-pointer relative group">
-								<NuxtLink to="/member/center"> {{ memberStore.memberInfo.name }}, 您好 </NuxtLink>
+								<nuxt-link to="/member/center"> {{ memberStore.memberInfo.name }}, 您好 </nuxt-link>
 								<div
 									class="group-hover:block hidden absolute text-sm font-medium text-gray-500 w-28"
 								>
@@ -75,29 +75,29 @@
 											:key="option.name"
 											class="border-b border-gray-100 last:border-0"
 										>
-											<NuxtLink
+											<nuxt-link
 												:to="option.path"
 												class="hover:bg-gray-100 block p-1.5"
 											>
 												{{ option.name }}
-											</NuxtLink>
+											</nuxt-link>
 										</li>
 									</ul>
 								</div>
 							</div>
 						</template>
 						<template v-else>
-							<NuxtLink :to="'/login'" class="pr-2 border-r mr-2">
-								會員登入</NuxtLink
+							<nuxt-link :to="'/login'" class="pr-2 border-r mr-2">
+								會員登入</nuxt-link
 							>
-							<NuxtLink class="mr-4" to="/register">註冊</NuxtLink>
+							<nuxt-link class="mr-4" to="/register">註冊</nuxt-link>
 						</template>
-						<NuxtLink to="/">
+						<nuxt-link to="/">
 							<span>
 								<font-awesome-icon :icon="['fas', 'cart-shopping']" />
 							</span>
 							購物車
-						</NuxtLink>
+						</nuxt-link>
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@ const memberCenterOptions = ref<{ name: string; path: string }[]>([
 	{ name: '我的點數', path: '/member/points' },
 	{ name: '我的收藏', path: '' },
 	{ name: '我的資料', path: '/member/info' },
-	{ name: '常用收件人', path: '' },
+	{ name: '常用收件人', path: '/member/recipients' },
 	{ name: '我的通知', path: '' },
 	{ name: '登出', path: '/' },
 ]);

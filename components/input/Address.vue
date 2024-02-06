@@ -59,6 +59,7 @@
 					v-model="address"
 					class="w-full"
 					@input="setAddressData()"
+					autocomplete="on"
 				/>
 			</div>
 		</div>
@@ -67,9 +68,15 @@
 
 <script setup lang="ts">
 import { City, District } from '@/types/area';
-const memberStore = useMember();
 const areaStore = useArea();
+
 const emits = defineEmits(['setAddressData']);
+
+const props = defineProps<{
+	originalCityId: number | null;
+	originalDistrictId: number | null;
+	originalAddress: string;
+}>();
 
 const selectedCity = ref<City>({ id: null, name: '' }); //選擇的城市
 const selectedDistrict = ref<District>({ id: null, name: '', zipCode: '' }); //選擇的鄉鎮區
@@ -79,7 +86,9 @@ const showCities = ref<boolean>(false); //展開城市選單
 const showDistricts = ref<boolean>(false); //展開鄉鎮區選單
 
 onMounted(() => {
-	getMemberAddress();
+	setTimeout(() => {
+		getMemberAddress();
+	}, 100);
 	//選單外收合選單
 	document.addEventListener('click', () => {
 		showCities.value = false;
@@ -101,20 +110,22 @@ const addressData = computed(() => {
 
 //取得使用者地址
 const getMemberAddress = () => {
-	const memberInfo = memberStore.memberInfo;
-	address.value = memberInfo.address;
-	selectedCity.value = {
-		id: +memberInfo.cityId,
-		name: memberInfo.cityName,
-	};
-	selectedDistrict.value = {
-		id: +memberInfo.districtId,
-		name: memberInfo.districtName,
-		zipCode: memberInfo.zipCode,
-	};
+	selectedCity.value = areaStore.cities.find((city) => {
+		return city.id === props.originalCityId;
+	}) || { id: null, name: '' };
 
 	areaStore.getDistrict(selectedCity.value);
-	setAddressData();
+
+	selectedDistrict.value = areaStore.districts.find((district) => {
+		return district.id === props.originalDistrictId;
+	}) || {
+		id: null,
+		name: '',
+		zipCode: '',
+	};
+
+	address.value = props.originalAddress
+
 };
 
 //選擇城市

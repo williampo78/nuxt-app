@@ -7,9 +7,9 @@
 						><font-awesome-icon :icon="['fas', 'fire']" /></span
 					>今日最熱銷</h2
 				>
-				<NuxtLink to="/" class="text-o"
+				<nuxt-link to="/" class="text-o"
 					>查看更多 <font-awesome-icon :icon="['fas', 'chevron-right']"
-				/></NuxtLink>
+				/></nuxt-link>
 			</div>
 			<div class="flex gap-3 justify-between w-full overflow-auto">
 				<Swiper

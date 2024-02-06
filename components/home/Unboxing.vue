@@ -7,9 +7,9 @@
 						><font-awesome-icon :icon="['fas', 'pen-nib']" /></span
 					>好文開箱</h2
 				>
-				<!-- <NuxtLink to="/" class="text-o"
+				<!-- <nuxt-link to="/" class="text-o"
 					>查看更多 <font-awesome-icon :icon="['fas', 'chevron-right']"
-				/></NuxtLink> -->
+				/></nuxt-link> -->
 			</div>
 			<div class="flex gap-x-2 justify-between w-full overflow-auto md:gap-0">
 				<div
@@ -30,11 +30,11 @@
 						<button
 							class="py-1.5 px-3 bg-blue-primary text-white text-xs rounded-full"
 						>
-							<NuxtLink to="/"
+							<nuxt-link to="/"
 								>more<font-awesome-icon
 									class="ml-1"
 									:icon="['fas', 'arrow-right']"
-							/></NuxtLink>
+							/></nuxt-link>
 						</button>
 					</div>
 				</div>

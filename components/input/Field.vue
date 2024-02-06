@@ -13,7 +13,11 @@
 				'!border-red': required && formSubmit && !inputValue,
 			}"
 		>
-			<font-awesome-icon :icon="['fas', icon]" class="text-gray-300" />
+			<font-awesome-icon
+				v-if="icon || inputIcon"
+				:icon="['fas', icon ? icon : inputIcon]"
+				class="text-gray-300"
+			/>
 			<input
 				:type="type"
 				:id="id"
@@ -64,6 +68,28 @@ const inputValue = computed({
 	set(newValue) {
 		emits('update:inputValue', newValue);
 	},
+});
+
+const inputIcon = computed((): string => {
+	const inputId = props.id;
+	let icon = '';
+	switch (inputId) {
+		case 'name':
+			icon = 'user';
+			break;
+
+		case 'mobile':
+			icon = 'mobile-screen-button';
+			break;
+
+		case 'email':
+			icon = 'envelope';
+			break;
+		default:
+			icon = '';
+	}
+
+	return icon;
 });
 </script>
 

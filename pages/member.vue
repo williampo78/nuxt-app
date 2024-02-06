@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="my-5  md:flex md:gap-x-12"
-		@click="showPagesMenu = false"
-	>
+	<div class="my-5 md:flex md:gap-x-12" @click="showPagesMenu = false">
 		<div class="relative mb-5 md:hidden">
 			<button
 				@click.stop="showPagesMenu = !showPagesMenu"
@@ -25,10 +22,10 @@
 					:key="page.name"
 					class="border-b border-gray-200 last:border-0"
 				>
-					<NuxtLink class="py-2 px-4 block" :to="page.link">
+					<nuxt-link class="py-2 px-4 block" :to="page.link">
 						<font-awesome-icon :icon="['fas', page.icon]" class="mr-2" />
 						{{ page.name }}
-					</NuxtLink>
+					</nuxt-link>
 				</li>
 			</ul>
 		</div>
@@ -52,7 +49,8 @@
 
 		<div class="flex-1">
 			<h1
-				class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-6 md:text-2xl"
+				v-if="route.path === currentPage.link"
+				class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-4 md:mb-6 md:text-2xl"
 				>{{ currentPage.name }}</h1
 			>
 			<NuxtPage />
@@ -98,11 +96,11 @@ const pages = ref<Page[]>([
 		link: '/member/info',
 		icon: 'user',
 	},
-	// {
-	// 	name: '常用收件人',
-	// 	link: '/member/setting-recipient',
-	// 	icon: 'address-book',
-	// },
+	{
+		name: '常用收件人',
+		link: '/member/recipients',
+		icon: 'address-book',
+	},
 	// {
 	// 	name: '我的通知',
 	// 	link: '/member/notification-message',
@@ -126,7 +124,7 @@ const showPagesMenu = ref<boolean>(false);
 const currentPage = computed((): Page => {
 	return (
 		pages.value.find((page) => {
-			return page.link === route.path;
+			return route.path.includes(page.link);
 		}) || pages.value[0]
 	);
 });

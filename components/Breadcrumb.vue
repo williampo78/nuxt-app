@@ -1,9 +1,9 @@
 <template>
 	<ul class="flex gap-2 my-3">
 		<li>
-			<NuxtLink to="/">
+			<nuxt-link to="/">
 				<font-awesome-icon :icon="['fas', 'house']" />
-			</NuxtLink>
+			</nuxt-link>
 		</li>
 		<li v-for="crumb in crumbs">
 			<font-awesome-icon :icon="['fas', 'chevron-right']" class="mr-2"/>

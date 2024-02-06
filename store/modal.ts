@@ -35,7 +35,7 @@ export const useModal = defineStore('modal', {
 	actions: {
 		openModal(config: CustomConfig | ToastConfig | AlertConfig) {
 			this.type = config.type || ''
-			this.icon = config.icon || ''
+			this.icon = config.icon || 'success'
 			this.title = config.title || ''
 			this.message = config.message || ''
 			this.modalShow = true

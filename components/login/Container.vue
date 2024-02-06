@@ -4,7 +4,7 @@
 			v-if="route.name === 'login' || route.name === 'register'"
 			class="flex border-b-4 border-blue-primary text-center text-lg md:text-2xl md:my-10"
 		>
-			<NuxtLink
+			<nuxt-link
 				:to="{ name: 'login' }"
 				class="flex-1 bg-blue-primary py-2 rounded-t-xl cursor-pointer"
 				:class="{
@@ -13,15 +13,15 @@
 				}"
 			>
 				會員登入
-			</NuxtLink>
-			<NuxtLink
+			</nuxt-link>
+			<nuxt-link
 				:to="{ name: 'register' }"
 				class="flex-1 py-2 rounded-t-xl cursor-pointer"
 				:class="{
 					'text-gray-100 bg-blue-primary': route.name === 'register',
 					'bg-gray-100 text-blue-primary': route.name === 'login',
 				}"
-				>會員註冊</NuxtLink
+				>會員註冊</nuxt-link
 			>
 		</div>
 		<div

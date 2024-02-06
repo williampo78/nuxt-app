@@ -118,13 +118,13 @@ import { Input } from 'postcss'; import { LoginContainer } from
 					<input type="checkbox" id="" class="mr-2" />
 					<label for=""
 						>我已詳細閱讀並同意春天藥局
-						<NuxtLink :to="{ name: 'register' }" class="text-emerald-400">
+						<nuxt-link :to="{ name: 'register' }" class="text-emerald-400">
 							隱私權政策
-						</NuxtLink>
+						</nuxt-link>
 						及
-						<NuxtLink :to="{ name: 'register' }" class="text-emerald-400">
+						<nuxt-link :to="{ name: 'register' }" class="text-emerald-400">
 							服務條款
-						</NuxtLink></label
+						</nuxt-link></label
 					>
 				</span>
 			</div>

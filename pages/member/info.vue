@@ -18,7 +18,6 @@
 			/>
 			<InputField
 				:label="'E-mail'"
-				:icon="'envelope'"
 				id="email"
 				required
 				:formSubmit="formSubmit"
@@ -115,7 +114,7 @@ const getMemberData = () => {
 	memberData.value.sex = memberInfo.sex === 'MALE' ? 1 : 0;
 };
 
-//取得Adress component的地址資料
+//取得Address component的地址資料
 const setAddressData = (data: AddressData): void => {
 	addressData.value = data;
 };
