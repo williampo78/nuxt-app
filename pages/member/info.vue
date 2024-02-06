@@ -36,7 +36,12 @@
 				v-model:inputValue="memberData.birthday"
 				disabled
 			/>
-			<InputAddress @setAddressData="setAddressData($event)" />
+			<InputAddress
+				@setAddressData="setAddressData($event)"
+				:original-city-id="addressData.cityId"
+				:original-district-id="addressData.districtId"
+				:original-address="addressData.address"
+			/>
 		</div>
 		<div class="bg-teal-50 py-6 flex justify-center gap-4 mt-6 md:py-12">
 			<button
@@ -80,10 +85,10 @@ const memberData = ref({
 });
 
 const addressData = ref<AddressData>({
-	cityId: <number | null>null,
-	districtId: <number | null>null,
-	zipCode: <string>'',
-	address: <string>'',
+	cityId: null,
+	districtId: null,
+	zipCode: '',
+	address: '',
 });
 
 const radioOptions = ref([
@@ -112,6 +117,11 @@ const getMemberData = () => {
 	memberData.value.mobile = memberInfo.mobile;
 	memberData.value.birthday = memberInfo.birthday;
 	memberData.value.sex = memberInfo.sex === 'MALE' ? 1 : 0;
+
+	addressData.value.cityId = memberInfo.cityId;
+	addressData.value.districtId = memberInfo.districtId;
+	addressData.value.zipCode = memberInfo.zipCode;
+	addressData.value.address = memberInfo.address;
 };
 
 //取得Address component的地址資料
@@ -126,7 +136,12 @@ const updateMemberInfo = async () => {
 	}
 	const data = await updateMemberInfoApi(submitData.value);
 	if (data.error_code) {
-		alert('欄位錯誤');
+		modalStore.openModal({
+			type: 'alert',
+			title: '欄位錯誤',
+			icon: 'error',
+			message: '請檢查欄位是否正確填寫',
+		});
 	} else {
 		modalStore.openModal({
 			type: 'alert',
@@ -134,9 +149,10 @@ const updateMemberInfo = async () => {
 			icon: 'success',
 			message: '您的資料已更新',
 		});
+		//取得更新後的使用者資訊
 		memberStore.setUserInfo();
+		router.push('/member/center');
 	}
-	console.log(data);
 };
 </script>
 

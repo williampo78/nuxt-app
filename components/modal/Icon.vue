@@ -4,6 +4,7 @@
 		:class="{
 			'bg-green-50': modalStore.icon === 'success',
 			'bg-red-50': modalStore.icon === 'error',
+			'bg-amber-50': modalStore.icon === 'warning',
 		}"
 	>
 		<div
@@ -11,6 +12,7 @@
 			:class="{
 				'bg-green-100': modalStore.icon === 'success',
 				'bg-red-100': modalStore.icon === 'error',
+				'bg-amber-100': modalStore.icon === 'warning',
 			}"
 		>
 			<span
@@ -24,6 +26,12 @@
 				class="text-red-400 text-2xl"
 			>
 				<font-awesome-icon :icon="['fas', 'circle-xmark']" />
+			</span>
+			<span
+				v-else-if="modalStore.icon === 'warning'"
+				class="text-amber-400 text-2xl"
+			>
+				<font-awesome-icon :icon="['fas', 'circle-exclamation']" />
 			</span>
 		</div>
 	</div>

@@ -45,22 +45,35 @@
 				<button @click="router.push(`/member/recipients/${recipient.id}`)">
 					<font-awesome-icon :icon="['fas', 'pen-to-square']" />
 				</button>
-				<button>
+				<button aria-label="刪除收件人" @click="openDeleteModal(recipient)">
 					<font-awesome-icon :icon="['fas', 'trash-can']" />
 				</button>
 			</div>
 		</div>
 	</div>
+	<RecipientDeleteModal v-if="modalStore.name === 'delete recipient'" />
 </template>
 
 <script setup lang="ts">
+import { RecipientData } from '@/types/recipient';
 const { fullAddress } = useRecipients();
 const recipientStore = useRecipient();
 const router = useRouter();
+const modalStore = useModal();
 
 const recipients = computed(() => {
 	return recipientStore.recipients;
 });
+
+const openDeleteModal = (recipient: RecipientData): void => {
+	modalStore.openModal({
+		type: 'custom',
+		icon: 'warning',
+		name: 'delete recipient',
+		hasHeader: false,
+		data: { name: recipient.name, id: recipient.id },
+	});
+};
 </script>
 
 <style scoped></style>

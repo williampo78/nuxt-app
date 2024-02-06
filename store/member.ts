@@ -14,9 +14,9 @@ export const useMember = defineStore('member', {
             sexName: '',
             birthday: '',
             zipCode: '',
-            cityId: '',
+            cityId: null,
             cityName: '',
-            districtId: '',
+            districtId: null,
             districtName: '',
             address: ''
         },
@@ -50,12 +50,12 @@ export const useMember = defineStore('member', {
         },
     }),
     actions: {
+        // 更新使用者資訊
         async setUserInfo() {
             const data = await getMemberInfoApi()
             this.memberInfo = data.result
             this.memberLevel = data.result.member_level
             this.memberGroup = data.result.member_group
-            console.log(data);
         },
         setToken(payload: string) {
             this.token = payload

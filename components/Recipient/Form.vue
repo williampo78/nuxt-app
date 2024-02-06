@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<div class="flex justify-center gap-5 bg-teal-50 mt-6 py-8 md:py-12">
-			<button class="btn btn-cancel" aria-label="取消">取消</button>
+			<button @click.prevent="cancelHandler()" class="btn btn-cancel" aria-label="取消">取消</button>
 			<button
 				@click="updateRecipient()"
 				class="btn btn-confirm"
@@ -171,6 +171,10 @@ const updateRecipient = async () => {
 	});
 	router.push('/member/recipients');
 };
+
+const cancelHandler = ()=>{
+	router.push('/member/recipients')
+}
 
 onMounted(() => {
 	getRecipientData();

@@ -6,9 +6,9 @@ export interface MemberInfo {
     sexName: string
     birthday: string
     zipCode: string
-    cityId: string
+    cityId: number | null
     cityName: string
-    districtId: string
+    districtId: number | null
     districtName: string
     address: string
 }

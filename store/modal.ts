@@ -1,31 +1,35 @@
 import { defineStore } from 'pinia';
 type ModalType = 'toast' | 'alert' | 'custom' | ''
+type Icon = 'success' | 'error' | 'warning' | ''
 interface CustomConfig {
 	type: 'custom' | '';
-	icon?: string;
+	icon?: Icon;
 	name: string;
-	title: string;
+	title?: string;
 	message?: string;
 	hasHeader?: boolean
+	data?:any
 }
 interface ToastConfig {
 	type: 'toast';
-	icon: string;
+	icon: Icon;
 	title?: string;
 	message: string;
+	data?:any
 }
 interface AlertConfig {
 	type: 'alert';
-	icon?: string;
+	icon?: Icon;
 	title: string;
 	message: string;
+	data?:any
 }
 
 export const useModal = defineStore('modal', {
 	state: () => ({
 		modalShow: <boolean>false,
 		type: <ModalType>'',
-		icon: <string>'success',
+		icon: <Icon>'success',
 		title: <string>'',
 		message: <string>'',
 		hasHeader: <boolean>true,
@@ -39,6 +43,7 @@ export const useModal = defineStore('modal', {
 			this.title = config.title || ''
 			this.message = config.message || ''
 			this.modalShow = true
+			this.data = config.data
 			if (config.type === 'toast') {
 				setTimeout(() => {
 					this.closeModal()
@@ -59,6 +64,7 @@ export const useModal = defineStore('modal', {
 			this.modalShow = false;
 			this.hasHeader = true
 			this.name = ''
+			this.data = null
 
 			const body = document.querySelector('body')
 			body!.style.overflow = 'unset'
