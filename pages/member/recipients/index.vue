@@ -1,11 +1,12 @@
 <template>
 	<div class="flex justify-end mb-4">
-		<button
+		<nuxt-link
+		to="recipients/add"
 			class="bg-emerald-400 rounded-md py-2 px-3 text-white text-sm md:text-base md:px-4"
 		>
 			<font-awesome-icon :icon="['fas', 'circle-plus']" class="mr-1" />
 			新增收件人
-		</button>
+		</nuxt-link>
 	</div>
 	<div class="grid md:grid-cols-2 gap-x-5 gap-y-2">
 		<div

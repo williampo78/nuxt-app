@@ -42,7 +42,7 @@ export const getRecipientsApi = () => {
 };
 
 //新增常用收件人
-export const createRecipientsApi = (data) => {
+export const addRecipientApi = (data) => {
 	return service({
 		url: '/membership/notes',
 		method: 'POST',
@@ -51,7 +51,7 @@ export const createRecipientsApi = (data) => {
 };
 
 //更新常用收件人
-export const updateRecipientsApi = (id,data) => {
+export const updateRecipientApi = (id,data) => {
 	return service({
 		url: `/membership/${id}/notes`,
 		method: 'PUT',

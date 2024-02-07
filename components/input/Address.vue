@@ -1,10 +1,14 @@
 <template>
 	<div
-		class="mt-4 md:grid md:grid-cols-[130px,1fr] text-black md:items-center md:gap-x-6 md:mt-8"
+		class="relative mt-4 md:grid md:grid-cols-[130px,1fr] text-black md:items-center md:gap-x-6 md:mt-8"
+		:class="{ 'mt-5 md:mt-9': required }"
 	>
 		<span class="text-right">地址</span>
 		<div class="grid grid-cols-2 gap-2">
-			<div class="select-box">
+			<div
+				class="select-box"
+				:class="{ '!border-red': formSubmit && required && !selectedCity.id }"
+			>
 				<button
 					@click.stop="(showCities = !showCities), (showDistricts = false)"
 					class="w-full text-left py-2 px-4"
@@ -26,7 +30,10 @@
 			</div>
 			<div
 				class="select-box"
-				:class="{ 'bg-gray-100 !text-gray-300 ': !selectedCity.id }"
+				:class="{
+					'bg-gray-100 !text-gray-300 ': !selectedCity.id,
+					'!border-red': formSubmit && required && !selectedDistrict.id,
+				}"
 			>
 				<button
 					@click.stop="(showDistricts = !showDistricts), (showCities = false)"
@@ -52,7 +59,10 @@
 					</li>
 				</ul>
 			</div>
-			<div class="py-2 px-4 border-2 border-gray-300 rounded-lg col-span-2">
+			<div
+				class="py-2 px-4 border-2 border-gray-300 rounded-lg col-span-2"
+				:class="{ '!border-red': formSubmit && required && !address }"
+			>
 				<input
 					type="text"
 					id="address"
@@ -63,6 +73,11 @@
 				/>
 			</div>
 		</div>
+		<small
+			v-if="required"
+			class="absolute right-0 top-1 text-xs text-red font-medium md:bottom-[103%] md:top-auto"
+			>必填</small
+		>
 	</div>
 </template>
 
@@ -76,6 +91,8 @@ const props = defineProps<{
 	originalCityId: number | null;
 	originalDistrictId: number | null;
 	originalAddress: string;
+	required?: boolean;
+	formSubmit?: boolean;
 }>();
 
 const selectedCity = ref<City>({ id: null, name: '' }); //選擇的城市
@@ -124,8 +141,7 @@ const getMemberAddress = () => {
 		zipCode: '',
 	};
 
-	address.value = props.originalAddress
-
+	address.value = props.originalAddress;
 };
 
 //選擇城市

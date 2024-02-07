@@ -32,6 +32,8 @@
 				:original-city-id="addressFields.cityId"
 				:original-district-id="addressFields.districtId"
 				:original-address="addressFields.address"
+				:formSubmit="formSubmit"
+				required
 			/>
 			<div class="mt-3 md:grid md:grid-cols-[130px,1fr] md:gap-6">
 				<label
@@ -57,11 +59,13 @@
 			</div>
 		</div>
 		<div class="flex justify-center gap-5 bg-teal-50 mt-6 py-8 md:py-12">
-			<button @click.prevent="cancelHandler()" class="btn btn-cancel" aria-label="取消">取消</button>
 			<button
-				@click="updateRecipient()"
-				class="btn btn-confirm"
-				aria-label="確認"
+				@click.prevent="cancelHandler()"
+				class="btn btn-cancel"
+				aria-label="取消"
+				>取消</button
+			>
+			<button @click="submitHandler()" class="btn btn-confirm" aria-label="確認"
 				>確認</button
 			>
 		</div>
@@ -69,8 +73,8 @@
 </template>
 
 <script setup lang="ts">
-import { updateRecipientsApi } from '@/api/member';
-import { AddressData } from '@/types/area';
+import { updateRecipientApi, addRecipientApi } from '@/api/member';
+import { AddressData, City, District } from '@/types/area';
 const { getRecipients } = useRecipients();
 
 const recipientStore = useRecipient();
@@ -98,16 +102,29 @@ const isDefault = ref<boolean>(false);
 
 const formSubmit = ref<boolean>(false);
 
-const city = computed(() => {
-	return areaStore.cities.find((city) => {
-		return city.id === addressFields.value.cityId;
-	});
+//computed
+const city = computed((): City | null => {
+	return (
+		areaStore.cities.find((city) => {
+			return city.id === addressFields.value.cityId;
+		}) || null
+	);
 });
 
-const district = computed(() => {
-	return areaStore.districts.find((district) => {
-		return district.id === addressFields.value.districtId;
-	});
+const district = computed((): District | null => {
+	return (
+		areaStore.districts.find((district) => {
+			return district.id === addressFields.value.districtId;
+		}) || null
+	);
+});
+
+const addRecipientPage = computed((): boolean => {
+	return route.name === 'member-recipients-add';
+});
+
+const editRecipientPage = computed((): boolean => {
+	return route.name === 'member-recipients-id';
 });
 
 const submitData = computed(() => {
@@ -130,6 +147,11 @@ const submitData = computed(() => {
 	};
 });
 
+onMounted(() => {
+	if (editRecipientPage.value) {
+		getRecipientData();
+	}
+});
 //methods
 
 //取得Address component的地址資料
@@ -157,28 +179,49 @@ const getRecipientData = () => {
 	}
 };
 
-const updateRecipient = async () => {
+const submitHandler = async () => {
 	formSubmit.value = true;
-	if (!fields.value.name || !fields.value.mobile) {
+	let title = '';
+	let message: string = '';
+	let icon = 'success';
+	let response;
+
+	if (
+		!fields.value.name ||
+		!fields.value.mobile ||
+		!addressFields.value.cityId ||
+		!addressFields.value.districtId ||
+		!addressFields.value.address
+	) {
 		return;
 	}
-	await updateRecipientsApi(+route.params.id, submitData.value);
+	if (addRecipientPage.value) {
+		response = await addRecipientApi(submitData.value);
+		title = '新增成功';
+		message = '收件人資訊已新增';
+	} else {
+		response = await updateRecipientApi(+route.params.id, submitData.value);
+		title = '修改成功';
+		message = '收件人資訊已修改';
+	}
+	if (response.error_code) {
+		title = '資料錯誤';
+		message = Object.values(response.result as object)[0][0];
+		icon = 'error';
+	}
+
 	await getRecipients();
 	modalStore.openModal({
 		type: 'alert',
-		title: '修改成功',
-		message: '收件人資訊已修改成功',
+		title: title,
+		message: message,
 	});
 	router.push('/member/recipients');
 };
 
-const cancelHandler = ()=>{
-	router.push('/member/recipients')
-}
-
-onMounted(() => {
-	getRecipientData();
-});
+const cancelHandler = () => {
+	router.push('/member/recipients');
+};
 </script>
 
 <style scoped></style>
