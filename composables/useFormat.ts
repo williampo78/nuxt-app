@@ -9,3 +9,7 @@ export function useFormat() {
         formattedMobile
     }
 }
+
+export function formatNumberWithCommas(number: string | number): string | number {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

@@ -66,3 +66,11 @@ export const deleteRecipientsApi = (id) => {
 		method: 'DELETE',
 	});
 };
+
+//取得會員收藏
+export const getCollectionsApi = () => {
+	return service({
+		url: '/membership/collections',
+		method: 'GET',
+	});
+};

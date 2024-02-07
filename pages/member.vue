@@ -86,11 +86,11 @@ const pages = ref<Page[]>([
 		link: '/member/points',
 		icon: 'coins',
 	},
-	// {
-	// 	name: '我的收藏',
-	// 	link: '/member/collection',
-	// 	icon: 'heart',
-	// },
+	{
+		name: '我的收藏',
+		link: '/member/collection',
+		icon: 'heart',
+	},
 	{
 		name: '我的資料',
 		link: '/member/info',
