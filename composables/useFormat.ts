@@ -11,5 +11,10 @@ export function useFormat() {
 }
 
 export function formatNumberWithCommas(number: string | number): string | number {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (number) {
+
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } else {
+        return ''
+    }
 }

@@ -1,6 +1,5 @@
 <template>
 	<div class="w-full max-w-[1200px]">
-		<Nav />
 		<div class="mt-4 gap-x-5 md:flex">
 			<section class="flex justify-center">
 				<img :src="productPhotos[0]" alt="" width="480" height="480"/>
