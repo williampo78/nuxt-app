@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="grid grid-cols-4 gap-3">
+		<div class="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
 			<ProductCard
 				v-for="product in products"
 				:id="product.product_id"
@@ -31,19 +31,19 @@ onMounted(async () => {
 const getAdvanceSearchList = async () => {
 	const data = await getAdvanceSearchListApi({
 		category: +route.query.category!,
-		order_by: 'launched',
+		order_by: route.query.orderBy,
 		page: 1,
-		price_max: 0,
-		price_min: 0,
+		price_max: route.query.maxPrice ? +route.query.maxPrice : 99999,
+		price_min: route.query.minPrice ? +route.query.minPrice : 0,
 		size: 500,
-		sort: 'DESC',
+		sort: route.query.sort || 'DESC',
 	});
 	products.value = data.result.list;
 };
 
 watch(
-	() => route.query.category,
-	() => {
+	() => route.query,
+	(newVal, oldVal) => {
 		getAdvanceSearchList();
 	}
 );

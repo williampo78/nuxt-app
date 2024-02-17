@@ -1,5 +1,5 @@
 <template>
-	<ul class="flex gap-2 my-3">
+	<ul class="flex flex-wrap gap-2 my-3">
 		<li>
 			<nuxt-link to="/">
 				<font-awesome-icon :icon="['fas', 'house']" />

@@ -3,7 +3,11 @@
 		<ul
 			class="border-2 border-gray-200 rounded-lg text-gray-800 cursor-pointer"
 		>
-			<li v-for="category in menuStore.categories" :key="category.id" class="border-b border-gray-200 last:border-b-0">
+			<li
+				v-for="category in menuStore.categories"
+				:key="category.id"
+				class="border-b border-gray-200 last:border-b-0"
+			>
 				<div
 					@click="toggleCategoryIds(category.id)"
 					class="py-2 px-4 flex justify-between gap-12 hover:bg-gray-200"
@@ -46,12 +50,15 @@
 							<li
 								@click="getAdvanceSearchCategory(further.id)"
 								v-for="further in sub.cateInfo"
-								class="py-1.5 hover:text-emerald-400"
-								:class="
-                            {'text-emerald-400': further.id === +route.query.category!}"
 							>
-								{{ further.name }}
-								({{ further.count }})
+								<nuxt-link
+									:to="{ query: { category: further.id } }"
+									class="block py-1.5 hover:text-emerald-400"
+									:class="{'text-emerald-400': further.id === +route.query.category!}"
+								>
+									{{ further.name }}
+									({{ further.count }})
+								</nuxt-link>
 							</li>
 						</ul>
 					</li>
@@ -98,12 +105,12 @@ const toggleSubCategoryIds = (id: number): void => {
 
 //取得目前的分類
 const getAdvanceSearchCategory = async (id: number): Promise<void> => {
-	router.push({ query: { category: id } });
 	openedCategoryIds.value = [];
 	openedSubCategoryIds.value = [];
 	const data = await getAdvanceSearchCategoryApi({ category: id });
 	chosenCategory.value = data.result[0];
 	const category = data.result;
+
 	openedCategoryIds.value.push(category[0].id);
 	openedSubCategoryIds.value.push(category[0].sub[0].id);
 };

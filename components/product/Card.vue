@@ -7,12 +7,12 @@
 		<small v-if="promotion" class="mt-4 mb-1 text-xs text-pink-secondary">
 			{{ promotion }}
 		</small>
-		<nuxt-link :to="`/product/${id}`" class="text-blue-primary mt-2 mb-4 block">
+		<nuxt-link :to="`/product/${id}`" class="text-sm text-gray-800 mt-2 mb-4 block md:text-base">
 			{{ productName || '美強生 優兒A+成長奶粉 6罐' }}
 		</nuxt-link>
-		<p class="text-red text-xl">
+		<p class="text-red md:text-xl">
 			${{ formatNumberWithCommas(sellingPrice!) || 100 }}
-			<sub class="text-xs text-gray-400 ml-4 line-through font-medium">
+			<sub class="text-xs text-gray-400 ml-2 line-through font-medium">
 				${{ formatNumberWithCommas(listPrice!) }}
 			</sub>
 		</p>

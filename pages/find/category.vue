@@ -2,8 +2,11 @@
 	<div class="mb-6">
 		<Breadcrumb />
 		<div class="flex gap-4">
-			<FindSidebar />
-			<FindProducts />
+			<FindSidebar class="hidden md:block" />
+			<div class="flex-1">
+				<FindPanel />
+				<FindProducts />
+			</div>
 		</div>
 	</div>
 </template>
