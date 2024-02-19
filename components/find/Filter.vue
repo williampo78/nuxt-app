@@ -10,7 +10,10 @@
 				class="flex-1 flex justify-between w-full p-4 border-b border-gray-200"
 				:class="{ 'border-none': index === filters.length - 1 }"
 			>
-				<ul class="grid grid-cols-4 flex-1 flex-wrap gap-4">
+				<ul
+					class="grid grid-cols-4 flex-1 flex-wrap gap-4"
+					:class="{ 'grid-cols-5': findPage }"
+				>
 					<li
 						@click="selectFilter(filter.title, item.id)"
 						v-for="item in filter.list"
@@ -25,7 +28,7 @@
 					</li>
 				</ul>
 				<span
-				v-if="filters.length > 4"
+					v-if="filters.length > 4"
 					class="text-emerald-400 font-medium border-l border-gray-300 flex items-center pl-3"
 				>
 					看更多
@@ -77,9 +80,13 @@ const filters = computed((): { title: string; list: FilterItem[] }[] => {
 	return arr;
 });
 
+const findPage = computed((): boolean => {
+	return route.name === 'find';
+});
+
 const getFilter = async () => {
 	const data = await getSearchFilter({
-		keyword: '',
+		keyword: route.query.keyword || '',
 		category: route.query.category,
 		brand: route.query.brand || '',
 		group: route.query.group || '',
@@ -123,14 +130,13 @@ const selectFilter = (title: string, id: number) => {
 	if (typeof originalQuery !== 'string' || originalQuery === null) {
 		router.push({ query: { ...route.query, [title]: id } });
 	} else {
-        if(originalQuery.includes(id.toString())){
-
-            let regex = new RegExp(id + ',?', 'g');
-            let query = originalQuery.replace(regex, '');
-            router.push({ query: { ...route.query, [title]: query } });
-        }else{
-            router.push({ query: { ...route.query, [title]: id } });
-        }
+		if (originalQuery.includes(id.toString())) {
+			let regex = new RegExp(id + ',?', 'g');
+			let query = originalQuery.replace(regex, '');
+			router.push({ query: { ...route.query, [title]: query } });
+		} else {
+			router.push({ query: { ...route.query, [title]: id } });
+		}
 	}
 };
 

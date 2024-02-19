@@ -1,5 +1,8 @@
 <template>
-	<div class="sticky top-0 z-10">
+	<div
+		class="sticky top-0 z-10"
+		@click="clickOutside(() => (showSearchHistory = false))"
+	>
 		<div
 			class="bg-blue-fifth flex justify-center py-2 px-5 md:p-0 text-blue-primary font-bold relative md:min-h-[120px]"
 		>
@@ -35,15 +38,27 @@
 				</div>
 				<div>
 					<div
-						class="hidden w-[500px] h-10 flex-shrink md:flex items-center bg-white p-1 border-2 border-blue-primary rounded-lg"
+						class="relative hidden w-[500px] h-10 flex-shrink md:flex items-center bg-white p-1 border-2 border-blue-primary rounded-lg"
 					>
 						<input
-							class="flex-1 border-r border-black outline-none mr-1"
+							@click.stop="showSearchHistory = true"
+							@keydown.enter="search()"
+							v-model="keyword"
+							class="flex-1 outline-none mr-1 pl-3"
 							type="text"
 							placeholder="輸入想搜尋的商品"
+							id="search"
 						/>
-						<font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-						<span class="w-8 mx-2">搜尋</span>
+
+						<button
+							@click="search()"
+							class="mx-2 flex items-center gap-1"
+							aria-label="搜尋"
+						>
+							<font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+							搜尋
+						</button>
+						<FindHistory v-if="showSearchHistory" />
 					</div>
 					<ul class="hidden md:flex gap-1 text-sm mt-1">
 						<li>益生菌</li>
@@ -63,7 +78,9 @@
 						</span>
 						<template v-if="memberStore.token && memberStore.memberInfo.name">
 							<div class="mr-4 cursor-pointer relative group">
-								<nuxt-link to="/member/center"> {{ memberStore.memberInfo.name }}, 您好 </nuxt-link>
+								<nuxt-link to="/member/center">
+									{{ memberStore.memberInfo.name }}, 您好
+								</nuxt-link>
 								<div
 									class="group-hover:block hidden absolute text-sm font-medium text-gray-500 w-28"
 								>
@@ -113,6 +130,12 @@
 <script setup lang="ts">
 const menuStore = useMenu();
 const memberStore = useMember();
+const router = useRouter();
+const route = useRoute();
+const { clickOutside } = useClickOutside();
+
+const keyword = ref<string>('');
+const showSearchHistory = ref<boolean>(false);
 
 const memberCenterOptions = ref<{ name: string; path: string }[]>([
 	{ name: '訂單查詢', path: '' },
@@ -123,6 +146,34 @@ const memberCenterOptions = ref<{ name: string; path: string }[]>([
 	{ name: '我的通知', path: '' },
 	{ name: '登出', path: '/' },
 ]);
+
+const search = () => {
+	const keywordQuery = keyword.value.trim();
+	router.push({ path: '/find', query: { keyword: keywordQuery } });
+	storeSearchHistory();
+	keyword.value = '';
+};
+
+const storeSearchHistory = () => {
+	const JSONHistory = localStorage.getItem('searchHistory');
+	let parsedHistory = [];
+	if (JSONHistory) {
+		parsedHistory = JSON.parse(JSONHistory);
+	}
+	parsedHistory.push(keyword.value);
+
+	if (parsedHistory.length > 5) {
+		parsedHistory.shift();
+	}
+	localStorage.setItem('searchHistory', JSON.stringify(parsedHistory));
+};
+
+watch(
+  () => route.query,
+  () => {
+	showSearchHistory.value = false
+  },
+);
 </script>
 
 <style lang="scss" scoped></style>
