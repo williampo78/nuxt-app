@@ -28,6 +28,8 @@ onMounted(async () => {
 	await nextTick();
 	getAdvanceSearchList();
 });
+
+//取得商品列表
 const getAdvanceSearchList = async () => {
 	const data = await getAdvanceSearchListApi({
 		category: +route.query.category!,
@@ -37,6 +39,11 @@ const getAdvanceSearchList = async () => {
 		price_min: route.query.minPrice ? +route.query.minPrice : 0,
 		size: 500,
 		sort: route.query.sort || 'DESC',
+		brand:route.query.brand || '',
+		group:route.query.group || '',
+		certificate:route.query.certificate || '',
+		ingredient:route.query.ingredient || '',
+
 	});
 	products.value = data.result.list;
 };

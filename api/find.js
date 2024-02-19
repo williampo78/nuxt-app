@@ -27,4 +27,13 @@ export const getAdvanceSearchListApi = (data) => {
 	});
 };
 
+//取得篩選條件
+export const getSearchFilter = (data) => {
+	return service({
+		method: 'POST',
+		url: '/v1/advanceFilter',
+		data,
+	});
+};
+
 

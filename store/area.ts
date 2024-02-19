@@ -11,7 +11,6 @@ export const useArea = defineStore('area', {
     actions: {
         async getArea() {
             const data = await getAreaApi()
-            console.log('area data', data);
             this.area = data.result
         },
         getDistrict(payload: City) {

@@ -4,6 +4,7 @@
 		<div class="flex gap-4">
 			<FindSidebar class="hidden md:block" />
 			<div class="flex-1">
+				<FindFilter />
 				<FindPanel />
 				<FindProducts />
 			</div>
