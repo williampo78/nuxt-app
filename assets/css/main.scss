@@ -8,6 +8,10 @@
 	@apply h-10 w-full bg-transparent outline-none placeholder:font-normal placeholder:opacity-50;
 }
 
+.subtitle {
+	@apply mb-3 pl-3 text-blue-primary text-xl border-l-4 border-blue-primary md:pl-4 md:text-2xl;
+}
+
 input {
 	border: none;
 	outline: none;
@@ -16,6 +20,14 @@ input {
 	}
 	&[type='radio'] {
 		display: none;
+	}
+}
+
+input[type='number'] {
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 }
 
@@ -55,6 +67,6 @@ input {
 	@apply bg-blue-primary text-white;
 }
 
-.btn-cancel{
-	@apply bg-white text-black border-2 border-gray-300
+.btn-cancel {
+	@apply bg-white text-black border-2 border-gray-300;
 }
