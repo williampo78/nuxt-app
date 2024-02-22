@@ -17,10 +17,18 @@ export const getProductSpecApi = (id) => {
 };
 
 //取得產品資訊
-export const getProductInfoApi = (id,data) => {
+export const getProductInfoApi = (id, data) => {
 	return service({
 		url: `/v1/product/${id}`,
 		method: 'GET',
-		params:data
+		params: data,
+	});
+};
+
+export const getStockApi = (data) => {
+	return service({
+		url: '/v1/stock',
+		method: 'GET',
+		params: data,
 	});
 };

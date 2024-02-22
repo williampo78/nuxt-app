@@ -172,15 +172,24 @@
 					</li>
 					<li
 						v-for="(name, index) in category.category_name.split(',')"
-						:class="{ 'text-gray-500': index  < category.category_name.split(',').length -1  }"
+						:class="{
+							'text-gray-500':
+								index < category.category_name.split(',').length - 1,
+						}"
 					>
 						<span v-if="index !== 0" class="text-gray-400 text-sm mr-4">
 							<font-awesome-icon :icon="['fas', 'chevron-right']" />
 						</span>
-						<span v-if="index < category.category_name.split(',').length -1">
+						<span v-if="index < category.category_name.split(',').length - 1">
 							{{ name }}
 						</span>
-						<nuxt-link v-else :to="{path:'/find/category',query:{category:category.category_id}}">
+						<nuxt-link
+							v-else
+							:to="{
+								path: '/find/category',
+								query: { category: category.category_id },
+							}"
+						>
 							{{ name }}
 						</nuxt-link>
 					</li>
@@ -195,7 +204,8 @@ import { getProductSpecApi, getProductInfoApi } from '@/api/product';
 import { ProductInfo, ShippingFee, Spec } from '@/types/product';
 
 const route = useRoute();
-const orderSpec = ref({} as Spec); //商品規格
+const { orderSpec, stock, getStock } = useProduct();
+
 const productInfo = ref({} as ProductInfo); //商品資訊
 const productPhotos = ref([]); //商品圖
 const shippingFee = ref({} as ShippingFee); //運費
@@ -226,6 +236,8 @@ const getProductInfo = async () => {
 	productDesc.value = data.result.productDesc;
 	productSpec.value = data.result.productSpec;
 	relateCategory.value = data.result.relateCategory;
+
+	getStock();
 };
 await getProductInfo();
 </script>

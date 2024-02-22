@@ -35,3 +35,4 @@ export interface SpecInfo {
     item_spec2: string
     stock_qty: number
 }
+
