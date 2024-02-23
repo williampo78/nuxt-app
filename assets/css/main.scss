@@ -1,3 +1,8 @@
+body *{
+	scrollbar-width: thin;
+
+}
+
 .grid-input {
 	@apply flex flex-col  gap-y-1 md:grid  md:grid-cols-[70px,1fr] md:items-center md:gap-x-[15px];
 }
@@ -70,3 +75,4 @@ input[type='number'] {
 .btn-cancel {
 	@apply bg-white text-black border-2 border-gray-300;
 }
+

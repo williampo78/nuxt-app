@@ -2,7 +2,7 @@ export interface ImageSlot {
     campaign_url_code: null | string
     desktop_applicable: number
     img_abstract: null | string
-    img_action: 'X' | 'U' | 'P' | 'C'
+    img_action: 'X' | 'U' | 'P' | 'C' | 'M'
     img_alt: null | string
     img_path: string | null
     img_title: null | string
@@ -24,7 +24,7 @@ export interface ImageSlot {
 export interface TextSlot {
     campaign_url_code: null | string
     desktop_applicable: 0 | 1
-    img_action: 'X' | 'U' | 'P' | 'C'
+    img_action: 'X' | 'U' | 'P' | 'C' | 'M'
     mobile_applicable: 0 | 1
     name: string
     target_blank: 0 | 1

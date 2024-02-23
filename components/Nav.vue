@@ -1,5 +1,5 @@
 <template>
-	<div class="max-w-[1200px] mx-auto sticky top-[52px] md:top-[120px]">
+	<div class="max-w-[1200px] mx-auto sticky top-[52px] md:top-[120px] z-[5]">
 		<div class="md:grid md:grid-cols-[204px,1fr]">
 			<span
 				class="hidden bg-blue-primary align-middle text-white md:flex items-center px-4 py-2"
@@ -11,14 +11,15 @@
 			</span>
 			<div class="relative font-bold bg-white">
 				<div class="flex py-[10px] text-blue-primary">
-					<ul v-if="!open" class="flex overflow-auto gap-4 px-3">
+					<ul v-if="!open" class="flex overflow-auto gap-4 px-3 hide-scrollbar">
 						<li
 							v-for="(item, index) in navItems"
 							:key="index"
-							@click="redirect(item)"
 							class="flex-shrink-0 cursor-pointer hover:text-emerald-400"
 						>
-							{{ item.name }}
+							<AdLink :item="item">
+								{{ item.name }}
+							</AdLink>
 						</li>
 					</ul>
 					<span class="flex-1 px-3" v-else>選擇分類</span>

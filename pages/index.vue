@@ -2,17 +2,32 @@
 	<div class="w-full">
 		<HomeMenu />
 
-		<div class="max-w-[1200px] mx-auto mt-4">
+		<div v-if="adStore.H040.length" class="max-w-[1200px] mx-auto mt-4">
 			<div class="flex gap-x-3 w-full overflow-auto">
-				<span v-for="i in 6" class="max-w-[120px] flex-shrink-0 md:max-w-full">
-					<img class="rounded-2xl" src="@/assets/images/product1.png" alt="" />
-				</span>
+				<Swiper
+					:slides-per-view="'auto'"
+					:space-between="12"
+					:modules="[SwiperFreeMode]"
+					:free-mode="true"
+				>
+					<SwiperSlide
+						v-for="item in adStore.H040"
+						class="max-w-[144px] md:max-w-[190px]"
+					>
+						<AdLink :item="item">
+							<img :src="item.img_path" :alt="item.img_alt" />
+						</AdLink>
+					</SwiperSlide>
+				</Swiper>
 			</div>
 		</div>
-		<div class="max-w-[1200px] mx-auto my-5">
-			<div class="flex justify-between w-full overflow-auto">
-				<span v-for="i in 2" class="max-w-full flex-shrink-0">
-					<img class="rounded-2xl" src="@/assets/images/image-63.png" alt="" />
+		<div v-if="adStore.H050.length" class="max-w-[1200px] mx-auto my-5">
+			<div class="grid grid-cols-2 gap-4">
+				<span v-for="item in adStore.H050" class="">
+					<!-- <img class="rounded-2xl" src="@/assets/images/image-63.png" alt="" /> -->
+					<AdLink :item="item">
+						<img :src="item.img_path" :alt="item.img_alt" />
+					</AdLink>
 				</span>
 			</div>
 		</div>
@@ -21,6 +36,8 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+const adStore = useAds();
+</script>
 
 <style lang="scss" scoped></style>
