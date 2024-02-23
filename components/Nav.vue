@@ -11,15 +11,20 @@
 			</span>
 			<div class="relative font-bold bg-white">
 				<div class="flex py-[10px] text-blue-primary">
-					<ul v-if="!open" class="flex overflow-auto gap-6 px-3">
-						<li v-for="item in items" class="flex-shrink-0">
+					<ul v-if="!open" class="flex overflow-auto gap-4 px-3">
+						<li
+							v-for="(item, index) in navItems"
+							:key="index"
+							@click="redirect(item)"
+							class="flex-shrink-0 cursor-pointer hover:text-emerald-400"
+						>
 							{{ item.name }}
 						</li>
 					</ul>
 					<span class="flex-1 px-3" v-else>選擇分類</span>
 					<span
 						@click="open = !open"
-						class="w-[42px] flex-shrink-0 flex justify-center items-center border-l border-gray-300"
+						class="w-[42px] flex-shrink-0 flex justify-center items-center border-l border-gray-300 md:hidden"
 					>
 						<font-awesome-icon
 							:icon="['fas', 'chevron-right']"
@@ -34,7 +39,8 @@
 						class="bg-yellow-forth p-4 grid grid-cols-3 gap-2 absolute w-full"
 					>
 						<li
-							v-for="item in items"
+							v-for="(item, index) in navItems"
+							:key="index"
 							class="text-center text-blue-primary bg-white border-2 border-blue-primary rounded-full"
 						>
 							{{ item.name }}</li
@@ -47,20 +53,27 @@
 </template>
 
 <script setup lang="ts">
-const items = ref<{ name: string }[]>([
-	{ name: '1+1 特惠組' },
-	{ name: '熱銷專區' },
-	{ name: '女性保健' },
-	{ name: '兒童營養' },
-	{ name: '益生菌' },
-	{ name: '益生菌' },
-	{ name: '益生菌' },
-	{ name: '益生菌' },
-	{ name: '益生菌' },
-	{ name: '益生菌' },
-]);
+import { TextSlot } from '@/types/ads';
+const adStore = useAds();
+const router = useRouter();
 
 const open = ref<boolean>(false);
+
+const navItems = computed(() => {
+	return adStore.nav;
+});
+
+const redirect = (navItem: TextSlot) => {
+	const action = navItem.img_action;
+	if (action === 'U' && navItem.url) {
+		window.open(navItem.url, navItem.target_blank ? '_blank' : '_self');
+	} else if (action === 'C') {
+		router.push({
+			path: '/find/category',
+			query: { category: navItem.target_cate_hierarchy },
+		});
+	}
+};
 </script>
 
 <style scoped lang="scss">

@@ -27,8 +27,10 @@
 </template>
 
 <script setup>
+
 const modalStore = useModal();
 const memberStore = useMember();
+const adStore = useAds()
 const route = useRoute();
 const tokenCookie = useCookie('token');
 const { getProductCategories } = useCategories();
@@ -39,10 +41,11 @@ if (tokenCookie.value) {
 	memberStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
 }
 
-await Promise.all([
-	getProductCategories(),
-	areaStore.getArea(),
-]);
+try {
+	await Promise.all([getProductCategories(), areaStore.getArea(),adStore.getAds()]);
+} catch (error) {
+	console.log(error);
+}
 
 const scrollToTop = () => {
 	window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
