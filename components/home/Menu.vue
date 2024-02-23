@@ -50,15 +50,23 @@
 				</ul>
 			</div>
 			<div class="hidden md:block">
-				<img class="h-full" src="@/assets/images/image-38.png" alt="" />
+				<Swiper :slides-per-view="'auto'" :space-between="12" :navigation="true" >
+					<SwiperSlide v-for="item in adStore.H020B">
+						<AdLink :item="item">
+							<img
+								:src="item.img_path ? item.img_path : ''"
+								:alt="item.img_alt ? item.img_alt : ''"
+							/>
+						</AdLink>
+					</SwiperSlide>
+				</Swiper>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-const menuStore = useMenu();
-const router = useRouter();
+const adStore = useAds();
 const {
 	categories,
 	subCategories,
