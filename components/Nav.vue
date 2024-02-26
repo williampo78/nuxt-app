@@ -61,7 +61,7 @@ const router = useRouter();
 const open = ref<boolean>(false);
 
 const navItems = computed(() => {
-	return adStore.nav;
+	return adStore.ads.H000;
 });
 
 const redirect = (navItem: TextSlot) => {

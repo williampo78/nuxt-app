@@ -69,8 +69,17 @@
 						clickable: true,
 					}"
 				>
-					<SwiperSlide v-for="item in adStore.H020B">
-						<AdLink :item="item">
+					<SwiperSlide v-for="item in adStore.ads.H020B">
+						<AdLink
+							:item="{
+								action: item.img_action,
+								targetId: item.target_cate_hierarchy,
+								targetBlank: item.target_blank,
+								campaignUrl: item.campaign_url_code,
+								targetCampaign: item.target_campaign,
+								url: item.url,
+							}"
+						>
 							<img
 								:src="item.img_path ? item.img_path : ''"
 								:alt="item.img_alt ? item.img_alt : ''"
@@ -103,9 +112,9 @@ const {
 
 <style scoped lang="scss">
 :deep(.swiper-pagination-bullet) {
-	@apply w-2.5 h-2.5 bg-white opacity-90
+	@apply w-2.5 h-2.5 bg-white opacity-90;
 }
 :deep(.swiper-pagination-bullet-active) {
-	@apply bg-emerald-400 w-6 rounded-full
+	@apply bg-emerald-400 w-6 rounded-full;
 }
 </style>

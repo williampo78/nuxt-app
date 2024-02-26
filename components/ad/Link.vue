@@ -1,31 +1,31 @@
 <template>
 	<span>
-		<template v-if="item.img_action === 'C'">
+		<template v-if="item.action === 'C'">
 			<NuxtLink
 				:to="{
 					path: '/find/category',
-					query: { category: item.target_cate_hierarchy },
+					query: { category: item.targetId },
 				}"
-				:target="item.target_blank ? '_blank' : '_self'"
+				:target="item.targetBlank ? '_blank' : '_self'"
 			>
 				<slot></slot>
 			</NuxtLink>
 		</template>
-		<template v-else-if="item.img_action === 'M'">
+		<template v-else-if="item.action === 'M'">
 			<NuxtLink
 				:to="{
-					path: `/campaign/${item.campaign_url_code}`,
-					query: { eventId: item.target_campaign },
+					path: `/campaign/${item.campaignUrl}`,
+					query: { eventId: item.targetCampaign },
 				}"
-				:target="item.target_blank ? '_blank' : '_self'"
+				:target="item.targetBlank ? '_blank' : '_self'"
 			>
 				<slot></slot>
 			</NuxtLink>
 		</template>
-		<template v-else-if="item.img_action === 'U'">
+		<template v-else-if="item.action === 'U'">
 			<a
 				:href="item.url ? item.url : ''"
-				:target="item.target_blank ? '_blank' : '_self'"
+				:target="item.targetBlank ? '_blank' : '_self'"
 			>
 				<slot></slot>
 			</a>
@@ -37,9 +37,15 @@
 </template>
 
 <script setup lang="ts">
-import { TextSlot, ImageSlot } from '@/types/ads';
-const props = defineProps<{
-	item: TextSlot | ImageSlot;
+defineProps<{
+	item: {
+		action?: 'U' | 'C' | 'X' | 'P'| 'M';
+		targetId?: null | number;
+		targetBlank?: 0 | 1;
+		campaignUrl?: string;
+		targetCampaign?: string;
+		url?:string
+	};
 }>();
 </script>
 
