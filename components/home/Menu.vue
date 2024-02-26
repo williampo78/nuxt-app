@@ -27,7 +27,7 @@
 			<!-- 第二層 -->
 			<div
 				v-if="chosenCategoryId"
-				class="bg-white h-full w-[calc(100%-204px)] absolute right-0 top-0 flex border-2 border-emerald-400 rounded-r-lg"
+				class="bg-white h-full w-[calc(100%-204px)] absolute right-0 top-0 flex border-2 border-emerald-400 rounded-r-lg z-10"
 			>
 				<ul class="w-[122px] py-2 bg-yellow-forth relative">
 					<li
@@ -49,8 +49,26 @@
 					</li>
 				</ul>
 			</div>
-			<div class="hidden md:block">
-				<Swiper :slides-per-view="'auto'" :space-between="12" :navigation="true" >
+			<div class="hidden md:block relative group">
+				<button
+					class="prev absolute left-0 top-[50%] z-[2] translate-y-[-50%] bg-black/30 py-5 px-2 rounded-r-md text-white text-xl hidden group-hover:block"
+				>
+					<font-awesome-icon :icon="['fas', 'chevron-left']" />
+				</button>
+				<Swiper
+					:modules="[Navigation, Autoplay, Pagination]"
+					:slides-per-view="'auto'"
+					:space-between="12"
+					:autoplay="true"
+					:loop="true"
+					:navigation="{
+						prevEl: '.prev',
+						nextEl: '.next',
+					}"
+					:pagination="{
+						clickable: true,
+					}"
+				>
 					<SwiperSlide v-for="item in adStore.H020B">
 						<AdLink :item="item">
 							<img
@@ -60,12 +78,19 @@
 						</AdLink>
 					</SwiperSlide>
 				</Swiper>
+				<button
+					class="next absolute right-0 top-[50%] z-[2] translate-y-[-50%] bg-black/30 py-5 px-2 rounded-l-md text-white text-xl hidden group-hover:block"
+				>
+					<font-awesome-icon :icon="['fas', 'chevron-right']" />
+				</button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
+
 const adStore = useAds();
 const {
 	categories,
@@ -76,4 +101,11 @@ const {
 } = useCategories();
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+:deep(.swiper-pagination-bullet) {
+	@apply w-2.5 h-2.5 bg-white opacity-90
+}
+:deep(.swiper-pagination-bullet-active) {
+	@apply bg-emerald-400 w-6 rounded-full
+}
+</style>
