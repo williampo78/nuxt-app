@@ -1,48 +1,53 @@
 <template>
-	<div class="bg-white py-6 px-3 md:mx-[-12px]">
-		<div class="max-w-[1200px] mx-auto">
-			<div class="flex justify-between text-blue-primary">
-				<h2 class="text-2xl mb-3"
-					><span class="mr-3"
-						><font-awesome-icon :icon="['fas', 'pen-nib']" /></span
-					>好文開箱</h2
+	<Swiper
+		:slides-per-view="'auto'"
+		:space-between="12"
+		:modules="[SwiperFreeMode]"
+		:free-mode="true"
+		class="w-full"
+	>
+		<SwiperSlide v-for="(item, index) in items" :key="index">
+			<img
+				class="w-[140px] h-[140px] md:max-w-[170px] md:max-h-[170px]"
+				:src="item.img_path ? item.img_path : ''"
+				:alt="item.img_alt ? item.img_alt : `圖片${index + 1}`"
+			/>
+			<div class="flex-1">
+				<p class="text-blue-primary">{{ item.img_title }}</p>
+				<p class="text-xs text-gray-400 my-4 font-medium">
+					{{ item.img_abstract }}
+				</p>
+				<button
+					class="py-1.5 px-3 bg-blue-primary text-white text-xs rounded-full"
 				>
-				<!-- <nuxt-link to="/" class="text-o"
-					>查看更多 <font-awesome-icon :icon="['fas', 'chevron-right']"
-				/></nuxt-link> -->
+					<AdLink
+						:item="{
+							action: item.see_more_action,
+							targetId: item.see_more_cate_hierarchy_id,
+							targetBlank: item.see_more_target_blank,
+							url:item.url
+						}"
+					>
+						more<font-awesome-icon
+							class="ml-1"
+							:icon="['fas', 'arrow-right']"
+						/>
+					</AdLink>
+				</button>
 			</div>
-			<div class="flex gap-x-2 justify-between w-full overflow-auto md:gap-0">
-				<div
-					v-for="i in 3"
-					:key="i"
-					class="md:w-[390px] p-4 bg-yellow-forth flex gap-x-4 rounded-2xl flex-shrink-0"
-				>
-					<img
-						class="w-[140px] md:max-w-[170px]"
-						src="@/assets/images/image-44.png"
-						alt=""
-					/>
-					<div class="w-[170px] flex-shrink-0">
-						<p class="text-blue-primary">缺3種營養 小病變重症</p>
-						<p class="text-xs text-gray-400 my-4 font-medium">
-							「有慢性病可以吃成藥嗎?」、「我對藥物過敏嗎?」根據2022博思市調公司針對國人自我照護習慣調查指出,九成台灣民眾曾生病卻置之不理...
-						</p>
-						<button
-							class="py-1.5 px-3 bg-blue-primary text-white text-xs rounded-full"
-						>
-							<nuxt-link to="/"
-								>more<font-awesome-icon
-									class="ml-1"
-									:icon="['fas', 'arrow-right']"
-							/></nuxt-link>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		</SwiperSlide>
+	</Swiper>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ImageSlot } from '~/types/ads';
+defineProps<{
+	items: ImageSlot[];
+}>();
+</script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.swiper-slide {
+	@apply max-w-[390px] p-4 bg-yellow-forth flex gap-x-4 rounded-2xl;
+}
+</style>

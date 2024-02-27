@@ -15,8 +15,8 @@ export const useAds = defineStore('ads', {
             H050: <ImageSlot[]>[],//活動 Banner
             H060: <ProductSlot>{}, //今日最熱銷
             H070: <ImageSlot[]>[],//熱銷品牌
-            H080A: <ProdctImageSlot[]>[],//品牌專館/特色專館(SP)
-            H080B: <ProdctImageSlot[]>[],//品牌專館/特色專館(PC)
+            H080A: <ProdctImageSlot>{},//品牌專館/特色專館(SP)
+            H080B: <ProdctImageSlot>{},//品牌專館/特色專館(PC)
             H100A: <ProductSlot[]>[], //大類樓層(1)
             H100B: <ProductSlot[]>[], //大類樓層(2)
             H100C: <ProductSlot[]>[], //大類樓層(3)

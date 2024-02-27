@@ -1,5 +1,8 @@
 <template>
-	<div class="bg-white p-4 rounded-2xl">
+	<nuxt-link
+		class="bg-white block h-full p-4 rounded-2xl flex flex-col justify-between"
+		:to="`/product/${id}`"
+	>
 		<div>
 			<img v-if="imgUrl" :src="imgUrl" alt="" />
 			<img v-else src="@/assets/images/image-44.png" alt="" />
@@ -7,9 +10,9 @@
 		<small v-if="promotion" class="mt-4 mb-1 text-xs text-pink-secondary">
 			{{ promotion }}
 		</small>
-		<nuxt-link :to="`/product/${id}`" class="text-sm text-gray-800 mt-2 mb-4 block md:text-base">
+		<p class="text-sm text-gray-800 mt-2 mb-4 block md:text-base">
 			{{ productName || '美強生 優兒A+成長奶粉 6罐' }}
-		</nuxt-link>
+		</p>
 		<p class="text-red md:text-xl">
 			${{ formatNumberWithCommas(sellingPrice!) || 100 }}
 			<sub class="text-xs text-gray-400 ml-2 line-through font-medium">
@@ -32,7 +35,7 @@
 					{{ label }}
 				</span>
 			</div>
-			<button class="text-blue-primary">
+			<button @click.prevent class="text-blue-primary">
 				<font-awesome-icon
 					v-if="collected"
 					:icon="['fas', 'heart']"
@@ -41,7 +44,7 @@
 				<font-awesome-icon v-else :icon="['far', 'heart']" />
 			</button>
 		</div>
-	</div>
+	</nuxt-link>
 </template>
 
 <script setup lang="ts">
