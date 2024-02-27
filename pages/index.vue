@@ -64,15 +64,58 @@
 			:bg-color="'bg-[#E5F7F4]'"
 			class="hidden md:block"
 		/>
-		<AdFloor
-			v-if="H110"
-			title="好文開箱"
-			icon="pen-nib"
-		>
-			<HomeUnboxing :items="H110"/>
+		<AdFloor v-if="H110" title="好文開箱" icon="pen-nib">
+			<HomeUnboxing :items="H110" />
 		</AdFloor>
-
-		<!-- <HomeUnboxing /> -->
+		<AdFloor
+			v-if="H120"
+			title="量身推薦"
+			icon="medal"
+			:bg-color="'bg-[#F1F9E9]'"
+			:title-color="'text-[#75C82B]'"
+		>
+			<Swiper
+				:slides-per-view="'auto'"
+				:space-between="12"
+				:modules="[SwiperFreeMode]"
+				:free-mode="true"
+			>
+				<SwiperSlide
+					v-for="(item, index) in H120"
+					:key="index"
+					class="max-w-[220px]"
+				>
+					<AdLink :item="item">
+						<div class="flex justify-center rounded-2xl mb-2">
+							<img
+								:src="item.img_path"
+								:title="item.img_title"
+								:alt="item.img_alt"
+							/>
+						</div>
+						<span
+							v-if="item.img_title"
+							class="text-product-title text-center text-sm block font-bold"
+							>{{ item.img_title.slice(0, 10) }}</span
+						>
+					</AdLink>
+				</SwiperSlide>
+			</Swiper>
+		</AdFloor>
+		<AdFloor
+			v-if="H130"
+			title="猜你喜歡"
+			icon="heart-circle-check"
+			:see-more="{
+				action: H130.see_more_action,
+				url: H130.url,
+				targetId: H130.see_more_cate_hierarchy_id,
+			}"
+			swiper
+			:products="H130.products"
+			:title-color="'text-[#EA861C]'"
+			:bg-color="'bg-[#FFF7E5]'"
+		/>
 	</div>
 </template>
 
@@ -87,6 +130,12 @@ const H080B = computed(() => {
 });
 const H110 = computed(() => {
 	return adStore.ads.H110;
+});
+const H120 = computed(() => {
+	return adStore.ads.H120;
+});
+const H130 = computed(() => {
+	return adStore.ads.H130;
 });
 </script>
 
