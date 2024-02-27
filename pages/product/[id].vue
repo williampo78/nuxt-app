@@ -158,10 +158,35 @@
 				</div>
 			</section>
 		</div>
-		<h2 class="subtitle">商品簡介</h2>
-		<div class="tab-content mb-5" v-html="productDesc"></div>
-		<h2 class="subtitle">商品規格</h2>
-		<div class="tab-content mb-5" v-html="productSpec"></div>
+		<div class="hidden md:flex my-9 text-2xl text-gray-400">
+			<button
+				@click="tabContent = content.code"
+				v-for="content in [
+					{ title: '商品簡介', code: 'brief' },
+					{ title: '商品規格', code: 'spec' },
+				]"
+				class="flex-1 border-b-2 border-gray-300"
+				:class="{
+					'text-blue-primary !border-blue-primary': content.code === tabContent,
+				}"
+			>
+				{{ content.title }}
+			</button>
+		</div>
+		<div class="my-6">
+			<h2 class="subtitle md:hidden">商品簡介</h2>
+			<div
+				class="tab-content mb-5 md:hidden"
+				:class="{ 'md:!block': tabContent === 'brief' }"
+				v-html="productDesc"
+			></div>
+			<h2 class="subtitle md:hidden">商品規格</h2>
+			<div
+				class="tab-content mb-5 md:hidden"
+				:class="{ 'md:!block': tabContent === 'spec' }"
+				v-html="productSpec"
+			></div>
+		</div>
 
 		<h2 class="subtitle">相關類別</h2>
 		<ul class="mb-5">
@@ -172,6 +197,7 @@
 					</li>
 					<li
 						v-for="(name, index) in category.category_name.split(',')"
+						class="flex-shrink-0 text-sm last:flex-shrink md:text-base"
 						:class="{
 							'text-gray-500':
 								index < category.category_name.split(',').length - 1,
@@ -205,6 +231,7 @@ import { ProductInfo, ShippingFee, Spec } from '@/types/product';
 
 const route = useRoute();
 const { orderSpec, stock, getStock } = useProduct();
+const { payment, availablePayments } = usePayments();
 
 const productInfo = ref({} as ProductInfo); //商品資訊
 const productPhotos = ref([]); //商品圖
@@ -218,7 +245,8 @@ const productSpec = ref<string>(''); //商品規格
 const relateCategory = ref<{ category_id: string; category_name: 'string' }[]>(
 	[]
 );
-const { payment, availablePayments } = usePayments();
+
+const tabContent = ref<string>('brief'); //切換商品簡介/商品規格
 
 const getProductInfo = async () => {
 	const id = route.params.id;
