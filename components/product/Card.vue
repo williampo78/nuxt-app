@@ -1,6 +1,6 @@
 <template>
 	<nuxt-link
-		class="bg-white block h-full p-4 rounded-2xl flex flex-col justify-between"
+		class="bg-white h-full p-4 rounded-2xl flex flex-col justify-between"
 		:to="`/product/${id}`"
 	>
 		<div>
@@ -35,9 +35,12 @@
 					{{ label }}
 				</span>
 			</div>
-			<button @click.prevent class="text-blue-primary">
+			<button
+				@click.prevent="toggleColllection()"
+				class="text-blue-primary text-lg"
+			>
 				<font-awesome-icon
-					v-if="collected"
+					v-if="isCollected"
 					:icon="['fas', 'heart']"
 					class="text-red"
 				/>
@@ -48,8 +51,11 @@
 </template>
 
 <script setup lang="ts">
+import { updateCollectionsApi, getCollectionsApi } from '@/api/member';
 import { formatNumberWithCommas } from '@/composables/useFormat';
 
+const collectionStore = useCollection();
+const modalStore = useModal();
 const props = defineProps<{
 	id?: number;
 	productName?: string;
@@ -61,6 +67,32 @@ const props = defineProps<{
 	cart?: boolean;
 	promotionLabels?: string[];
 }>();
+
+onMounted(async () => {
+	await nextTick();
+});
+
+const isCollected = computed(() => {
+	return collectionStore.collections.find((collection) => {
+		return collection.product_id === props.id;
+	});
+});
+
+//加入/取消收藏
+const toggleColllection = async () => {
+	await updateCollectionsApi({
+		product_id: props.id,
+		status: isCollected.value ? -1 : 0,
+	});
+
+	await collectionStore.getCollections();
+
+	modalStore.openModal({
+		type: 'toast',
+		message: isCollected.value ? '已加入收藏' : '已取消收藏',
+		icon: isCollected.value ? 'collect' : 'uncollect',
+	});
+};
 </script>
 
 <style scoped></style>

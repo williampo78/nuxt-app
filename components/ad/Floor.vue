@@ -13,7 +13,7 @@
 					查看更多 <font-awesome-icon :icon="['fas', 'chevron-right']" />
 				</AdLink>
 			</div>
-			<div class="flex gap-3 justify-between w-full overflow-auto">
+			<div class="flex ">
 				<slot>
 					<Swiper
 						v-if="swiper"
@@ -41,7 +41,7 @@
 								:promotion="product.promotion_desc"
 								:list-price="product.list_price"
 								:selling-price="product.selling_price"
-								:collected="product.collections"
+								:collected="product.collection"
 								:promotion-labels="product.promotion_label"
 							/>
 						</SwiperSlide>
@@ -80,6 +80,9 @@ withDefaults(
 </script>
 
 <style scoped>
+.swiper{
+	@apply mx-0
+}
 .swiper-slide {
 	@apply max-w-[220px];
 }

@@ -30,6 +30,8 @@
 
 const modalStore = useModal();
 const memberStore = useMember();
+const collectionStore = useCollection();
+
 const adStore = useAds()
 const route = useRoute();
 const tokenCookie = useCookie('token');
@@ -42,7 +44,7 @@ if (tokenCookie.value) {
 }
 
 try {
-	await Promise.all([getProductCategories(), areaStore.getArea(),adStore.getAds()]);
+	await Promise.all([getProductCategories(), areaStore.getArea(),adStore.getAds(),collectionStore.getCollections()]);
 } catch (error) {
 	console.log(error);
 }

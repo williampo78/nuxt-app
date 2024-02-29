@@ -81,7 +81,7 @@ export interface Product {
     product_photo: string
     promotion_desc: string
     promotion_label: any[]
-    collections: boolean
+    collection: boolean
     selling_channel: string
     start_selling: string | Date
 }

@@ -2,7 +2,7 @@
 	<div class="flex justify-between items-center text-sm mb-4 md:text-base">
 		<p>
 			已收藏
-			<span class="text-emerald-400">{{ collections.length }}</span> 件商品
+			<span class="text-emerald-400">{{ collectionStore.collections.length }}</span> 件商品
 		</p>
 		<button
 			aria-label="刪除"
@@ -14,7 +14,7 @@
 	</div>
 	<ul class="flex flex-col gap-y-2">
 		<li
-			v-for="collection in collections"
+			v-for="collection in collectionStore.collections"
 			:key="collection.product_no"
 			class="flex gap-2 py-3 px-2 md:gap-6"
 		>
@@ -61,20 +61,9 @@
 
 <script setup lang="ts">
 import { formatNumberWithCommas } from '~/composables/useFormat';
-import { Collection } from '~/types/collection';
-import { getCollectionsApi } from '~/api/member';
 
-const collections = ref<Collection[]>([]);
+const collectionStore = useCollection();
 const selectedIds = ref<number[]>([]);
-onMounted(async () => {
-	await nextTick();
-	getCollections();
-});
-
-const getCollections = async () => {
-	const data = await getCollectionsApi();
-	collections.value = data.result;
-};
 
 const toggleSelectedId = (collectionId: number) => {
 	if (selectedIds.value.includes(collectionId)) {

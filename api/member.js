@@ -46,16 +46,16 @@ export const addRecipientApi = (data) => {
 	return service({
 		url: '/membership/notes',
 		method: 'POST',
-		data
+		data,
 	});
 };
 
 //更新常用收件人
-export const updateRecipientApi = (id,data) => {
+export const updateRecipientApi = (id, data) => {
 	return service({
 		url: `/membership/${id}/notes`,
 		method: 'PUT',
-		data
+		data,
 	});
 };
 
@@ -72,5 +72,14 @@ export const getCollectionsApi = () => {
 	return service({
 		url: '/membership/collections',
 		method: 'GET',
+	});
+};
+
+//加入/移除收藏
+export const updateCollectionsApi = (data) => {
+	return service({
+		url: '/membership/collections',
+		method: 'POST',
+		data,
 	});
 };

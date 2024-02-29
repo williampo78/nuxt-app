@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 type ModalType = 'toast' | 'alert' | 'custom' | ''
-type Icon = 'success' | 'error' | 'warning' | ''
+type Icon = 'success' | 'error' | 'warning' | 'collect' | 'uncollect' | ''
 interface CustomConfig {
 	type: 'custom' | '';
 	icon?: Icon;
@@ -8,21 +8,21 @@ interface CustomConfig {
 	title?: string;
 	message?: string;
 	hasHeader?: boolean
-	data?:any
+	data?: any
 }
 interface ToastConfig {
 	type: 'toast';
 	icon: Icon;
 	title?: string;
 	message: string;
-	data?:any
+	data?: any
 }
 interface AlertConfig {
 	type: 'alert';
 	icon?: Icon;
 	title: string;
 	message: string;
-	data?:any
+	data?: any
 }
 
 export const useModal = defineStore('modal', {
@@ -47,7 +47,7 @@ export const useModal = defineStore('modal', {
 			if (config.type === 'toast') {
 				setTimeout(() => {
 					this.closeModal()
-				}, 2000);
+				}, 1200);
 			}
 			if (config.type === 'custom') {
 				this.hasHeader = config.hasHeader || false
