@@ -83,3 +83,11 @@ export const updateCollectionsApi = (data) => {
 		data,
 	});
 };
+//加入/移除收藏
+export const deleteCollectionsApi = (data) => {
+	return service({
+		url: '/membership/collections/batchDelete',
+		method: 'POST',
+		data,
+	});
+};
