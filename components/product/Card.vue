@@ -51,11 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import { updateCollectionsApi, getCollectionsApi } from '@/api/member';
 import { formatNumberWithCommas } from '@/composables/useFormat';
 
 const collectionStore = useCollection();
-const modalStore = useModal();
 const props = defineProps<{
 	id?: number;
 	productName?: string;
@@ -73,24 +71,16 @@ onMounted(async () => {
 });
 
 const isCollected = computed(() => {
-	return collectionStore.collections.find((collection) => {
+	return !!collectionStore.collections.find((collection) => {
 		return collection.product_id === props.id;
 	});
 });
 
 //加入/取消收藏
 const toggleColllection = async () => {
-	await updateCollectionsApi({
-		product_id: props.id,
-		status: isCollected.value ? -1 : 0,
-	});
-
-	await collectionStore.getCollections();
-
-	modalStore.openModal({
-		type: 'toast',
-		message: isCollected.value ? '已加入收藏' : '已取消收藏',
-		icon: isCollected.value ? 'collect' : 'uncollect',
+	collectionStore.toggleColllection({
+		id: props.id!,
+		isCollected: isCollected.value,
 	});
 };
 </script>

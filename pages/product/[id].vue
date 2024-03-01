@@ -154,7 +154,7 @@
 					<ProductSpec :orderSpec="orderSpec" />
 				</div>
 				<div class="hidden md:block">
-					<ProductButtons />
+					<ProductButtons :productInfo="productInfo" />
 				</div>
 			</section>
 		</div>

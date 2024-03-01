@@ -7,7 +7,7 @@ export interface ProductInfo {
     product_discount: number
     product_id: number | string
     product_name: string
-    promotion_label: string | null
+    promotion_label: string
     selling_channel: string
     selling_price: number
     start_selling: string | Date
