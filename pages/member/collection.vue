@@ -1,73 +1,98 @@
 <template>
-	<div class="flex justify-between items-center text-sm mb-4 md:text-base">
-		<p>
-			已收藏
-			<span class="text-emerald-400">
-				{{ collectionStore.collections.length }}
-			</span>
-			件商品
-		</p>
-		<button
-			@click="removeCollection('batch')"
-			aria-label="刪除"
-			class="bg-red text-white font-medium py-1.5 px-3 rounded-md"
-		>
-			<font-awesome-icon :icon="['fas', 'trash-can']" class="mr-1" />
-			刪除
-		</button>
+	<div v-if="collectionStore.collections.length">
+		<div class="flex justify-between items-center text-sm mb-4 md:text-base">
+			<p>
+				已收藏
+				<span class="text-emerald-400">
+					{{ collectionStore.collections.length }}
+				</span>
+				件商品
+			</p>
+			<button
+				@click="removeCollection('batch')"
+				aria-label="刪除"
+				class="bg-red text-white font-medium py-1.5 px-3 rounded-md"
+			>
+				<font-awesome-icon :icon="['fas', 'trash-can']" class="mr-1" />
+				刪除
+			</button>
+		</div>
+		<ul class="flex flex-col gap-y-2">
+			<li
+				v-for="collection in collectionStore.collections"
+				:key="collection.product_no"
+				class="flex gap-2 py-3 px-2 md:gap-6"
+			>
+				<span
+					@click="toggleSelectedProduct(collection)"
+					class="self-center cursor-pointer md:text-xl"
+				>
+					<font-awesome-icon
+						v-if="selectedProducts.includes(collection)"
+						:icon="['fas', 'square-check']"
+						class="text-emerald-400"
+					/>
+					<font-awesome-icon
+						v-else
+						:icon="['far', 'square']"
+						class="text-gray-400"
+					/>
+				</span>
+				<img :src="collection.product_photo" alt="" class="max-w-[90px]" />
+				<div class="flex-1 flex flex-col justify-between md:text-lg">
+					<p class="text-sm text-black md:text-lg">{{
+						collection.product_name
+					}}</p>
+					<p class="text-red"
+						>${{ formatNumberWithCommas(collection.selling_price) }}
+						<sub class="line-through text-gray-400 font-medium text-xs ml-2"
+							>${{ formatNumberWithCommas(collection.list_price) }}</sub
+						></p
+					>
+				</div>
+				<div
+					class="flex flex-col justify-between items-center text-gray-400 md:flex-row md:gap-9"
+				>
+					<button aria-label="加入購物車">
+						<font-awesome-icon :icon="['fas', 'cart-shopping']" />
+					</button>
+					<button
+						@click="removeCollection('single', collection)"
+						aria-label="移除收藏"
+					>
+						<font-awesome-icon :icon="['fas', 'trash-can']" />
+					</button>
+				</div>
+			</li>
+		</ul>
+		<CollectionRemoveModal
+			v-if="modalStore.name === 'remove collection'"
+			@deleted="deleted"
+		/>
 	</div>
-	<ul class="flex flex-col gap-y-2">
-		<li
-			v-for="collection in collectionStore.collections"
-			:key="collection.product_no"
-			class="flex gap-2 py-3 px-2 md:gap-6"
-		>
-			<span
-				@click="toggleSelectedProduct(collection)"
-				class="self-center cursor-pointer md:text-xl"
-			>
-				<font-awesome-icon
-					v-if="selectedProducts.includes(collection)"
-					:icon="['fas', 'square-check']"
-					class="text-emerald-400"
+	<div
+		v-else
+		class="flex flex-col items-center md:my-12 md:flex-row md:gap-[100px]"
+	>
+		<div class="flex-1 text-center">
+			<h4 class="text-xl text-black md:text-3xl"> 瀏覽商品並加入我的收藏！ </h4>
+			<nuxt-link to="/" class="relative inline-block btn btn-confirm my-5">
+				開始瀏覽
+				<img
+					src="/images/cursor.svg"
+					alt=""
+					class="absolute w-8 right-0 translate-x-[50%]"
 				/>
-				<font-awesome-icon
-					v-else
-					:icon="['far', 'square']"
-					class="text-gray-400"
-				/>
-			</span>
-			<img :src="collection.product_photo" alt="" class="max-w-[90px]" />
-			<div class="flex-1 flex flex-col justify-between md:text-lg">
-				<p class="text-sm text-black md:text-lg">{{
-					collection.product_name
-				}}</p>
-				<p class="text-red"
-					>${{ formatNumberWithCommas(collection.selling_price) }}
-					<sub class="line-through text-gray-400 font-medium text-xs ml-2"
-						>${{ formatNumberWithCommas(collection.list_price) }}</sub
-					></p
-				>
-			</div>
-			<div
-				class="flex flex-col justify-between items-center text-gray-400 md:flex-row md:gap-9"
-			>
-				<button aria-label="加入購物車">
-					<font-awesome-icon :icon="['fas', 'cart-shopping']" />
-				</button>
-				<button
-					@click="removeCollection('single', collection)"
-					aria-label="移除收藏"
-				>
-					<font-awesome-icon :icon="['fas', 'trash-can']" />
-				</button>
-			</div>
-		</li>
-	</ul>
-	<CollectionRemoveModal
-		v-if="modalStore.name === 'remove collection'"
-		@deleted="deleted"
-	/>
+			</nuxt-link>
+		</div>
+		<div class="flex-1">
+			<img
+				class="h-[300px] md:h-[420px]"
+				src="/images/collection-character.svg"
+				alt=""
+			/>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -113,7 +138,7 @@ const removeCollection = (
 				type: 'alert',
 				title: '刪除提醒',
 				message: '請先勾選要刪除的商品',
-				icon:'warning'
+				icon: 'warning',
 			});
 			return;
 		}
