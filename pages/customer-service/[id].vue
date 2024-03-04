@@ -1,8 +1,9 @@
 <template>
-	<div class="my-4 md:my-8">
+	<div class="my-4 md:my-6">
+		<Breadcrumb :crumbs="[{ name: title }]" />
 		<h1
 			class="text-lg text-center border-b-4 border-blue-primary pb-3 mb-4 md:mb-6 md:text-2xl"
-			>{{ footerStore.title }}
+			>{{ title }}
 		</h1>
 
 		<div v-html="content"></div>
@@ -11,7 +12,7 @@
 
 <script setup lang="ts">
 import { getFooterContentApi } from '@/api/footer';
-const route = useRoute()
+const route = useRoute();
 
 const footerStore = useFooter();
 

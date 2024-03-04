@@ -1,5 +1,5 @@
 <template>
-	<ul class="flex flex-wrap gap-2 my-3">
+	<!-- <ul class="flex flex-wrap gap-2 my-3">
 		<li>
 			<nuxt-link to="/">
 				<font-awesome-icon :icon="['fas', 'house']" />
@@ -9,7 +9,8 @@
 			<font-awesome-icon :icon="['fas', 'chevron-right']" class="mr-2" />
 			{{ route.query.keyword }} 搜尋結果
 		</li>
-	</ul>
+	</ul> -->
+	<Breadcrumb :crumbs="[{ name: route.query.keyword as string }]" />
 	<FindFilter />
 	<FindProducts @checkProductListLength="checkResult" />
 	<div
@@ -31,6 +32,8 @@
 <script setup lang="ts">
 const route = useRoute();
 const hasResult = ref<boolean>(false);
+
+// const crumbs = computed((){})
 
 const checkResult = (val: boolean) => {
 	hasResult.value = val;

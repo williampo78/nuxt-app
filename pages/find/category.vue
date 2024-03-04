@@ -1,6 +1,6 @@
 <template>
 	<div class="mb-6">
-		<Breadcrumb />
+		<!-- <Breadcrumb /> -->
 		<div class="flex gap-4">
 			<FindSidebar class="hidden md:block" />
 			<div class="flex-1">
