@@ -1,5 +1,6 @@
 <template>
 	<div class="w-full max-w-[1200px]">
+		<Breadcrumb :crumbs="crumbs" />
 		<div class="mt-4 gap-x-9 md:flex">
 			<section class="flex justify-center">
 				<img
@@ -247,6 +248,21 @@ const relateCategory = ref<{ category_id: string; category_name: 'string' }[]>(
 );
 
 const tabContent = ref<string>('brief'); //切換商品簡介/商品規格
+
+const crumbs = computed(() => {
+	const relativeCategory = relateCategory.value[0];
+	const paths = relativeCategory.category_name
+		.split(',')
+		.map((path, i, { length }) => ({
+			name: path,
+			link:
+				i === length - 1
+					? `/find/category?category=${relativeCategory.category_id}`
+					: '',
+			disabled: !(i === length - 1),
+		}));
+	return paths;
+});
 
 const getProductInfo = async () => {
 	const id = route.params.id;

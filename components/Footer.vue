@@ -56,7 +56,6 @@
 								{{ item.content_name }}
 							</nuxt-link>
 							<nuxt-link
-								@click="setTitle(item.content_name)"
 								v-if="item.content_target === 'H'"
 								:to="`/customer-service/${item.content_id} `"
 							>
@@ -93,11 +92,6 @@ await footerStore.getFooter();
 const footerList = computed(() => {
 	return footerStore.footerList;
 });
-
-//取得前往連結頁面的名稱
-const setTitle = (title: string) => {
-	footerStore.setTitle(title);
-};
 
 </script>
 

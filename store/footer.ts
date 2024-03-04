@@ -16,15 +16,11 @@ interface FooterList {
 export const useFooter = defineStore('footer', {
     state: () => ({
         footerList: ref<FooterList[]>([]),
-        title: ref<string>(''),
     }),
     actions: {
         async getFooter() {
             const data = await getFooterListApi();
             this.footerList = data.result;
-        },
-        setTitle(payload: string) {
-            this.title = payload
         },
     },
 

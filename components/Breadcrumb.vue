@@ -1,5 +1,5 @@
 <template>
-	<ul class="flex flex-wrap gap-2 my-3">
+	<ul class="flex flex-wrap gap-2 my-3 md:my-5">
 		<li>
 			<nuxt-link to="/">
 				<font-awesome-icon :icon="['fas', 'house']" />
@@ -7,46 +7,31 @@
 		</li>
 		<li v-for="crumb in crumbs">
 			<font-awesome-icon :icon="['fas', 'chevron-right']" class="mr-2" />
-			{{ crumb.name }}
+			<nuxt-link
+				v-if="!crumb.disabled && crumb.link"
+				:to="crumb.link"
+				class="underline"
+			>
+				{{ crumb.name }}
+			</nuxt-link>
+			<span v-else>
+				{{ crumb.name }}
+			</span>
 		</li>
 	</ul>
 </template>
 
 <script setup lang="ts">
-// import { getBreadcrumbApi } from '@/api/find';
-// const route = useRoute();
-// const crumbs = ref<Crumb>();
-
 defineProps<{
 	crumbs: Crumb[];
 }>();
 
-// interface Crumb {
-// 	[key: string]: {
-// 		id?: number;
-// 		name: string;
-// 		[propName: string]: any;
-// 	};
-// }
 interface Crumb {
 	name: string;
 	link?: string;
 	id?: string;
+	disabled?: boolean;
 }
-
-// const getBreadcrumbs = async () => {
-// 	const data = await getBreadcrumbApi({ category_id: route.query.category });
-// 	crumbs.value = data.result;
-// };
-
-// await getBreadcrumbs();
-
-// watch(
-//   () => route.query.category,
-//   () => {
-// 	getBreadcrumbs()
-//   },
-// );
 </script>
 
 <style scoped></style>

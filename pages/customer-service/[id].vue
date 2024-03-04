@@ -6,7 +6,7 @@
 			>{{ title }}
 		</h1>
 
-		<div v-html="content"></div>
+		<div v-if="content" v-html="content"></div>
 	</div>
 </template>
 
@@ -14,13 +14,19 @@
 import { getFooterContentApi } from '@/api/footer';
 const route = useRoute();
 
-const footerStore = useFooter();
-
 const title = ref<string>('');
 const content = ref<string>('');
 
 onMounted(async () => {
 	await nextTick();
+	if (route.params.id === 'hit-me') {
+		title.value = '與我們聯繫'
+		return;
+	}
+	else if (route.params.id === 'qa') {
+		title.value = '常見問題'
+		return;
+	}
 	const data = await getFooterContentApi(route.params.id);
 	title.value = data.result[0].content_name;
 	content.value = data.result[0].content_text;
