@@ -46,11 +46,33 @@
 						<dt class="text-[18px] font-bold">{{ field.field_value }}</dt>
 						<dd
 							v-for="item in field.field_items"
-							:key="item.content_id"
+							:key="item.content_url"
 							class="my-1"
 						>
-							{{ item.content_name }}</dd
-						>
+							<nuxt-link
+								v-if="item.content_target === 'S'"
+								:to="item.content_url"
+							>
+								{{ item.content_name }}
+							</nuxt-link>
+							<nuxt-link
+								@click="setTitle(item.content_name)"
+								v-if="item.content_target === 'H'"
+								:to="`/customer-service/${item.content_id} `"
+							>
+								{{ item.content_name }}
+							</nuxt-link>
+							<a
+								v-else-if="item.content_target === 'B'"
+								:href="item.content_url"
+								target="_blank"
+								:aria-label="item.content_name"
+							>
+								<span class="cursor-pointer md:hover:text-sub-title-yellow">{{
+									item.content_name
+								}}</span>
+							</a>
+						</dd>
 					</dl>
 				</div>
 			</div>
@@ -63,15 +85,20 @@
 	</div>
 </template>
 
-<script setup>
-import { getFooterInfoApi } from '@/api/footer';
-const footerList = ref([]);
+<script setup lang="ts">
+const footerStore = useFooter();
 
-const getFooter = async () => {
-	const data = await getFooterInfoApi();
-	footerList.value = data.result;
+await footerStore.getFooter();
+
+const footerList = computed(() => {
+	return footerStore.footerList;
+});
+
+//取得前往連結頁面的名稱
+const setTitle = (title: string) => {
+	footerStore.setTitle(title);
 };
-await getFooter();
+
 </script>
 
 <style lang="scss" scoped></style>
