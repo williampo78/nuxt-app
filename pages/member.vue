@@ -38,10 +38,19 @@
 					<nuxt-link
 						:to="page.link"
 						class="block py-2 px-3 w-full"
+						:class="{ 'flex items-center gap-4': page.hasMessage }"
 						active-class="bg-white bg-opacity-50 rounded-lg"
 					>
-						<font-awesome-icon :icon="['fas', page.icon]" class="mr-2" />
-						{{ page.name }}
+						<span>
+							<font-awesome-icon :icon="['fas', page.icon]" class="mr-2" />
+							{{ page.name }}
+						</span>
+						<span
+							v-if="page.hasMessage && messageStore.totalUnread > 0"
+							class="flex w-5 h-5 items-center justify-center rounded-full bg-emerald-400 text-white text-xs"
+						>
+							{{ messageStore.totalUnread }}
+						</span>
 					</nuxt-link>
 				</li>
 			</ul>
@@ -62,6 +71,7 @@
 import { getMemberPointsApi, getMemberExpiringPointsApi } from '~/api/member';
 
 const memberStore = useMember();
+const messageStore = useMessage();
 const route = useRoute();
 
 interface Page {
@@ -101,12 +111,12 @@ const pages = ref<Page[]>([
 		link: '/member/recipients',
 		icon: 'address-book',
 	},
-	// {
-	// 	name: '我的通知',
-	// 	link: '/member/notification-message',
-	// 	icon: 'bell',
-	// 	hasMessage: true,
-	// },
+	{
+		name: '我的通知',
+		link: '/member/notifications',
+		icon: 'bell',
+		hasMessage: true,
+	},
 	// {
 	// 	name: '變更密碼',
 	// 	link: '/member/account-password',

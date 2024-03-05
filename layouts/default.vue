@@ -27,12 +27,12 @@
 </template>
 
 <script setup>
-
 const modalStore = useModal();
 const memberStore = useMember();
 const collectionStore = useCollection();
+const messageStore = useMessage();
 
-const adStore = useAds()
+const adStore = useAds();
 const route = useRoute();
 const tokenCookie = useCookie('token');
 const { getProductCategories } = useCategories();
@@ -44,7 +44,13 @@ if (tokenCookie.value) {
 }
 
 try {
-	await Promise.all([getProductCategories(), areaStore.getArea(),adStore.getAds(),collectionStore.getCollections()]);
+	await Promise.all([
+		getProductCategories(),
+		areaStore.getArea(),
+		adStore.getAds(),
+		collectionStore.getCollections(),
+		messageStore.getMessages(),
+	]);
 } catch (error) {
 	console.log(error);
 }

@@ -91,3 +91,20 @@ export const deleteCollectionsApi = (data) => {
 		data,
 	});
 };
+
+//取得訊息列表
+export const getMessagesApi = (data) => {
+	return service({
+		url: '/members/message',
+		method: 'GET',
+		params: data,
+	});
+};
+
+//將訊息狀態改為已讀
+export const readMessageApi = (id) => {
+	return service({
+		url: `/members/message/${id}`,
+		method: 'PATCH',
+	});
+};

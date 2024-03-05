@@ -143,7 +143,7 @@ const memberCenterOptions = ref<{ name: string; path: string }[]>([
 	{ name: '我的收藏', path: '/member/collection' },
 	{ name: '我的資料', path: '/member/info' },
 	{ name: '常用收件人', path: '/member/recipients' },
-	{ name: '我的通知', path: '' },
+	{ name: '我的通知', path: '/member/notifications' },
 	{ name: '登出', path: '/' },
 ]);
 
