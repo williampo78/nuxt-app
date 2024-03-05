@@ -33,7 +33,7 @@
 			<article
 				v-if="openedId === message.id"
 				v-html="message.content"
-				class="mt-5"
+				class="mt-5 overflow-auto"
 			></article>
 		</div>
 	</div>
