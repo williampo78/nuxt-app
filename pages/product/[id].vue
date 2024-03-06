@@ -267,7 +267,6 @@ const crumbs = computed(() => {
 const getProductInfo = async () => {
 	const id = route.params.id;
 	const data = await getProductInfoApi(id, { detail: true });
-	console.log(data);
 
 	orderSpec.value = data.result.orderSpec;
 	productInfo.value = data.result.productInfo;

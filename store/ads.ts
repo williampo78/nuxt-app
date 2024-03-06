@@ -31,7 +31,6 @@ export const useAds = defineStore('ads', {
     actions: {
         async getAds() {
             const data = await getAdsApi()
-            console.log(data.result);
             this.ads = data.result
         },
     },

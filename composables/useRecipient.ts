@@ -7,7 +7,6 @@ export function useRecipients() {
     //取得收件人列表
     const getRecipients = async () => {
         const data = await getRecipientsApi()
-        console.log('recipient data',data);
 
         recipientStore.setRecipient(data.result)
     }

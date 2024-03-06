@@ -1,14 +1,21 @@
-import { service } from "~/composables/api.ts";
+import { service } from '~/composables/api.ts';
 
 export const getFooterListApi = () => {
-  return service({
-    url: "/v1/footer",
-    method: "GET",
-  });
+	return service({
+		url: '/v1/footer',
+		method: 'GET',
+	});
 };
 export const getFooterContentApi = (id) => {
+	return service({
+		url: `/v1/footer/${id}`,
+		method: 'GET',
+	});
+};
+
+export const getQaListApi = () => {
   return service({
-    url: `/v1/footer/${id}`,
-    method: "GET",
-  });
+		url: `/v1/qa`,
+		method: 'GET',
+	});
 };

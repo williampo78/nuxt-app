@@ -23,7 +23,6 @@ const getBreadcrumbs = async () => {
 
 	crumbs.value = []
 	const data = await getBreadcrumbApi({ category_id: route.query.category });
-	console.log(data);
 	const _crumbs = data.result;
 	for (const i in _crumbs) {
 		if (data.result[i]) {
