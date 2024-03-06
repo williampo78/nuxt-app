@@ -98,6 +98,9 @@
 <script setup lang="ts">
 import { formatNumberWithCommas } from '~/composables/useFormat';
 import { Collection } from '~/types/collection';
+definePageMeta({
+	middleware: ['auth'],
+});
 
 const modalStore = useModal();
 const collectionStore = useCollection();

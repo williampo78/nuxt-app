@@ -41,6 +41,9 @@
 
 <script setup lang="ts">
 import { readMessageApi } from '@/api/member';
+definePageMeta({
+	middleware: ['auth'],
+});
 
 const messageStore = useMessage();
 const openedId = ref<number | null>(null);

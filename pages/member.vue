@@ -15,10 +15,11 @@
 <script setup lang="ts">
 import { getMemberPointsApi, getMemberExpiringPointsApi } from '~/api/member';
 
+
 const memberStore = useMember();
 
-//computed
 const currentPage = computed(() => {
+	//computed
 	return memberStore.currentPage;
 });
 

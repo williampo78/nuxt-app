@@ -70,6 +70,9 @@
 <script setup lang="ts">
 import { updateMemberInfoApi } from '@/api/member';
 import { AddressData } from '@/types/area';
+definePageMeta({
+	middleware: ['auth'],
+});
 const memberStore = useMember();
 const modalStore = useModal();
 const router = useRouter();
