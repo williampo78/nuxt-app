@@ -15,9 +15,6 @@
 						}"
 						class="w-[120px] h-[120px] flex flex-col justify-center items-center border-b border-gray-200 last:border-none"
 					>
-						<!-- <span class="text-[32px]"
-							><font-awesome-icon :icon="['fas', 'whiskey-glass']"
-						/></span> -->
 						<img :src="category.icon" alt="" class="w-12 mb-1" />
 						{{ category.name }}
 					</div>
@@ -53,17 +50,14 @@
 </template>
 
 <script setup lang="ts">
-const {
-	categories,
-	// subCategories,
-	chosenCategoryId,
-	selectCategory,
-	gotoCate,
-} = useCategories();
+const { categories, gotoCate } = useCategories();
 
 const menuStore = useMenu();
-const chosenCateId = ref<number | null>(1);
-const chosenSubId = ref<number | null>(1);
+const chosenCateId = ref<string>('');
+const chosenSubId = ref<number>('');
+onMounted(() => {
+	preselect();
+});
 
 const subCategories = computed(() => {
 	if (chosenCateId.value) {
@@ -74,6 +68,12 @@ const subCategories = computed(() => {
 
 const closeMenu = () => {
 	menuStore.closeMenu();
+};
+
+const preselect = () => {
+	chosenCateId.value = Object.keys(categories.value)[0] || null;
+	if (chosenCateId.value)
+		chosenSubId.value = Object.keys(categories.value[chosenCateId.value].cateInfo)[0] || null;
 };
 </script>
 

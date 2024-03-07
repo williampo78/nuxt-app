@@ -12,8 +12,11 @@ export const useCollection = defineStore('collection', {
     }),
     actions: {
         async getCollections() {
-            const data = await getCollectionsApi();
-            this.collections = data.result;
+            const token = useCookie('token')
+            if (token.value) {
+                const data = await getCollectionsApi();
+                this.collections = data.result;
+            }
         },
         async toggleColllection(payload: { id: number | string, isCollected: boolean }) {
             const modalStore = useModal()
