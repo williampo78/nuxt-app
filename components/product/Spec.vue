@@ -55,6 +55,8 @@
 import { getStockApi } from '~/api/product';
 import { Spec, SpecInfo } from '@/types/product';
 
+const modalStore = useModal();
+
 const props = defineProps<{
 	orderSpec: Spec;
 }>();
@@ -144,6 +146,13 @@ const decreaseQuantity = () => {
 const increaseQuantity = () => {
 	if (quantity.value < 10 && quantity.value < stock.value.specifiedQty) {
 		quantity.value++;
+	} else {
+		modalStore.openModal({
+			title: '春天線上購提醒',
+			type: 'alert',
+			message: '已達此商品可購買的最大數量',
+			icon: 'warning',
+		});
 	}
 };
 </script>

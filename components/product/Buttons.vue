@@ -2,12 +2,14 @@
 	<div class="flex gap-4">
 		<button
 			class="bg-blue-primary text-white py-3 rounded-lg w-52"
-			:class="{ '!bg-gray-400': stock.stockQty <= 0 }"
+			:class="{
+				'!bg-gray-400 cursor-default': stock.stockQty <= 0 || !startSelling,
+			}"
 		>
 			{{ specStatus }}
 		</button>
 		<button
-			v-if="stock.stockQty"
+			v-if="stock.stockQty && startSelling"
 			class="border-2 border-blue-primary text-blue-primary py-3 rounded-lg w-52"
 			>加入購物車</button
 		>
@@ -28,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
 import { ProductInfo } from '@/types/product';
 const collectionStore = useCollection();
 
@@ -37,8 +40,16 @@ const props = defineProps<{
 
 const { stock } = useProduct();
 
+//已經開賣
+const startSelling = computed(() => {
+	return dayjs().isAfter(dayjs(props.productInfo.start_selling));
+});
+
 //規格可販售狀態
 const specStatus = computed(() => {
+	if (!startSelling.value) {
+		return '即將開賣';
+	}
 	if (stock.value.stockQty > 0) {
 		return '立即購買';
 	} else {
