@@ -17,6 +17,15 @@ export const updateMemberInfoApi = (data) => {
 	});
 };
 
+//變更密碼
+export const updatePasswordApi = (data) => {
+	return service({
+		url: '/membership/changePassWord',
+		method: 'PUT',
+		data,
+	});
+};
+
 //取得點數
 export const getMemberPointsApi = () => {
 	return service({

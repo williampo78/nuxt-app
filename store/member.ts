@@ -91,11 +91,11 @@ export const useMember = defineStore('member', {
                 icon: 'bell',
                 hasMessage: true,
             },
-            // {
-            // 	name: '變更密碼',
-            // 	link: '/member/account-password',
-            // 	icon: 'gear',
-            // },
+            {
+            	name: '變更密碼',
+            	link: '/member/change-password',
+            	icon: 'gear',
+            },
             {
             	name: '常見問題',
             	link: '/customer-service/qa',

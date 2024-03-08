@@ -25,10 +25,6 @@
 						<font-awesome-icon :icon="['fas', 'xmark']" />
 					</span>
 					<nuxt-link :to="'/'" class="max-w-[180px]">
-						<!-- <picture>
-            <source media="(min-width:992px )" srcset="@/assets/images/logo@2x.png" sizes="" />
-            <img src="@/assets/images/logo.svg" alt="" />
-          </picture> -->
 						<img
 							class="w-[95px] md:w-[210px]"
 							src="@/assets/images/logo.png"
@@ -169,10 +165,10 @@ const storeSearchHistory = () => {
 };
 
 watch(
-  () => route.query,
-  () => {
-	showSearchHistory.value = false
-  },
+	() => route.query,
+	() => {
+		showSearchHistory.value = false;
+	}
 );
 </script>
 
