@@ -31,26 +31,37 @@ const modalStore = useModal();
 const memberStore = useMember();
 const collectionStore = useCollection();
 const messageStore = useMessage();
+const cartStore = useCart();
 
 const adStore = useAds();
 const route = useRoute();
-const tokenCookie = useCookie('token');
+const cookieToken = useCookie('token');
 const { getProductCategories } = useCategories();
 const areaStore = useArea();
 
-memberStore.setToken(tokenCookie.value); //把cookie token寫進store
-if (tokenCookie.value) {
+memberStore.setToken(cookieToken.value); //把cookie token寫進store
+if (cookieToken.value) {
 	memberStore.setUserInfo(); //如果有coolie有token的話取得使用者資訊
 }
 
 try {
-	await Promise.all([
-		getProductCategories(),
-		areaStore.getArea(),
-		adStore.getAds(),
-		collectionStore.getCollections(),
-		messageStore.getMessages(),
-	]);
+	if (cookieToken.value) {
+		// 登入狀態
+		await Promise.all([
+			getProductCategories(),
+			areaStore.getArea(),
+			adStore.getAds(),
+			collectionStore.getCollections(),
+			messageStore.getMessages(),
+			cartStore.getCartCount(),
+		]);
+	} else {
+		await Promise.all([
+			getProductCategories(),
+			areaStore.getArea(),
+			adStore.getAds(),
+		]);
+	}
 } catch (error) {
 	console.log(error);
 }

@@ -106,8 +106,14 @@
 							<nuxt-link class="mr-4" to="/register">註冊</nuxt-link>
 						</template>
 						<nuxt-link to="/">
-							<span>
+							<span class="relative">
 								<font-awesome-icon :icon="['fas', 'cart-shopping']" />
+								<span
+									v-if="cartStore.count > 0"
+									class="absolute bottom-[50%] left-[50%] w-4 h-4 bg-red rounded-full flex justify-center items-center text-[10px] text-white"
+								>
+									{{ cartStore.count }}
+								</span>
 							</span>
 							購物車
 						</nuxt-link>
@@ -126,6 +132,7 @@
 <script setup lang="ts">
 const menuStore = useMenu();
 const memberStore = useMember();
+const cartStore = useCart();
 const router = useRouter();
 const route = useRoute();
 const { clickOutside } = useClickOutside();

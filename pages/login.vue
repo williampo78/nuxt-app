@@ -103,6 +103,7 @@ definePageMeta({
 const modalStore = useModal();
 const memberStore = useMember();
 const router = useRouter();
+const cartStore = useCart();
 
 const tokenCookie = useCookie('token', {
 	expires: new Date(new Date().getTime() + 60 * 60 * 1000 * 3),
@@ -163,6 +164,7 @@ const loginHandler = async () => {
 			setTimeout(() => {
 				//拿完token取使用者資料
 				getUserInfo();
+				cartStore.getCartCount();
 			}, 300);
 			router.push('/');
 		} else if (data.error_code === '404') {

@@ -12,10 +12,6 @@ export const useMessage = defineStore('message', {
     }),
     actions: {
         async getMessages() {
-            const token = useCookie('token')
-            if (!token.value) {
-                return
-            }
             try {
                 const data = await getMessagesApi({
                     page: 1,
