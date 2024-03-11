@@ -35,6 +35,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+	middleware: ['auth'],
+});
 const memberStore = useMember();
 const tabs = ref<string[]>(['獲得/使用紀錄', '即將到期']);
 const tabIndex = ref<number>(0);

@@ -3,6 +3,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+	middleware: ['auth'],
+});
 const { getRecipients } = useRecipients();
 const recipientStore = useRecipient();
 

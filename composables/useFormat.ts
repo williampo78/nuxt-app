@@ -18,3 +18,8 @@ export function formatNumberWithCommas(number: string | number): string | number
         return ''
     }
 }
+
+export function checkPasswordValidation(password: string) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/
+    return regex.test(password)
+}

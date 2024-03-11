@@ -124,10 +124,11 @@ onMounted(async () => {
 });
 
 const getCaptcha = async () => {
-	const data = await getCaptchaApi();
-
-	captchaUrl.value = data.url.img;
-	captchKey.value = data.url.key;
+	try {
+		const data = await getCaptchaApi();
+		captchaUrl.value = data.url.img;
+		captchKey.value = data.url.key;
+	} catch (error) {}
 };
 
 const loginHandler = async () => {

@@ -45,7 +45,9 @@
 			</div>
 		</div>
 		<!-- 防詐騙提醒 -->
-		<div class="border-4 bg-emerald-400 border-emerald-400 rounded-xl overflow-hidden">
+		<div
+			class="border-4 bg-emerald-400 border-emerald-400 rounded-xl overflow-hidden"
+		>
 			<div class="bg-amber-50 p-5 flex flex-col md:px-16 md:flex-row">
 				<div
 					class="flex-1 text-emerald-400 flex flex-col items-center gap-x-2 md:flex-row md:gap-5"
@@ -82,9 +84,7 @@
 					</ul>
 				</div>
 			</div>
-			<div
-				class="py-2 text-amber-50 text-center text-sm md:text-base"
-			>
+			<div class="py-2 text-amber-50 text-center text-sm md:text-base">
 				<p>
 					如有疑慮,請來電客服專線:0800-111-222 <br />
 					或撥打警用電話 165 反詐騙專線諮詢
@@ -96,6 +96,9 @@
 
 <script setup lang="ts">
 const { formattedMobile } = useFormat();
+definePageMeta({
+	middleware: ['auth'],
+});
 const memberStore = useMember();
 
 const noiceList = ref<string[]>([
