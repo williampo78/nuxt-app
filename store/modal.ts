@@ -12,7 +12,7 @@ interface CustomConfig {
 }
 interface ToastConfig {
 	type: 'toast';
-	icon: Icon;
+	icon?: Icon;
 	title?: string;
 	message: string;
 	data?: any

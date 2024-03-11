@@ -65,7 +65,7 @@ interface QA {
 	}[];
 }
 const QAs = ref<QA[]>([]);
-const options = ref<{ name: string; code: string }>({});
+const options = ref<{ name: string; code: string }[]>([]);
 const selectedOption = ref({ name: '', code: '' });
 
 const openDropdown = ref<boolean>(false);
@@ -85,7 +85,7 @@ const getQaList = async () => {
 	const data = await getQaListApi();
 	QAs.value = data.result;
 
-	options.value = data.result.map((d) => {
+	options.value = data.result.map((d: { name: string; code: string }) => {
 		return { code: d.code, name: d.name };
 	});
 	selectedOption.value = options.value[0];
@@ -97,7 +97,11 @@ const changeCategory = (option: { code: string; name: string }) => {
 	openedQuestion.value = list.value[0].question;
 };
 
-const openQuestion = (QA) => {
+const openQuestion = (QA: {
+	sort: number;
+	question: string;
+	answer: string;
+}) => {
 	if (openedQuestion.value === QA.question) {
 		openedQuestion.value = '';
 	} else {
