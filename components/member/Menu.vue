@@ -1,5 +1,5 @@
 <template>
-	<div class="relative mb-5 md:hidden z-10">
+	<div class="relative mb-5 md:hidden z-[2]">
 		<button
 			@click.stop="showPagesMenu = !showPagesMenu"
 			class="flex justify-between w-full py-2 px-4 border-2 border-gray-300 rounded-md"
