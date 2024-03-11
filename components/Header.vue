@@ -88,7 +88,15 @@
 											:key="option.name"
 											class="border-b border-gray-100 last:border-0"
 										>
+											<button
+												@click="logOut()"
+												v-if="option.name === '登出'"
+												class="hover:bg-gray-100 block w-full text-left p-1.5"
+											>
+												登出
+											</button>
 											<nuxt-link
+												v-else
 												:to="option.path"
 												class="hover:bg-gray-100 block p-1.5"
 											>
@@ -129,6 +137,7 @@ const memberStore = useMember();
 const router = useRouter();
 const route = useRoute();
 const { clickOutside } = useClickOutside();
+const { logOut } = useLogOut();
 
 const keyword = ref<string>('');
 const showSearchHistory = ref<boolean>(false);
