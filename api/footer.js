@@ -19,3 +19,14 @@ export const getQaListApi = () => {
 		method: 'GET',
 	});
 };
+
+//與我們聯繫表單
+export const sendContactFormApi = (data) => {
+  return service({
+		url: `/v1/footer/contact`,
+		method: 'POST',
+		data
+	});
+};
+
+

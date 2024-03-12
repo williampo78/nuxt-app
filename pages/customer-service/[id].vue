@@ -10,7 +10,8 @@
 					>{{ title }}
 				</h1>
 
-				<div v-if="route.path.includes('qa')"> <QA /> </div>
+				<CustomerServiceQA v-if="route.path.includes('qa')" />
+				<CustomerServiceContact v-if="route.path.includes('hit-me')" />
 				<div v-if="content" v-html="content"></div>
 			</div>
 		</div>

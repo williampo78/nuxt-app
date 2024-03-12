@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="relative flex flex-col gap-2 md:grid md:grid-cols-[130px,1fr,180px] mt-4 md:items-center md:gap-x-6 md:mt-8"
+		class="relative flex flex-col gap-2 md:grid md:grid-cols-[150px,1fr,180px] mt-4 md:items-center md:gap-x-6 md:mt-8"
 		:class="{ ' md:mt-[40px]': required }"
 	>
 		<label for="telephone" class="inline-block mb-1 md:text-right md:mb-0">
