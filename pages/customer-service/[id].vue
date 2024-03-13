@@ -2,7 +2,7 @@
 	<div class="my-4 md:my-6">
 		<Breadcrumb :crumbs="[{ name: title }]" v-if="!route.path.includes('qa')" />
 
-		<div class="flex gap-x-12">
+		<div class="md:flex md:gap-x-12">
 			<MemberMenu v-if="route.path.includes('qa')" />
 			<div class="flex-1">
 				<h1
@@ -10,7 +10,8 @@
 					>{{ title }}
 				</h1>
 
-				<div v-if="route.path.includes('qa')"> <QA /> </div>
+				<CustomerServiceQA v-if="route.path.includes('qa')" />
+				<CustomerServiceContact v-if="route.path.includes('hit-me')" />
 				<div v-if="content" v-html="content"></div>
 			</div>
 		</div>

@@ -28,6 +28,7 @@
 				autocomplete="on"
 				:placeholder="placeholder"
 			/>
+
 			<button
 				@click="toggleShowPassword()"
 				v-if="type === 'password'"
@@ -69,6 +70,7 @@ const props = withDefaults(
 		required: false,
 		disabled: false,
 		inputValue: '',
+		textArea: false,
 	}
 );
 const inputType = ref<string>('text');
@@ -86,6 +88,7 @@ const inputValue = computed({
 		emits('update:inputValue', newValue);
 	},
 });
+
 
 const inputIcon = computed((): string => {
 	const inputId = props.id;
