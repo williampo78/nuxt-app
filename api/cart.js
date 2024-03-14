@@ -7,3 +7,12 @@ export const getCartCountApi = () => {
 	});
 };
 
+//新增/移除購物車商品
+export const updateCartApi = (data) => {
+	return service({
+		url: '/shopping/addGoodsQty',
+		method: 'POST',
+		data
+	});
+};
+

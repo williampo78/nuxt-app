@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 type ModalType = 'toast' | 'alert' | 'custom' | ''
-type Icon = 'success' | 'error' | 'warning' | 'collect' | 'uncollect' | ''
+type Icon = 'success' | 'error' | 'warning' | 'collect' | 'uncollect' | 'cart-add' | ''
 interface CustomConfig {
 	type: 'custom' | '';
 	icon?: Icon;

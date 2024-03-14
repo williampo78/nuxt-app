@@ -3,12 +3,14 @@
 		<button
 			class="bg-blue-primary text-white py-3 rounded-lg w-52"
 			:class="{
-				'!bg-gray-400 cursor-default': productStore.stock.stockQty <= 0 || !startSelling,
+				'!bg-gray-400 cursor-default':
+					productStore.stock.stockQty <= 0 || !startSelling,
 			}"
 		>
 			{{ specStatus }}
 		</button>
 		<button
+			@click="addToCart()"
 			v-if="productStore.stock && startSelling"
 			class="border-2 border-blue-primary text-blue-primary py-3 rounded-lg w-52"
 			>加入購物車</button
@@ -31,8 +33,11 @@
 
 <script setup lang="ts">
 import dayjs from 'dayjs';
+import { updateCartApi } from '@/api/cart';
 import { ProductInfo } from '@/types/product';
 const collectionStore = useCollection();
+const cartStore = useCart();
+const modalStore = useModal();
 
 const props = defineProps<{
 	productInfo: ProductInfo;
@@ -63,6 +68,27 @@ const isCollected = computed((): boolean => {
 		return c.product_id === +props.productInfo.product_id;
 	});
 });
+
+//加入購物車
+const addToCart = async () => {
+	try {
+		const response = await updateCartApi({
+			item_id: productStore.specId,
+			item_qty: cartStore.quantity,
+			status_code: 0,
+		});
+
+		if (!response.error_code) {
+			modalStore.openModal({
+				type: 'toast',
+				message: '已加入購物車',
+				icon: 'cart-add',
+			});
+			let cartCount = response.result.cartCount;
+			cartStore.setCartCount(cartCount);
+		}
+	} catch (error) {}
+};
 
 const toggleColllection = () => {
 	collectionStore.toggleColllection({

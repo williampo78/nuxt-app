@@ -56,12 +56,13 @@ import { getStockApi } from '~/api/product';
 import { Spec, SpecInfo } from '@/types/product';
 
 const modalStore = useModal();
+const productStore = useProduct();
+const cartStore = useCart();
 
 const props = defineProps<{
 	orderSpec: Spec;
 }>();
 
-const productStore = useProduct();
 
 const chosenSpecNames = ref<string[]>(['', '']);
 const quantity = ref<number>(1);
@@ -143,11 +144,13 @@ const noStock = (spec: string) => {
 const decreaseQuantity = () => {
 	if (quantity.value > 1) {
 		quantity.value--;
+		cartStore.setQuantity(quantity.value)
 	}
 };
 const increaseQuantity = () => {
 	if (quantity.value < 10 && quantity.value < productStore.stock.specifiedQty) {
 		quantity.value++;
+		cartStore.setQuantity(quantity.value)
 	} else {
 		modalStore.openModal({
 			title: '春天線上購提醒',

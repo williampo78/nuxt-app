@@ -45,6 +45,12 @@
 			>
 				<font-awesome-icon :icon="['fas', 'heart-circle-minus']" />
 			</span>
+			<span
+				v-else-if="modalStore.icon === 'cart-add'"
+				class="text-green-400 text-2xl"
+			>
+			<font-awesome-icon :icon="['fas', 'cart-plus']" />
+			</span>
 		</div>
 	</div>
 </template>
