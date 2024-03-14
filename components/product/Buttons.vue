@@ -3,13 +3,13 @@
 		<button
 			class="bg-blue-primary text-white py-3 rounded-lg w-52"
 			:class="{
-				'!bg-gray-400 cursor-default': stock.stockQty <= 0 || !startSelling,
+				'!bg-gray-400 cursor-default': productStore.stock.stockQty <= 0 || !startSelling,
 			}"
 		>
 			{{ specStatus }}
 		</button>
 		<button
-			v-if="stock.stockQty && startSelling"
+			v-if="productStore.stock && startSelling"
 			class="border-2 border-blue-primary text-blue-primary py-3 rounded-lg w-52"
 			>加入購物車</button
 		>
@@ -38,7 +38,7 @@ const props = defineProps<{
 	productInfo: ProductInfo;
 }>();
 
-const { stock } = useProduct();
+const productStore = useProduct();
 
 //已經開賣
 const startSelling = computed(() => {
@@ -50,7 +50,7 @@ const specStatus = computed(() => {
 	if (!startSelling.value) {
 		return '即將開賣';
 	}
-	if (stock.value.stockQty > 0) {
+	if (productStore.stock.stockQty > 0) {
 		return '立即購買';
 	} else {
 		return '補貨中';

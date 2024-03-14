@@ -61,14 +61,14 @@ const props = defineProps<{
 	orderSpec: Spec;
 }>();
 
-const { stock } = useProduct();
+const productStore = useProduct();
 
 const chosenSpecNames = ref<string[]>(['', '']);
 const quantity = ref<number>(1);
 
-const specId = ref<number | null>(null);
 
-onMounted(() => {
+onMounted(async () => {
+	await nextTick();
 	preSelectSpec();
 });
 
@@ -104,7 +104,7 @@ const selectSpec = (spec: string, index: number) => {
 	getSpecInfo();
 };
 
-//取得對應的規格
+//取得對應的規格資訊
 const getSpecInfo = () => {
 	const info = props.orderSpec.spec_info.find((info) => {
 		return (
@@ -113,8 +113,10 @@ const getSpecInfo = () => {
 		);
 	});
 
+
 	if (info) {
-		specId.value = info.item_id;
+		//把規格id紀錄在store
+		productStore.setSpecId(info.item_id)
 		updateStock(info.item_id);
 	}
 };
@@ -122,7 +124,7 @@ const getSpecInfo = () => {
 //取得庫存資訊
 const updateStock = async (id: number) => {
 	const data = await getStockApi({ item_id: id });
-	stock.value = data.result;
+	productStore.getStock(data.result);
 };
 
 //沒有庫存
@@ -144,7 +146,7 @@ const decreaseQuantity = () => {
 	}
 };
 const increaseQuantity = () => {
-	if (quantity.value < 10 && quantity.value < stock.value.specifiedQty) {
+	if (quantity.value < 10 && quantity.value < productStore.stock.specifiedQty) {
 		quantity.value++;
 	} else {
 		modalStore.openModal({
