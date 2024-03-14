@@ -231,10 +231,10 @@ import { getProductSpecApi, getProductInfoApi } from '@/api/product';
 import { ProductInfo, ShippingFee, Spec } from '@/types/product';
 
 const route = useRoute();
-const { orderSpec, stock, getStock } = useProduct();
 const { payment, availablePayments } = usePayments();
 
 const productInfo = ref({} as ProductInfo); //商品資訊
+const orderSpec = ref({} as Spec); //商品規格
 const productPhotos = ref([]); //商品圖
 const shippingFee = ref({} as ShippingFee); //運費
 const campaignInfo = ref<any>([]); //贈品、優惠
@@ -280,7 +280,6 @@ const getProductInfo = async () => {
 	productSpec.value = data.result.productSpec;
 	relateCategory.value = data.result.relateCategory;
 
-	getStock();
 };
 await getProductInfo();
 </script>
