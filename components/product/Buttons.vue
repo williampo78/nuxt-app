@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import dayjs from 'dayjs';
-import { updateCartApi } from '@/api/cart';
+import { addCartApi } from '@/api/cart';
 import { ProductInfo } from '@/types/product';
 const collectionStore = useCollection();
 const cartStore = useCart();
@@ -72,7 +72,7 @@ const isCollected = computed((): boolean => {
 //加入購物車
 const addToCart = async () => {
 	try {
-		const response = await updateCartApi({
+		const response = await addCartApi({
 			item_id: productStore.specId,
 			item_qty: cartStore.quantity,
 			status_code: 0,

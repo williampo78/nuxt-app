@@ -25,6 +25,7 @@ export const getProductInfoApi = (id, data) => {
 	});
 };
 
+//取得商品庫存
 export const getStockApi = (data) => {
 	return service({
 		url: '/v1/stock',

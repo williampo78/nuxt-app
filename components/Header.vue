@@ -113,7 +113,7 @@
 							>
 							<nuxt-link class="mr-4" to="/register">註冊</nuxt-link>
 						</template>
-						<nuxt-link to="/">
+						<nuxt-link to="/cart">
 							<span class="relative">
 								<font-awesome-icon :icon="['fas', 'cart-shopping']" />
 								<span
